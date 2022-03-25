@@ -19,8 +19,10 @@ namespace Avans_Devops_Tests.Tests
             BacklogItem.Sprint = sprint;
 
             //Act
-            Activity Activity = new("Riem pakken", new User(1,"Jeremy", new Role(),"jsmits9@avans.nl"), 1);
-            Activity Activity2 = new("Hond zoeken", new User(1, "Jeremy", new Role(), "jsmits9@avans.nl"), 1);
+            User user = new(1, "Jeremy", Roles.Developer, "jsmits9@avans.nl");
+
+            Activity Activity = new("Riem pakken", user, 1);
+            Activity Activity2 = new("Hond zoeken", user,1);
             BacklogItem.AddActivity(Activity);
             BacklogItem.AddActivity(Activity2);
 
@@ -36,8 +38,9 @@ namespace Avans_Devops_Tests.Tests
             BacklogItem.Sprint = sprint;
 
             //Act
-            Activity Activity = new("Riem pakken", new User(1, "Jeremy", new Role(), "jsmits9@avans.nl"), 1);
-            Activity Activity2 = new("Hond zoeken", new User(1, "Jeremy", new Role(), "jsmits9@avans.nl"), 1);
+            User user = new(1, "Jeremy", Roles.Developer, "jsmits9@avans.nl");
+            Activity Activity = new("Riem pakken", user, 1);
+            Activity Activity2 = new("Hond zoeken", user, 1);
             BacklogItem.AddActivity(Activity);
             BacklogItem.AddActivity(Activity2);
 
