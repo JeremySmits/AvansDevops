@@ -33,7 +33,6 @@ namespace Avans_Devops.Composite
 
 		public void AddChild(Comment comment) {
             this.Comments.Add(comment);
-            NotifyObservers(comment);
         }
         public void RemoveChild(Comment comment) {
             this.Comments.Remove(comment);
