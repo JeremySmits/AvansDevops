@@ -3,11 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Avans_Devops.Observe;
 
 namespace Avans_Devops.Releases
 {
-    public class FailRelease
+    public class FailRelease : IObservable
     {
-        public void Proceed() { }
+        public List<Observer> Observers { get; } = new List<Observer>();
+        public void Proceed() {
+            string message = "The release has been cancelled!";
+
+            // Scrum master notification
+            User scrumMaster = new User(1, "Scrum Master Placeholder", Roles.ScrumMaster, "scrum@master.com");
+            Observer scrumMasterObserver = new Observer();
+            scrumMasterObserver.Receiver = scrumMaster;
+            scrumMasterObserver.Message = message;
+            AttachObserver(scrumMasterObserver);
+            
+            // Product owner notification
+            User productOwner = new User(2, "Product Owner Placeholder", Roles.ProductOwner, "product@owner.com");
+            Observer productOwnerObserver = new Observer();
+            productOwnerObserver.Receiver = productOwner;
+            productOwnerObserver.Message = message;
+            AttachObserver(productOwnerObserver);
+
+            NotifyObservers();
+        }
+        public void AttachObserver(Observer observer) {
+            this.Observers.Add(observer);
+        }
+        public void DetachObserver(Observer observer) {
+            this.Observers.Remove(observer);
+        }
+        public void NotifyObservers() {
+            
+            foreach (var o in Observers) {
+                o.SendMessage();
+            }
+        }
     }
 }

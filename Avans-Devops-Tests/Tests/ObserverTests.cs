@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Xunit;
 using Avans_Devops.Observe;
 using Avans_Devops.Composite;
+using Avans_Devops.Releases;
 
 namespace Avans_Devops.Tests
 {
@@ -84,7 +85,7 @@ namespace Avans_Devops.Tests
 		}
 
         [Fact]
-        public void ThreadSingleObserver()
+        public void ThreadNotificationSingleObserver()
         {
             //Arrange
 			BacklogItem backlogItem = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
@@ -101,7 +102,7 @@ namespace Avans_Devops.Tests
         }
 
 		[Fact]
-        public void ThreadMultipleObservers()
+        public void ThreadNotificationMultipleObservers()
         {
             //Arrange
 			BacklogItem backlogItem = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
@@ -119,5 +120,113 @@ namespace Avans_Devops.Tests
 			Assert.True(observer1.NotificationMemory.Count == 1);
 			Assert.True(observer2.NotificationMemory.Count == 1);
         }
+		[Fact]
+		public void AttachFailReleaseObserver()
+		{
+			//Arrange
+			FailRelease failRelease = new FailRelease();
+			string message = "The release has been cancelled!";
+
+			User scrumMaster = new User(1, "Scrum Master Placeholder", Roles.ScrumMaster, "scrum@master.com");
+            Observer scrumMasterObserver = new Observer();
+            scrumMasterObserver.Receiver = scrumMaster;
+            scrumMasterObserver.Message = message;
+
+			//Act
+			failRelease.AttachObserver(scrumMasterObserver);
+
+			//Assert
+			Assert.True(failRelease.Observers.Count == 1);
+		}
+
+		[Fact]
+		public void DetachFailReleaseObserver()
+		{
+			//Arrange
+			FailRelease failRelease = new FailRelease();
+			string message = "The release has been cancelled!";
+
+			User scrumMaster = new User(1, "Scrum Master Placeholder", Roles.ScrumMaster, "scrum@master.com");
+            Observer scrumMasterObserver = new Observer();
+            scrumMasterObserver.Receiver = scrumMaster;
+            scrumMasterObserver.Message = message;
+
+			//Act
+			failRelease.AttachObserver(scrumMasterObserver);
+			failRelease.DetachObserver(scrumMasterObserver);
+
+			//Assert
+			Assert.True(failRelease.Observers.Count == 0);
+		}
+
+		[Fact]
+		public void AttachMultipleFailReleaseObservers()
+		{
+			//Arrange
+			FailRelease failRelease = new FailRelease();
+			string message = "The release has been cancelled!";
+
+			User scrumMaster = new User(1, "Scrum Master Placeholder", Roles.ScrumMaster, "scrum@master.com");
+            Observer scrumMasterObserver = new Observer();
+            scrumMasterObserver.Receiver = scrumMaster;
+            scrumMasterObserver.Message = message;
+
+            User productOwner = new User(2, "Product Owner Placeholder", Roles.ProductOwner, "product@owner.com");
+            Observer productOwnerObserver = new Observer();
+            productOwnerObserver.Receiver = productOwner;
+            productOwnerObserver.Message = message;
+
+			//Act
+			failRelease.AttachObserver(scrumMasterObserver);
+			failRelease.AttachObserver(productOwnerObserver);
+
+			//Assert
+			Assert.True(failRelease.Observers.Count == 2);
+		}
+		
+		[Fact]
+		public void DetachMultipleFailReleaseObservers()
+		{
+			//Arrange
+			FailRelease failRelease = new FailRelease();
+			string message = "The release has been cancelled!";
+
+			User scrumMaster = new User(1, "Scrum Master Placeholder", Roles.ScrumMaster, "scrum@master.com");
+            Observer scrumMasterObserver = new Observer();
+            scrumMasterObserver.Receiver = scrumMaster;
+            scrumMasterObserver.Message = message;
+
+            User productOwner = new User(2, "Product Owner Placeholder", Roles.ProductOwner, "product@owner.com");
+            Observer productOwnerObserver = new Observer();
+            productOwnerObserver.Receiver = productOwner;
+            productOwnerObserver.Message = message;
+
+			//Act
+			failRelease.AttachObserver(scrumMasterObserver);
+			failRelease.AttachObserver(productOwnerObserver);
+
+			failRelease.DetachObserver(scrumMasterObserver);
+			failRelease.DetachObserver(productOwnerObserver);
+
+			//Assert
+			Assert.True(failRelease.Observers.Count == 0);
+		}
+
+		[Fact]
+		public void FailReleaseNotificationObserver()
+		{
+			//Arrange
+			FailRelease failRelease = new FailRelease();
+			// Observer observer = new Observer();
+			
+			//Act
+			// failRelease.AttachObserver(observer);
+			failRelease.Proceed();
+
+			//Assert
+			foreach (var o in failRelease.Observers) {
+                Assert.True(o.NotificationMemory.Count == 1);
+            }
+		}
     }
 }

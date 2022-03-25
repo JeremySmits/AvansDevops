@@ -47,7 +47,9 @@ namespace Avans_Devops.Composite
         public void NotifyObservers(Comment comment) {
             string message = comment.OP + "responded to your thread with: " + comment.CommentText;
             foreach (var o in Observers) {
-                o.SendMessage(this.OP, message);
+                o.Receiver = this.OP;
+                o.Message = message;
+                o.SendMessage();
             }
         }
     }
