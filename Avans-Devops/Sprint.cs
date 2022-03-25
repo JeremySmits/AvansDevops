@@ -12,7 +12,7 @@ namespace Avans_Devops
         public string SprintType { get; set; }
         public ISprintState SprintState { get; set; }
 
-        public Sprint(int sprintId, int backlogId, string name, DateTime startDate, DateTime endDate, string sprintType, ISprintState sprintState)
+        public Sprint(int sprintId, int backlogId, string name, DateTime startDate, DateTime endDate, string sprintType)
         {
             SprintId = sprintId;
             BacklogId = backlogId;
@@ -20,10 +20,16 @@ namespace Avans_Devops
             StartDate = startDate;
             EndDate = endDate;
             SprintType = sprintType;
+            SprintState = new InActivateSprintState();
+            BacklogItems = new();
+        }
+
+        public void SetSprintState(ISprintState sprintState)
+        {
             SprintState = sprintState;
         }
 
-        public bool CheckSprintDone() 
+        public bool CheckSprintStarted() 
         { 
             if(EndDate < DateTime.Today)
             {
