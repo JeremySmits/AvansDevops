@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Avans_Devops.Observer
+namespace Avans_Devops.Observe
 {
     interface IObservable
     {
-        public void AddObserver() { }
-        public void DeleteObserver() { }
+        public void AttachObserver() { }
+        public void DetachObserver() { }
         public void NotifyObservers() { }
-        public void SetChanged() { }
     }
 }

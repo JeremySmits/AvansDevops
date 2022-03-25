@@ -12,8 +12,8 @@ namespace Avans_Devops.Composite
         private BacklogItem BacklogItem { get; }
         private int ParentPostID { get; }
         private Post ParentPost { get; }
-        private string CommentText { get; }
-        private User OP { get; }
+        public string CommentText { get; }
+        public User OP { get; }
         private bool IsClosed { get; }
 
 		public Comment(int postID, BacklogItem backlogItem, int parentPostID, Post parentPost, string commentText, User oP)

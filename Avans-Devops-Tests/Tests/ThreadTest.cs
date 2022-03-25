@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Xunit;
+using Avans_Devops.Composite;
 
 namespace Avans_Devops.Tests
 {
@@ -13,15 +14,15 @@ namespace Avans_Devops.Tests
             BacklogItem backlogItem1 = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
             BacklogItem backlogItem2 = new BacklogItem(1, 1, 2, "Backlog Item Name 2", 1, 1);
 
-            Composite.Thread thread1 = new Composite.Thread(1, backlogItem1, 0, null, "Thread text 1", null);
-            Composite.Thread thread2 = new Composite.Thread(2, backlogItem2, 0, null, "Thread text 2", null);
+            Thread thread1 = new Thread(1, backlogItem1, 0, null, "Thread text 1", null);
+            Thread thread2 = new Thread(2, backlogItem2, 0, null, "Thread text 2", null);
 
-            Composite.Comment comment1 = new Composite.Comment(2, thread1.BacklogItem, thread1.PostID, thread1, "Comment text 1", null);
-            Composite.Comment comment2 = new Composite.Comment(3, thread1.BacklogItem, thread1.PostID, thread1, "Comment text 2", null);
+            Comment comment1 = new Comment(2, thread1.BacklogItem, thread1.PostID, thread1, "Comment text 1", null);
+            Comment comment2 = new Comment(3, thread1.BacklogItem, thread1.PostID, thread1, "Comment text 2", null);
 
-            Composite.Comment comment3 = new Composite.Comment(4, thread2.BacklogItem, thread2.PostID, thread2, "Comment text 3", null);
-            Composite.Comment comment4 = new Composite.Comment(5, thread2.BacklogItem, thread2.PostID, thread2, "Comment text 4", null);
-            Composite.Comment comment5 = new Composite.Comment(6, thread2.BacklogItem, thread2.PostID, thread2, "Comment text 5", null);
+            Comment comment3 = new Comment(4, thread2.BacklogItem, thread2.PostID, thread2, "Comment text 3", null);
+            Comment comment4 = new Comment(5, thread2.BacklogItem, thread2.PostID, thread2, "Comment text 4", null);
+            Comment comment5 = new Comment(6, thread2.BacklogItem, thread2.PostID, thread2, "Comment text 5", null);
 
             //Act
             thread1.AddChild(comment1);
@@ -43,15 +44,15 @@ namespace Avans_Devops.Tests
             BacklogItem backlogItem1 = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
             BacklogItem backlogItem2 = new BacklogItem(1, 1, 2, "Backlog Item Name 2", 1, 1);
 
-            Composite.Thread thread1 = new Composite.Thread(1, backlogItem1, 0, null, "Thread text 1", null);
-            Composite.Thread thread2 = new Composite.Thread(2, backlogItem2, 0, null, "Thread text 2", null);
+            Thread thread1 = new Thread(1, backlogItem1, 0, null, "Thread text 1", null);
+            Thread thread2 = new Thread(2, backlogItem2, 0, null, "Thread text 2", null);
 
-            Composite.Comment comment1 = new Composite.Comment(2, thread1.BacklogItem, thread1.PostID, thread1, "Comment text 1", null);
-            Composite.Comment comment2 = new Composite.Comment(3, thread1.BacklogItem, thread1.PostID, thread1, "Comment text 2", null);
+            Comment comment1 = new Comment(2, thread1.BacklogItem, thread1.PostID, thread1, "Comment text 1", null);
+            Comment comment2 = new Comment(3, thread1.BacklogItem, thread1.PostID, thread1, "Comment text 2", null);
 
-            Composite.Comment comment3 = new Composite.Comment(4, thread2.BacklogItem, thread2.PostID, thread2, "Comment text 3", null);
-            Composite.Comment comment4 = new Composite.Comment(5, thread2.BacklogItem, thread2.PostID, thread2, "Comment text 4", null);
-            Composite.Comment comment5 = new Composite.Comment(6, thread2.BacklogItem, thread2.PostID, thread2, "Comment text 5", null);
+            Comment comment3 = new Comment(4, thread2.BacklogItem, thread2.PostID, thread2, "Comment text 3", null);
+            Comment comment4 = new Comment(5, thread2.BacklogItem, thread2.PostID, thread2, "Comment text 4", null);
+            Comment comment5 = new Comment(6, thread2.BacklogItem, thread2.PostID, thread2, "Comment text 5", null);
 
             //Act
             thread1.AddChild(comment1);
