@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Avans_Devops
 {
-    public class Sprint
+    public class InActivateSprint : ISprint
     {
         public int SprintId { get; set; }
         public int BacklogId { get; set; }
@@ -11,10 +14,10 @@ namespace Avans_Devops
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string SprintType { get; set; }
-        public ISprintState SprintState { get; set; }
+        public ISprint SprintState { get; set; }
         public List<BacklogItem> BacklogItems { get; set; }
 
-        public Sprint(int sprintId, int backlogId, string name, DateTime startDate, DateTime endDate, string sprintType)
+        public InActivateSprint(int sprintId, int backlogId, string name, DateTime startDate, DateTime endDate, string sprintType)
         {
             SprintId = sprintId;
             BacklogId = backlogId;
@@ -22,13 +25,7 @@ namespace Avans_Devops
             StartDate = startDate;
             EndDate = endDate;
             SprintType = sprintType;
-            SprintState = new InActivateSprintState();
             BacklogItems = new();
-        }
-
-        public void SetSprintState(ISprintState sprintState)
-        {
-            SprintState = sprintState;
         }
 
         public bool CheckSprintStarted()
@@ -63,5 +60,20 @@ namespace Avans_Devops
         }
 
         public Report RunPipeline() { return new Report(); }
+
+        public void UpdateSprinteDetails()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveBacklogItem(BacklogItem BacklogItem)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ReleaseSprint()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

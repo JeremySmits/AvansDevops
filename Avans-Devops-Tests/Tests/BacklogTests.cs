@@ -13,8 +13,8 @@ namespace Avans_Devops.Tests
             Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
 
             //Act
-            backlog.AddSprint(new Sprint(1,1,"Sprint 1", DateTime.Today, DateTime.Today.AddDays(1),"Type 1"));
-            backlog.AddSprint(new Sprint(2, 1, "Sprint 2", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1"));
+            backlog.AddSprint(new InActivateSprint(1,1,"Sprint 1", DateTime.Today, DateTime.Today.AddDays(1),"Type 1"));
+            backlog.AddSprint(new InActivateSprint(2, 1, "Sprint 2", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1"));
 
             //Assert
             Assert.True(backlog.Sprints.Count == 2);
@@ -27,8 +27,8 @@ namespace Avans_Devops.Tests
             Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
 
             //Act
-            backlog.AddSprint(new Sprint(1, 1, "Sprint 1", DateTime.Today, DateTime.Today.AddDays(1), "Type 1"));
-            backlog.AddSprint(new Sprint(2, 1, "Sprint 2", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1"));
+            backlog.AddSprint(new InActivateSprint(1, 1, "Sprint 1", DateTime.Today, DateTime.Today.AddDays(1), "Type 1"));
+            backlog.AddSprint(new InActivateSprint(2, 1, "Sprint 2", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1"));
 
             backlog.RemoveSprint(2);
 

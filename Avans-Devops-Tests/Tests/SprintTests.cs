@@ -14,7 +14,7 @@ namespace Avans_Devops_Tests.Tests
         public void AddToBacklogItemToActiveSprint()
         {
             //Arrange
-            Sprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(-10), DateTime.Today.AddDays(10), "Type 1");
+            InActivateSprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(-10), DateTime.Today.AddDays(10), "Type 1");
             BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
 
 
@@ -29,7 +29,7 @@ namespace Avans_Devops_Tests.Tests
         public void AddToBacklogItemToNewSprint()
         {
             //Arrange
-            Sprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1");
+            InActivateSprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1");
             BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
 
 
@@ -44,11 +44,10 @@ namespace Avans_Devops_Tests.Tests
         public void SetSprintstate()
         {
             //Arrange
-            Sprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1");
+            InActivateSprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1");
 
 
             //Act
-            sprint.SetSprintState(new ActivateSprintState());
 
             //Assert
             //Assert.True(sprint.SprintState.BacklogItemsAdd);
