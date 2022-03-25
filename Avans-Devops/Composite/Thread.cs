@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Avans_Devops.Observer;
 
 namespace Avans_Devops.Composite
 {
-    public class Thread : Post
+    public class Thread : Post, IObservable
     {
         public int PostID { get; }
         public BacklogItem BacklogItem { get; }
@@ -27,14 +28,15 @@ namespace Avans_Devops.Composite
 			CommentText = commentText;
 			OP = oP;
 			IsClosed = false;
+			Comments = new List<Comment>();
 		}
 
 		public void AddChild(Comment comment) {
             this.Comments.Add(comment);
+            NotifyObservers(comment);
         }
         public void RemoveChild(Comment comment) {
             this.Comments.Remove(comment);
         }
-        public void Notify() { }
     }
 }
