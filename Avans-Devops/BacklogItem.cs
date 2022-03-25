@@ -5,6 +5,7 @@ namespace Avans_Devops
     public class BacklogItem
     {
         public int SprintId { get; set; }
+        public Sprint Sprint { get; set; }
         public int BacklogId { get; set; }
         public int BacklogItemId { get; set; }
         public string Name { get; set; }
@@ -25,8 +26,17 @@ namespace Avans_Devops
             Effort = effort;
         }
 
-        public bool CheckActivitiesDone() { return false; }
-        public void AddActivity(Activity Activity) { }
+        public void AddActivity(Activity Activity) 
+        {
+            if(this.Sprint != null)
+            {
+                if (!this.Sprint.CheckSprintDone())
+                {
+                    this.Activities.Add(Activity);
+                }
+            }
+        }
+
         public void SwitchState(string nextstate) 
         {
             switch (this.State)
