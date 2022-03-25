@@ -22,7 +22,7 @@ namespace Avans_Devops_Tests.Tests
             User user = new(1, "Jeremy", Roles.Developer, "jsmits9@avans.nl");
 
             Activity Activity = new("Riem pakken", user, 1);
-            Activity Activity2 = new("Hond zoeken", user,1);
+            Activity Activity2 = new("Hond zoeken", user, 1);
             BacklogItem.AddActivity(Activity);
             BacklogItem.AddActivity(Activity2);
 
