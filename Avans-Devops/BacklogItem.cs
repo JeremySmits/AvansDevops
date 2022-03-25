@@ -30,7 +30,7 @@ namespace Avans_Devops
         {
             if(this.Sprint != null)
             {
-                if (!this.Sprint.CheckSprintDone())
+                if (this.Sprint.CheckSprintStarted())
                 {
                     this.Activities.Add(Activity);
                 }
