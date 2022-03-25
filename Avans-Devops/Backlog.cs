@@ -27,7 +27,7 @@ namespace Avans_Devops
         }
         public void RemoveSprint(int SprintId) 
         {
-            List<Sprint> tempSprints = new List<Sprint>();
+            List<Sprint> tempSprints = new();
 
             foreach(Sprint sprint in Sprints)
             {
@@ -43,7 +43,7 @@ namespace Avans_Devops
         }
         public void RemoveUser(int UserId)
         {
-            List<User> tempUsers = new List<User>();
+            List<User> tempUsers = new();
 
             foreach (User user in ScrumTeam)
             {
@@ -59,7 +59,7 @@ namespace Avans_Devops
         }
         public void RemoveBacklogItem(int BackLogItemId)
         {
-            List<BacklogItem> tempBacklogItem= new List<BacklogItem>();
+            List<BacklogItem> tempBacklogItem= new();
 
             foreach (BacklogItem backlogItem in BackLogItems)
             {

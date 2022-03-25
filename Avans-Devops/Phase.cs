@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace Avans_Devops
 {
-    public class Phase
+    public enum PhaseState
     {
-        enum PhaseState
-        {
-            Developer,
-            ScrumMaster,
-            ProductOwner
-        }
+        ToDo,
+        Doing,
+        ReadyForTesting,
+        Testing,
+        Done
     }
 }

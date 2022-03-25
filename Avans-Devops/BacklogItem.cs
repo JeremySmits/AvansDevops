@@ -8,18 +8,18 @@ namespace Avans_Devops
         public int BacklogId { get; set; }
         public int BacklogItemId { get; set; }
         public string Name { get; set; }
-        public Phase State { get; set; }
+        public PhaseState State { get; set; }
         public List<Activity> Activities { get; set; }
         public int ThreatId { get; set; }
         public int Effort { get; set; }
 
-        public BacklogItem(int sprintId, int backlogId,int backlogItemId, string name, Phase state, int threatId, int effort)
+        public BacklogItem(int sprintId, int backlogId,int backlogItemId, string name, int threatId, int effort)
         {
             SprintId = sprintId;
             BacklogId = backlogId;
             BacklogItemId = backlogItemId;
             Name = name;
-            State = state;
+            State = PhaseState.ToDo;
             Activities = new List<Activity>();
             ThreatId = threatId;
             Effort = effort;
@@ -27,6 +27,41 @@ namespace Avans_Devops
 
         public bool CheckActivitiesDone() { return false; }
         public void AddActivity(Activity Activity) { }
-        public void SwitchState(Phase state) { }
+        public void SwitchState(string nextstate) 
+        {
+            switch (this.State)
+            {
+                case PhaseState.ToDo:
+                    if(nextstate == "Doing")
+                    {
+                        State = PhaseState.Doing;
+                    }
+                    break;
+                case PhaseState.Doing:
+                    if (nextstate == "ReadyForTesting")
+                    {
+                        State = PhaseState.ReadyForTesting;
+                    }
+                    break;
+                case PhaseState.ReadyForTesting:
+                    if (nextstate == "Testing")
+                    {
+                        State = PhaseState.Testing;
+                    }
+                    break;
+                case PhaseState.Testing:
+                    if (nextstate == "ToDo")
+                    {
+                        State = PhaseState.ToDo;
+                    }
+                    if (nextstate == "Done")
+                    {
+                        State = PhaseState.Done;
+                    }
+                    break;
+                case PhaseState.Done:
+                    break;
+            }
+        }
     }
 }

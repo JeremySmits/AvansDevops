@@ -11,6 +11,6 @@ namespace Avans_Devops
         public string Name { get; set; }
         public User ResponsibleDeveloper { get; set; }
         public BacklogItem BacklogItem { get; set; }
-        public Phase State { get; set; }
+        public PhaseState State { get; set; }
     }
 }
