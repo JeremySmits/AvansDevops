@@ -10,7 +10,7 @@ namespace Avans_Devops
     {
         enum PhaseState
         {
-            Developer,
+            ToDo,
             ScrumMaster,
             ProductOwner
         }
