@@ -14,7 +14,7 @@ namespace Avans_Devops_Tests.Tests
         public void AddActivityToBacklog()
         {
             //Arrange
-            Sprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", new ActivateSprintState());
+            Sprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(-10), DateTime.Today.AddDays(-1), "Type 1", new ActivateSprintState());
             BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
             BacklogItem.Sprint = sprint;
 

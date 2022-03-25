@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Avans_Devops
 {
@@ -12,7 +11,6 @@ namespace Avans_Devops
         public DateTime EndDate { get; set; }
         public string SprintType { get; set; }
         public ISprintState SprintState { get; set; }
-        public List<BacklogItem> BacklogItems { get; set; }
 
         public Sprint(int sprintId, int backlogId, string name, DateTime startDate, DateTime endDate, string sprintType, ISprintState sprintState)
         {
@@ -23,40 +21,19 @@ namespace Avans_Devops
             EndDate = endDate;
             SprintType = sprintType;
             SprintState = sprintState;
-            BacklogItems = new();
         }
 
-        public bool CheckSprintStarted() 
+        public bool CheckSprintDone() 
         { 
-            if(StartDate > DateTime.Today)
-            {
-                return true;
-            }
-            else
+            if(EndDate < DateTime.Today)
             {
                 return false;
             }
-        }
-        public bool CheckSprintDone()
-        {
-            if (EndDate < DateTime.Today)
+            else
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
         }
-
-        public void AddBacklogItem(BacklogItem backlogItem)
-        {
-            if (CheckSprintStarted() && !CheckSprintDone())
-            {
-                BacklogItems.Add(backlogItem);
-            }
-        }
-
         public Report RunPipeline() { return new Report(); }
     }
 }

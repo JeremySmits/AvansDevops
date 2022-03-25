@@ -10,7 +10,6 @@ namespace Avans_Devops.Tests
         public void AddSprintToBacklog()
         {
             //Arrange
-            User user = new(1, "Alex", Roles.ScrumMaster, "alex@avans.nl");
             Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
 
             //Act
