@@ -23,7 +23,17 @@ namespace Avans_Devops
             SprintState = sprintState;
         }
 
-        public bool CheckSprintDone() { return false; }
+        public bool CheckSprintDone() 
+        { 
+            if(EndDate < DateTime.Today)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
         public Report RunPipeline() { return new Report(); }
     }
 }
