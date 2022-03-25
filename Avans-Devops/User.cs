@@ -4,10 +4,10 @@
     {
         public int UserId { get; set; }
         public string Name { get; set; }
-        public Role Role { get; set; }
+        public Roles Role { get; set; }
         public string Email { get; set; }
 
-        public User(int userId, string name, Role role, string email)
+        public User(int userId, string name, Roles role, string email)
         {
             this.UserId = userId;
             this.Name = name;
@@ -15,7 +15,10 @@
             this.Email = email;
         }
 
-        public void ChangeRole(Role Role) { }
+        public void ChangeRole(Roles role) 
+        {
+            this.Role = role;
+        }
         public void Notify() { }
     }
 }

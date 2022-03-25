@@ -43,8 +43,8 @@ namespace Avans_Devops.Tests
             Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
 
             //Act
-            backlog.AddUser(new User(1, "Jeremy Smits", new Role(), "Jsmits9Avans.nl"));
-            backlog.AddUser(new User(2, "Sanne Huisman", new Role(), "SHuisman2@Avans.nl"));
+            backlog.AddUser(new User(1, "Jeremy Smits", Roles.Developer, "Jsmits9Avans.nl"));
+            backlog.AddUser(new User(2, "Sanne Huisman", Roles.Developer, "SHuisman2@Avans.nl"));
 
             //Assert
             Assert.True(backlog.ScrumTeam.Count == 2);
@@ -57,8 +57,8 @@ namespace Avans_Devops.Tests
             Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
 
             //Act
-            backlog.AddUser(new User(1, "Jeremy Smits", new Role(), "Jsmits9Avans.nl"));
-            backlog.AddUser(new User(2, "Sanne Huisman", new Role(), "SHuisman2@Avans.nl"));
+            backlog.AddUser(new User(1, "Jeremy Smits", Roles.Developer, "Jsmits9Avans.nl"));
+            backlog.AddUser(new User(2, "Sanne Huisman", Roles.Developer, "SHuisman2@Avans.nl"));
 
             backlog.RemoveUser(2);
 
