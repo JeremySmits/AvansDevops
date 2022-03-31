@@ -8,7 +8,7 @@ namespace Avans_Devops
         public string Name { get; set; }
         public string Description { get; set; }
         public List<User> ScrumTeam { get; set; }
-        public List<ISprint> Sprints { get; set; }
+        public List<Sprint> Sprints { get; set; }
         public List<BacklogItem> BackLogItems { get; set; }
 
         public Backlog(int backlogId, string name, string description)
@@ -17,19 +17,19 @@ namespace Avans_Devops
             Name = name;
             Description = description;
             ScrumTeam = new List<User>();
-            Sprints = new List<ISprint>();
+            Sprints = new List<Sprint>();
             BackLogItems = new List<BacklogItem>();
         }
 
-        public void AddSprint(ISprint Sprint) 
+        public void AddSprint(Sprint Sprint) 
         {
             this.Sprints.Add(Sprint);
         }
         public void RemoveSprint(int SprintId) 
         {
-            List<ISprint> tempSprints = new();
+            List<Sprint> tempSprints = new();
 
-            foreach(ISprint sprint in Sprints)
+            foreach(Sprint sprint in Sprints)
             {
                 if (sprint.SprintId != SprintId)
                     tempSprints.Add(sprint);

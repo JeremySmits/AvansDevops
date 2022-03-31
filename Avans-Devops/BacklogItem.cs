@@ -5,7 +5,7 @@ namespace Avans_Devops
     public class BacklogItem
     {
         public int SprintId { get; set; }
-        public ISprint Sprint { get; set; }
+        public Sprint Sprint { get; set; }
         public int BacklogId { get; set; }
         public int BacklogItemId { get; set; }
         public string Name { get; set; }
