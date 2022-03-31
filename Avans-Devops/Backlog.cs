@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Avans_Devops
 {
@@ -66,6 +67,33 @@ namespace Avans_Devops
             }
 
             BackLogItems = tempBacklogItem;
+        }
+        public bool RunSprintDeployment(Sprint sprint, int i)
+        {
+            if(sprint.RunPipeline(i))
+            {
+                foreach (Sprint s in Sprints)
+                {
+                    List<Sprint> sprintsCopy = new();
+                    if (s.SprintId == sprint.SprintId)
+                    {
+                        sprintsCopy.Add(new FinishedSprint(sprint.SprintId, sprint.BacklogId, sprint.Name,
+                            sprint.StartDate, sprint.EndDate, sprint.SprintType, sprint.ScrumMaster));
+                    }
+                    else
+                    {
+                        sprintsCopy.Add(s);
+                    }
+                    Sprints = sprintsCopy;
+                }
+
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Build Failed");
+                return false;
+            }
         }
     }
 }

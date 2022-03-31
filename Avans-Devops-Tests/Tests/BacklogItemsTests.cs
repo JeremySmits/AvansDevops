@@ -156,5 +156,6 @@ namespace Avans_Devops_Tests.Tests
             //Assert
             Assert.True(BacklogItem.State != PhaseState.Done);
         }
+
     }
 }

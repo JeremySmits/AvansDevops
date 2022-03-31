@@ -6,11 +6,11 @@ namespace Avans_Devops
     public abstract class Sprint
     {
         public int SprintId { get; set; }
-        protected int BacklogId { get; set; }
-        protected string Name { get; set; }
-        protected DateTime StartDate { get; set; }
-        protected DateTime EndDate { get; set; }
-        protected string SprintType { get; set; }
+        public int BacklogId { get; set; }
+        public string Name { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public string SprintType { get; set; }
         public List<BacklogItem> BacklogItems { get; set; }
         public User ScrumMaster { get; set; }
 
@@ -62,7 +62,12 @@ namespace Avans_Devops
             Console.WriteLine("Je kan alleen een sprint aanpassen als de status inactive is!");
         }
 
-        public Report RunPipeline() { return new Report(); }
+        public bool RunPipeline(int i) 
+        { 
+            if(i == 1)
+            return true;
+            return false;
+        }
 
         public void ReleaseSprint()
         {
