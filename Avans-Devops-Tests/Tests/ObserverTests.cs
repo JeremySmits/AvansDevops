@@ -4,6 +4,7 @@ using Xunit;
 using Avans_Devops.Observe;
 using Avans_Devops.Composite;
 using Avans_Devops.Releases;
+using Avans_Devops.Pipeline;
 
 namespace Avans_Devops.Tests
 {
@@ -120,6 +121,7 @@ namespace Avans_Devops.Tests
 			Assert.True(observer1.NotificationMemory.Count == 1);
 			Assert.True(observer2.NotificationMemory.Count == 1);
         }
+
 		[Fact]
 		public void AttachFailReleaseObserver()
 		{
@@ -227,6 +229,72 @@ namespace Avans_Devops.Tests
 			foreach (var o in failRelease.Observers) {
                 Assert.True(o.NotificationMemory.Count == 1);
             }
+		}
+
+		[Fact]
+		public void AttachPipelineObserver()
+		{
+			//Arrange
+			IPipelineFactory pipeline = new DevelopmentPipeline();
+			Observer observer = new Observer();
+
+			//Act
+			pipeline.AttachObserver(observer);
+
+			//Assert
+			Assert.True(pipeline.Observers.Count == 1);
+		}
+
+		[Fact]
+		public void AttachMultiplePipelineObservers()
+		{
+			//Arrange
+			IPipelineFactory pipeline = new DevelopmentPipeline();
+			Observer observer1 = new Observer();
+			Observer observer2 = new Observer();
+
+			//Act
+			pipeline.AttachObserver(observer1);
+			pipeline.AttachObserver(observer2);
+
+			//Assert
+			Assert.True(pipeline.Observers.Count == 2);
+		}
+
+		[Fact]
+		public void DetachPipelineObserver()
+		{
+			//Arrange
+			IPipelineFactory pipeline = new DevelopmentPipeline();
+			Observer observer = new Observer();
+
+			//Act
+			pipeline.AttachObserver(observer);
+			pipeline.DetachObserver(observer);
+
+			//Assert
+			Assert.True(pipeline.Observers.Count == 0);
+		}
+
+		[Fact]
+		public void DetachMultiplePipelineObservers()
+		{
+			//Arrange
+			IPipelineFactory pipeline = new DevelopmentPipeline();
+			Observer observer1 = new Observer();
+			Observer observer2 = new Observer();
+			Observer observer3 = new Observer();
+
+			//Act
+			pipeline.AttachObserver(observer1);
+			pipeline.AttachObserver(observer2);
+			pipeline.AttachObserver(observer3);
+
+			pipeline.DetachObserver(observer1);
+			pipeline.DetachObserver(observer2);
+
+			//Assert
+			Assert.True(pipeline.Observers.Count == 1);
 		}
     }
 }
