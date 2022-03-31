@@ -43,14 +43,30 @@ namespace Avans_Devops_Tests.Tests
         }
 
         [Fact]
+        public void CheckIfSprintHasScrumMaster()
+        {
+            //Arrange
+            User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
+            InActivateSprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
+
+            //Assert
+            Assert.True(sprint.ScrumMaster != null);
+        }
+
+        [Fact]
         public void SetSprintstate()
         {
             //Arrange
+            User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
+            Sprint sprint = new InActivateSprint(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
 
             //Act
+            sprint = new ActiveSprint(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
+
+            var s = sprint.GetTypeSprint();
 
             //Assert
-            //Assert.True(sprint.SprintState.BacklogItemsAdd);
+            Assert.True(sprint.GetTypeSprint() == "Active");
         }
     }
 }

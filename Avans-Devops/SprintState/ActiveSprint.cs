@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Avans_Devops
 {
-    public class ActivateSprint : Sprint
+    public class ActiveSprint : Sprint
     {
-        public ActivateSprint(int sprintId, int backlogId, string name, DateTime startDate, DateTime endDate, string sprintType, User scrumMaster)
+        public ActiveSprint(int sprintId, int backlogId, string name, DateTime startDate, DateTime endDate, string sprintType, User scrumMaster)
         {
             SprintId = sprintId;
             BacklogId = backlogId;
@@ -18,6 +18,10 @@ namespace Avans_Devops
             SprintType = sprintType;
             BacklogItems = new();
             ScrumMaster = scrumMaster;
+        }
+        public override string GetTypeSprint()
+        {
+            return "Active";
         }
     }
 }
