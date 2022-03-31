@@ -106,7 +106,7 @@ namespace Avans_Devops_Tests.Tests
 
             //Act
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
-            backlog.AddSprint(new InActivateSprint(1, 1, "Sprint 1", DateTime.Today, DateTime.Today.AddDays(1), "Type 1", user));
+            backlog.AddSprint(new ActiveSprint(1, 1, "Sprint 1", DateTime.Today, DateTime.Today.AddDays(1), "Type 1", user));
 
             //Assert
             Assert.True(backlog.RunSprintDeployment(backlog.Sprints[0],1) && backlog.Sprints[0].GetTypeSprint() == "Finished");
@@ -120,10 +120,10 @@ namespace Avans_Devops_Tests.Tests
 
             //Act
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
-            backlog.AddSprint(new InActivateSprint(1, 1, "Sprint 1", DateTime.Today, DateTime.Today.AddDays(1), "Type 1", user));
+            backlog.AddSprint(new ActiveSprint(1, 1, "Sprint 1", DateTime.Today, DateTime.Today.AddDays(1), "Type 1", user));
 
             //Assert
-            Assert.True(!backlog.RunSprintDeployment(backlog.Sprints[0], 9) && backlog.Sprints[0].GetTypeSprint() == "Inactive");
+            Assert.True(!backlog.RunSprintDeployment(backlog.Sprints[0], 9) && backlog.Sprints[0].GetTypeSprint() == "Active");
         }
     }
 }

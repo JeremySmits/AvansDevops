@@ -70,30 +70,34 @@ namespace Avans_Devops
         }
         public bool RunSprintDeployment(Sprint sprint, int i)
         {
-            if(sprint.RunPipeline(i))
+            if(sprint.GetTypeSprint() == "Active")
             {
-                foreach (Sprint s in Sprints)
+                if (sprint.RunPipeline(i))
                 {
-                    List<Sprint> sprintsCopy = new();
-                    if (s.SprintId == sprint.SprintId)
+                    foreach (Sprint s in Sprints)
                     {
-                        sprintsCopy.Add(new FinishedSprint(sprint.SprintId, sprint.BacklogId, sprint.Name,
-                            sprint.StartDate, sprint.EndDate, sprint.SprintType, sprint.ScrumMaster));
+                        List<Sprint> sprintsCopy = new();
+                        if (s.SprintId == sprint.SprintId)
+                        {
+                            sprintsCopy.Add(new FinishedSprint(sprint.SprintId, sprint.BacklogId, sprint.Name,
+                                sprint.StartDate, sprint.EndDate, sprint.SprintType, sprint.ScrumMaster));
+                        }
+                        else
+                        {
+                            sprintsCopy.Add(s);
+                        }
+                        Sprints = sprintsCopy;
                     }
-                    else
-                    {
-                        sprintsCopy.Add(s);
-                    }
-                    Sprints = sprintsCopy;
-                }
 
-                return true;
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("Build Failed");
+                    return false;
+                }
             }
-            else
-            {
-                Console.WriteLine("Build Failed");
-                return false;
-            }
+            return false;
         }
     }
 }

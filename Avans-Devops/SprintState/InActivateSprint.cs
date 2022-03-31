@@ -18,6 +18,7 @@ namespace Avans_Devops
             SprintType = sprintType;
             BacklogItems = new();
             ScrumMaster = scrumMaster;
+            IsRuningPipeline = false;
         }
 
         public override string GetTypeSprint()
@@ -27,7 +28,7 @@ namespace Avans_Devops
 
         public override void AddBacklogItem(BacklogItem backlogItem)
         {
-            if (CheckSprintStarted() && !CheckSprintDone())
+            if (CheckSprintStarted() && !CheckSprintDone() && !IsRuningPipeline)
             {
                 BacklogItems.Add(backlogItem);
             }
