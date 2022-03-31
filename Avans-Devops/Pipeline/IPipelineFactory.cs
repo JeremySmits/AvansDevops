@@ -20,17 +20,13 @@ namespace Avans_Devops.Pipeline
         public List<string> SetAnalyses() { return null; }
         public List<string> SetDeploys() { return null; }
         public List<string> SetUtilities() { return null; }
-        public void Build() { }
-
         public List<Observer> Observers { get; } = new List<Observer>();
-
         public void RunPipeline() {
             // if onderdeel niet leeg, run dat onderdeel
             // als onderdeel faalt, NotifyObserver met gefaalde onderdeel naar scrum master.
             // als alle onderdelen goed gaan NotifyObserver message naar scrum master en product owner.
             // als alle onderdelen goed gaan, sprint wordt op finished gezet
             List<List<string>> steps = new List<List<string>>();
-
             String failed = null;
 
             foreach (var step in steps) {
@@ -51,6 +47,11 @@ namespace Avans_Devops.Pipeline
                 }
                 // Else het onderdeel is leeg en gaat verder
             }
+            // Als pipeline succesvol is, zet sprint op finished
+            if (failed == null) {
+                //Placeholder voor de sprint
+            }
+
             NotifyObservers(failed);
         }
         public void AttachObserver(Observer observer) {
