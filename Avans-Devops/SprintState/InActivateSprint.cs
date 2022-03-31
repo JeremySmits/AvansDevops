@@ -24,5 +24,27 @@ namespace Avans_Devops
         {
             return "Inactive";
         }
+
+        public override void AddBacklogItem(BacklogItem backlogItem)
+        {
+            if (CheckSprintStarted() && !CheckSprintDone())
+            {
+                BacklogItems.Add(backlogItem);
+            }
+        }
+
+        public override void UpdateSprinteDetails(int sprintId, int backlogId,
+            string name, DateTime startDate, DateTime endDate, string sprintType,
+            User scrumMaster)
+        {
+            SprintId = sprintId;
+            BacklogId = backlogId;
+            Name = name;
+            StartDate = startDate;
+            EndDate = endDate;
+            SprintType = sprintType;
+            BacklogItems = new();
+            ScrumMaster = scrumMaster;
+        }
     }
 }

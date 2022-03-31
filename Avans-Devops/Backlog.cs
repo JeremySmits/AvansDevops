@@ -34,7 +34,6 @@ namespace Avans_Devops
                 if (sprint.SprintId != SprintId)
                     tempSprints.Add(sprint);
             }
-
             Sprints = tempSprints;
         }
         public void AddUser(User User)
@@ -50,7 +49,6 @@ namespace Avans_Devops
                 if (user.UserId != UserId)
                     tempUsers.Add(user);
             }
-
             ScrumTeam = tempUsers;
         }
         public void AddBacklogItem(BacklogItem BackLogItem) 

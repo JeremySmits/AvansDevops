@@ -15,7 +15,7 @@ namespace Avans_Devops_Tests.Tests
         {
             //Arrange
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
-            InActivateSprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(-10), DateTime.Today.AddDays(10), "Type 1", user);
+            ActiveSprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(-10), DateTime.Today.AddDays(10), "Type 1", user);
             BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
 
 
@@ -43,6 +43,22 @@ namespace Avans_Devops_Tests.Tests
         }
 
         [Fact]
+        public void AddToBacklogItemToFinishedSprint()
+        {
+            //Arrange
+            User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
+            FinishedSprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(-10), DateTime.Today.AddDays(10), "Type 1", user);
+            BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
+
+
+            //Act
+            sprint.AddBacklogItem(BacklogItem);
+
+            //Assert
+            Assert.True(sprint.BacklogItems.Count == 0);
+        }
+
+        [Fact]
         public void CheckIfSprintHasScrumMaster()
         {
             //Arrange
@@ -54,19 +70,32 @@ namespace Avans_Devops_Tests.Tests
         }
 
         [Fact]
-        public void SetSprintstate()
+        public void SetSprintstateInActive()
         {
             //Arrange
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
             Sprint sprint = new InActivateSprint(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
 
             //Act
-            sprint = new ActiveSprint(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
-
-            var s = sprint.GetTypeSprint();
+            sprint = new InActivateSprint(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
 
             //Assert
-            Assert.True(sprint.GetTypeSprint() == "Active");
+            Assert.True(sprint.GetTypeSprint() == "Inactive");
+        }
+
+        [Fact]
+        public void SetSprintstateFinishedActive()
+        {
+            //Arrange
+            User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
+            Sprint sprint = new InActivateSprint(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
+
+            //Act
+            sprint = new FinishedSprint(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
+
+
+            //Assert
+            Assert.True(sprint.GetTypeSprint() == "Finished");
         }
     }
 }

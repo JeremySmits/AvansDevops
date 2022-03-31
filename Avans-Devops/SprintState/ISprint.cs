@@ -37,25 +37,32 @@ namespace Avans_Devops
             }
         }
 
-        public void AddBacklogItem(BacklogItem backlogItem)
+        public virtual void AddBacklogItem(BacklogItem backlogItem)
         {
-            if (CheckSprintStarted() && !CheckSprintDone())
+            Console.WriteLine("Je kan alleen een sprint aanpassen als de status inactive is!");
+        }
+
+        public void RemoveBacklogItem(int BackLogItemId)
+        {
+            List<BacklogItem> tempBacklogItem = new();
+
+            foreach (BacklogItem backlogItem in BacklogItems)
             {
-                BacklogItems.Add(backlogItem);
+                if (backlogItem.BacklogItemId != BackLogItemId)
+                    tempBacklogItem.Add(backlogItem);
             }
+
+            BacklogItems = tempBacklogItem;
+        }
+
+        public virtual void UpdateSprinteDetails(int sprintId, int backlogId, 
+            string name, DateTime startDate, DateTime endDate, string sprintType, 
+            User scrumMaster)
+        {
+            Console.WriteLine("Je kan alleen een sprint aanpassen als de status inactive is!");
         }
 
         public Report RunPipeline() { return new Report(); }
-
-        public void UpdateSprinteDetails()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveBacklogItem(BacklogItem BacklogItem)
-        {
-            throw new NotImplementedException();
-        }
 
         public void ReleaseSprint()
         {
