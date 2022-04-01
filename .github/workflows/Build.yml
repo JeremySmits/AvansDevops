@@ -1,10 +1,10 @@
-name: Build
+name: Build and run tests
 on:
   push:
-    branches:
-      - Master
+    branches: [ Master ]
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches: [ Master ]
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,13 +19,13 @@ jobs:
       with:
         dotnet-version: '5.0.100'
     - name: Install dependencies
-      run: dotnet restore Avans-Devops/Avans-Devops.sln
+      run: dotnet restore
     - name: Build
       run: dotnet build Avans-Devops/Avans-Devops.sln --configuration Release --no-restore
     - name: Test
       run: dotnet test Avans-Devops/Avans-Devops.sln --blame --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=opencover.xml
     - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@master /k:"JeremySmits_AvansDevops" /o:"jeremysmits-1" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+      uses: sonarsource/sonarcloud-github-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
