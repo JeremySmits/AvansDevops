@@ -1,8 +1,10 @@
 name: Build and run tests
 on:
   push:
-    branches: [ Master ]
-
+    branches:
+      - Master
+  pull_request:
+    types: [opened, synchronize, reopened]
 jobs:
   build:
     runs-on: ubuntu-latest
