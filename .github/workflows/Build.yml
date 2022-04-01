@@ -3,8 +3,8 @@ name: Build
 on:
   push:
     branches:
-      - master
-      - main
+      - Master
+      - Main
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
