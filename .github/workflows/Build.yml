@@ -24,4 +24,4 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonarcloud.ps1 -sonarSecret ${{ secrets.SONAR_TOKEN }}
+          .\sonarcloud.ps1 -sonarSecret ${{ secrets.SONAR_TOKEN }}
