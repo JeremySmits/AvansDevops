@@ -50,8 +50,7 @@ jobs:
           
           .\.sonar\scanner\dotnet-sonarscanner begin/k:"JeremySmits_AvansDevops" /o:"jeremysmits-1" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vstest.reportsPaths="D:\a\Avans-Devops\output\*.trx" /d:sonar.cs.vscoveragexml.reportsPaths="D:\a\Avans-Devops\output\**\*.coveragexml"
           dotnet build Avans-Devops/Avans-Devops.sln
-          dotnet restore .\Avans-Devops\Avans-Devops-Tests
-          dotnet test .\Avans-Devops\Avans-Devops-Tests -r output --collect "Code Coverage"
+          dotnet test  Avans-Devops -r output --collect "Code Coverage"
           Get-ChildItem -Recurse -Filter "*.coverage" | % {
           $outfile = "$([System.IO.Path]::GetFileNameWithoutExtension($_.FullName)).coveragexml"
           $output = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($_.FullName), $outfile)
