@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +8,7 @@ using Avans_Devops.Observe;
 
 namespace Avans_Devops.Pipeline
 {
-    public abstract class IPipelineFactory: IObservable
+    interface IPipeline: IObservable
     {
         public string Title { get; set; }
         public int PipelineId { get; set; }
@@ -17,10 +17,11 @@ namespace Avans_Devops.Pipeline
         public List<string> Builds { get; set; }
         public List<string> Tests { get; set; }
         public List<string> Analyses { get; set; }
-        public abstract List<string> Deploys { get; set; }
+        public List<string> Deploys { get; set; }
         public List<string> Utilities { get; set; }
 
-        public List<Observer> Observers { get; set;} = new List<Observer>();
+        public List<Observer> Observers { get; set;}
+		// public List<Observer> Observers { get; set;} = new List<Observer>();
 
 		public bool RunPipeline() {
             // if onderdeel niet leeg, run dat onderdeel
@@ -59,17 +60,7 @@ namespace Avans_Devops.Pipeline
             }
         }
 
-        public void addSource(string source){
-            this.Sources.Add(source);
-        }
-
-        public void removeSource(string source){
-            
-        }
-
-        public List<string> getSources(){
-            return this.Sources;
-        }
+		
 
         public void AttachObserver(Observer observer) {
             this.Observers.Add(observer);
