@@ -8,23 +8,23 @@ namespace Avans_Devops.Composite
 {
     public class Comment : Post
     {
-        private int PostID { get; }
-        private BacklogItem BacklogItem { get; }
-        private int ParentPostID { get; }
-        private Post ParentPost { get; }
-        public string CommentText { get; }
-        public User OP { get; }
-        private bool IsClosed { get; }
-
-		public Comment(int postID, BacklogItem backlogItem, int parentPostID, Post parentPost, string commentText, User oP)
+		public Comment(int postID,  Thread parentPost, string commentText, User OP)
 		{
 			this.PostID = postID;
-			this.BacklogItem = backlogItem;
-			this.ParentPostID = parentPostID;
 			this.ParentPost = parentPost;
 			this.CommentText = commentText;
-			this.OP = oP;
-			this.IsClosed = false;
+			this.OP = OP;
 		}
+
+		public override void AddChild(Post Post) 
+		{
+			Thread tempThread = new Thread(PostID, ParentPost.BacklogItem, ParentPost, CommentText, OP);
+			tempThread.AddChild(Post);
+
+			ParentPost.Posts.Add(tempThread);
+			ParentPost.Posts.Remove(this);
+		}
+
+		public override void RemoveChild(Post Post) { Console.WriteLine("Comments has no children."); }
 	}
 }

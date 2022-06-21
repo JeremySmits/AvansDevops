@@ -8,28 +8,17 @@ namespace Avans_Devops.Composite
 {
     public abstract class Post
     {
-        private int PostID { get; }
-        private BacklogItem BacklogItem { get; }
-        private int ParentPostID { get; }
-        private Post ParentPost { get; }
-        private string CommentText { get; }
-        private User OP { get; }
-        private bool IsActive { get; }
+        public int PostID { get; set; }
+        public Thread ParentPost { get; set; }
+        public string CommentText { get; set; }
+        public User OP { get; set; }
 
-        public void setActive(bool SetActive) {
-            if (!SetActive && this.IsActive) {
-                // Close active thread
-            } else if (SetActive && !this.IsActive) {
-                // Open closed thread
-            } else if (!SetActive && !this.IsActive) {
-                // Close already closed thread
-                throw new NotSupportedException("Can't close a thread that is already closed.");
-            } else if (SetActive && this.IsActive) {
-                // Open already active thread
-                throw new NotSupportedException("Can't open a thread that's already open.");
-                
-            }
+        public virtual void AddChild(Post Post) { }
+        public virtual void RemoveChild(Post Post) { }
 
+        public void SetCommentText(string text)
+        {
+            CommentText = text;
         }
     }
 }
