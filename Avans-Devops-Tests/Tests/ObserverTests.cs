@@ -235,7 +235,7 @@ namespace Avans_Devops.Tests
 		public void AttachPipelineObserver()
 		{
 			//Arrange
-			IPipelineFactory pipeline = new DevelopmentPipeline();
+			var pipeline = PipelineFactory.createPipeline(PipelineType.Deployment, "deploymentPipeline");
 			Observer observer = new Observer();
 
 			//Act
@@ -249,7 +249,7 @@ namespace Avans_Devops.Tests
 		public void AttachMultiplePipelineObservers()
 		{
 			//Arrange
-			IPipelineFactory pipeline = new DevelopmentPipeline();
+			var pipeline = PipelineFactory.createPipeline(PipelineType.Deployment, "deploymentPipeline");
 			Observer observer1 = new Observer();
 			Observer observer2 = new Observer();
 
@@ -265,7 +265,7 @@ namespace Avans_Devops.Tests
 		public void DetachPipelineObserver()
 		{
 			//Arrange
-			IPipelineFactory pipeline = new DevelopmentPipeline();
+			var pipeline = PipelineFactory.createPipeline(PipelineType.Deployment, "deploymentPipeline");
 			Observer observer = new Observer();
 
 			//Act
@@ -280,7 +280,7 @@ namespace Avans_Devops.Tests
 		public void DetachMultiplePipelineObservers()
 		{
 			//Arrange
-			IPipelineFactory pipeline = new DevelopmentPipeline();
+			var pipeline = PipelineFactory.createPipeline(PipelineType.Deployment, "deploymentPipeline");
 			Observer observer1 = new Observer();
 			Observer observer2 = new Observer();
 			Observer observer3 = new Observer();

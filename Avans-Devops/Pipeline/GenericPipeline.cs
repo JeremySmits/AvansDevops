@@ -4,7 +4,7 @@ using Avans_Devops.Observe;
 
 namespace Avans_Devops.Pipeline
 {
-	public class TestPipeline : IPipeline
+	public class GenericPipeline : IPipeline
 	{
 		public string Title { get; set; }
         public int PipelineId { get; set; }
@@ -19,20 +19,8 @@ namespace Avans_Devops.Pipeline
 
 		public bool canRun()
 		{
-			// A testing pipeline may only run if it has tests, analyses (test results) and no deployments.
-			return hasTests() && hasAnalyses() && !hasDeployment();
-		}
-
-		public bool hasTests(){
-			return this.Tests != null && this.Tests.Count > 0;
-		}
-
-		public bool hasAnalyses(){
-			return this.Analyses != null && this.Analyses.Count > 0;
-		}
-
-		public bool hasDeployment(){
-			return this.Deploys != null && this.Deploys.Count > 0;
+			// A generic pipeline may always run, even if it has no steps.
+			return true;
 		}
 	}
 }
