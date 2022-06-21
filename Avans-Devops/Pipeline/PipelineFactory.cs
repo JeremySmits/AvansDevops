@@ -26,7 +26,6 @@ namespace Avans_Devops.Pipeline
 					Console.Write("Test pipeline made");
 					pipeline = new TestPipeline();
 					break;
-				case PipelineType.Generic:
 				default:
 					Console.Write("Generic pipeline made");
 					pipeline = new GenericPipeline();

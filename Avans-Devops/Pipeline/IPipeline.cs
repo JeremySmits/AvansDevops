@@ -21,7 +21,6 @@ namespace Avans_Devops.Pipeline
         public List<string> Utilities { get; set; }
 
         public List<Observer> Observers { get; set;}
-		// public List<Observer> Observers { get; set;} = new List<Observer>();
 
         public bool canRun();
 
@@ -45,10 +44,10 @@ namespace Avans_Devops.Pipeline
                             // De console log is het uitvoeren
                             Console.Write(item);
                             if (item == "Fail") {
-                            // De pipeline faalt; melding naar scrum master met gefaalde item & pipeline 
-                            failed = item;
-                            break;
-                            };
+                                // De pipeline faalt; melding naar scrum master met gefaalde item & pipeline 
+                                failed = item;
+                                break;
+                            }
                         }
                     }
                     if (failed != null) {
