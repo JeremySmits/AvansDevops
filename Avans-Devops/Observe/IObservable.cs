@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Avans_Devops.Observe
 {
-    interface IObservable
+    public interface IObservable
     {
         public void AttachObserver() { }
         public void DetachObserver() { }
