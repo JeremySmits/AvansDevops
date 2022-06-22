@@ -36,7 +36,6 @@ namespace Avans_Devops.Releases
             this.Observers.Remove(observer);
         }
         public void NotifyObservers() {
-            
             foreach (var o in Observers) {
                 o.SendMessage();
             }

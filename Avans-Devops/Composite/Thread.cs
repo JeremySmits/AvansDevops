@@ -27,8 +27,13 @@ namespace Avans_Devops.Composite
         {
             if (!IsClosed && BacklogItem.State != PhaseState.Done)
             {
+                Observer observer = new Observer();
+                observer.Receiver = this.OP;
+                string message = Post.OP + "responded to your thread with: " + Post.CommentText;
+                observer.Message = message;
+                NotifyObservers();
+
                 this.Posts.Add(Post);
-                NotifyObservers(Post);
             }
         }
         public override void RemoveChild(Post Post)
@@ -48,13 +53,10 @@ namespace Avans_Devops.Composite
         {
             this.Observers.Remove(observer);
         }
-        public void NotifyObservers(Post Post)
+        public void NotifyObservers()
         {
-            string message = Post.OP + "responded to your thread with: " + Post.CommentText;
             foreach (var o in Observers)
             {
-                o.Receiver = this.OP;
-                o.Message = message;
                 o.SendMessage();
             }
         }
