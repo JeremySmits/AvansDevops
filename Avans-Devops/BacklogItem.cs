@@ -6,7 +6,7 @@ namespace Avans_Devops
     {
         public int SprintId { get; set; }
         public Sprint Sprint { get; set; }
-        public int BacklogId { get; set; }
+        public Backlog Backlog { get; set; }
         public int BacklogItemId { get; set; }
         public string Name { get; set; }
         public PhaseState State { get; set; }
@@ -14,10 +14,10 @@ namespace Avans_Devops
         public int ThreatId { get; set; }
         public int Effort { get; set; }
 
-        public BacklogItem(int sprintId, int backlogId,int backlogItemId, string name, int threatId, int effort)
+        public BacklogItem(int sprintId, Backlog backlog, int backlogItemId, string name, int threatId, int effort)
         {
             SprintId = sprintId;
-            BacklogId = backlogId;
+            Backlog = backlog;
             BacklogItemId = backlogItemId;
             Name = name;
             State = PhaseState.ToDo;

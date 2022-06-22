@@ -16,7 +16,7 @@ namespace Avans_Devops_Tests.Tests
             //Arrange
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
             ActiveSprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(-10), DateTime.Today.AddDays(10), "Type 1", user);
-            BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
+            BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
 
 
             //Act
@@ -32,7 +32,7 @@ namespace Avans_Devops_Tests.Tests
             //Arrange
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
             InActivateSprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
-            BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
+            BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
 
 
             //Act
@@ -48,7 +48,7 @@ namespace Avans_Devops_Tests.Tests
             //Arrange
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
             FinishedSprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(-10), DateTime.Today.AddDays(10), "Type 1", user);
-            BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
+            BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
 
 
             //Act
@@ -102,7 +102,7 @@ namespace Avans_Devops_Tests.Tests
         public void SetSprintToFinishedWhenPipelineSucces()
         {
             //Arrange
-            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
+            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking", null);
 
             //Act
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
@@ -116,7 +116,7 @@ namespace Avans_Devops_Tests.Tests
         public void SetSprintNotToFinishedWhenPipelineFail()
         {
             //Arrange
-            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
+            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking", null);
 
             //Act
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");

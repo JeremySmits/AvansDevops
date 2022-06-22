@@ -8,12 +8,14 @@ namespace Avans_Devops
         public int BacklogId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public Sprint Sprint { get; set; }
         public List<User> ScrumTeam { get; set; }
         public List<Sprint> Sprints { get; set; }
         public List<BacklogItem> BackLogItems { get; set; }
 
-        public Backlog(int backlogId, string name, string description)
+        public Backlog(int backlogId, string name, string description, Sprint sprint)
         {
+            Sprint = sprint;
             BacklogId = backlogId;
             Name = name;
             Description = description;

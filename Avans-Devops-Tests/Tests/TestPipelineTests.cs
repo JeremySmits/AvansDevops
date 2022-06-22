@@ -32,10 +32,10 @@ namespace Avans_Devops_Tests.Tests
         }
 
         [Fact]
-        public void tryInvalidTestPipelineWithoutTests()
+        public void TryInvalidTestPipelineWithoutTests()
         {
             //Arrange
-            var testPipeline = PipelineFactory.createPipeline(PipelineType.Test, "testPipeline");
+            var testPipeline = PipelineFactory.CreatePipeline(PipelineType.Test, "testPipeline");
 
             testPipeline.Sources.Add("Source 1");
             testPipeline.Packages.Add("Package 1");
@@ -46,17 +46,17 @@ namespace Avans_Devops_Tests.Tests
             testPipeline.Utilities.Add("Utility 1");
 
 			//Act
-            var canRun = testPipeline.canRun();
+            var canRun = testPipeline.CanRun();
 
             //Assert
             Assert.False(canRun);
         }
 
 		[Fact]
-        public void tryInvalidTestPipelineWithoutAnalyses()
+        public void TryInvalidTestPipelineWithoutAnalyses()
         {
             //Arrange
-            var testPipeline = PipelineFactory.createPipeline(PipelineType.Test, "testPipeline");
+            var testPipeline = PipelineFactory.CreatePipeline(PipelineType.Test, "testPipeline");
 
             testPipeline.Sources.Add("Source 1");
             testPipeline.Packages.Add("Package 1");
@@ -74,10 +74,10 @@ namespace Avans_Devops_Tests.Tests
         }
 
 		[Fact]
-        public void tryInvalidTestPipelineWithDeployment()
+        public void TryInvalidTestPipelineWithDeployment()
         {
             //Arrange
-            var testPipeline = PipelineFactory.createPipeline(PipelineType.Test, "testPipeline");
+            var testPipeline = PipelineFactory.CreatePipeline(PipelineType.Test, "testPipeline");
 
             testPipeline.Sources.Add("Source 1");
             testPipeline.Packages.Add("Package 1");
