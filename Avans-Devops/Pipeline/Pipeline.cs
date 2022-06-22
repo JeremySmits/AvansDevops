@@ -8,7 +8,7 @@ using Avans_Devops.Observe;
 
 namespace Avans_Devops.Pipeline
 {
-    public interface IPipeline: IObservable
+    public abstract class Pipeline: IObservable
     {
         public string Title { get; set; }
         public int PipelineId { get; set; }
@@ -22,7 +22,7 @@ namespace Avans_Devops.Pipeline
 
         public List<Observer> Observers { get; set;}
 
-        public bool canRun();
+        public virtual bool canRun() { return false;  }
 
 		public bool RunPipeline() {
             if (canRun()){

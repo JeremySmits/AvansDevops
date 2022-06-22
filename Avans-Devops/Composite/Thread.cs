@@ -25,7 +25,7 @@ namespace Avans_Devops.Composite
         }
         public override void AddChild(Post Post)
         {
-            if (!IsClosed)
+            if (!IsClosed && BacklogItem.State != PhaseState.Done)
             {
                 this.Posts.Add(Post);
                 NotifyObservers(Post);
@@ -33,7 +33,7 @@ namespace Avans_Devops.Composite
         }
         public override void RemoveChild(Post Post)
         {
-            if (!IsClosed)
+            if (!IsClosed && BacklogItem.State != PhaseState.Done)
             {
                 this.Posts.Remove(Post);
 
