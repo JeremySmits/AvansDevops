@@ -15,7 +15,7 @@ namespace Avans_Devops.Tests
 		{
 			//Arrange
 			BacklogItem backlogItem = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
-			Thread thread = new Thread(1, backlogItem, 0, null, "Thread text 1", null);
+			Thread thread = new Thread(1, backlogItem, null, "Thread text 1", null);
 			Observer observer = new Observer();
 
 			//Act
@@ -30,7 +30,7 @@ namespace Avans_Devops.Tests
 		{
 			//Arrange
 			BacklogItem backlogItem = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
-			Thread thread = new Thread(1, backlogItem, 0, null, "Thread text 1", null);
+			Thread thread = new Thread(1, backlogItem, null, "Thread text 1", null);
 			Observer observer1 = new Observer();
 			Observer observer2 = new Observer();
 			Observer observer3 = new Observer();
@@ -49,7 +49,7 @@ namespace Avans_Devops.Tests
 		{
 			//Arrange
 			BacklogItem backlogItem = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
-			Thread thread = new Thread(1, backlogItem, 0, null, "Thread text 1", null);
+			Thread thread = new Thread(1, backlogItem, null, "Thread text 1", null);
 			Observer observer = new Observer();
 
 			//Act
@@ -66,7 +66,7 @@ namespace Avans_Devops.Tests
 		{
 			//Arrange
 			BacklogItem backlogItem = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
-			Thread thread = new Thread(1, backlogItem, 0, null, "Thread text 1", null);
+			Thread thread = new Thread(1, backlogItem, null, "Thread text 1", null);
 			Observer observer1 = new Observer();
 			Observer observer2 = new Observer();
 			Observer observer3 = new Observer();
@@ -90,8 +90,8 @@ namespace Avans_Devops.Tests
         {
             //Arrange
 			BacklogItem backlogItem = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
-			Thread thread = new Thread(1, backlogItem, 0, null, "Thread text 1", null);
-			Comment comment = new Comment(2, thread.BacklogItem, thread.PostID, thread, "Comment text 1", null);
+			Thread thread = new Thread(1, backlogItem, null, "Thread text 1", null);
+			Comment comment = new Comment(thread.PostID, thread, "Comment text 1", null);
 			Observer observer = new Observer();
 
             //Act
@@ -107,8 +107,8 @@ namespace Avans_Devops.Tests
         {
             //Arrange
 			BacklogItem backlogItem = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
-			Thread thread = new Thread(1, backlogItem, 0, null, "Thread text 1", null);
-			Comment comment = new Comment(2, thread.BacklogItem, thread.PostID, thread, "Comment text 1", null);
+			Thread thread = new Thread(1, backlogItem, null, "Thread text 1", null);
+			Comment comment = new Comment(thread.PostID, thread, "Comment text 1", null);
 			Observer observer1 = new Observer();
 			Observer observer2 = new Observer();
 
