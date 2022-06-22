@@ -10,7 +10,7 @@ namespace Avans_Devops.Composite
     public class Thread : Post, IObservable
     {
         public BacklogItem BacklogItem { get; }
-        private bool IsClosed { get; set; }
+        public bool IsClosed { get; set; }
         public List<Post> Posts { get; } = new List<Post>();
         public List<Observer> Observers { get; } = new List<Observer>();
 
@@ -23,23 +23,36 @@ namespace Avans_Devops.Composite
             OP = oP;
             IsClosed = false;
         }
-        public override void AddChild(Post Post) {
-            this.Posts.Add(Post);
-            NotifyObservers(Post);
+        public override void AddChild(Post Post)
+        {
+            if (!IsClosed)
+            {
+                this.Posts.Add(Post);
+                NotifyObservers(Post);
+            }
         }
-        public override void RemoveChild(Post Post) {
-            this.Posts.Remove(Post);
+        public override void RemoveChild(Post Post)
+        {
+            if (!IsClosed)
+            {
+                this.Posts.Remove(Post);
+
+            }
         }
 
-        public void AttachObserver(Observer observer) {
+        public void AttachObserver(Observer observer)
+        {
             this.Observers.Add(observer);
         }
-        public void DetachObserver(Observer observer) {
+        public void DetachObserver(Observer observer)
+        {
             this.Observers.Remove(observer);
         }
-        public void NotifyObservers(Post Post) {
+        public void NotifyObservers(Post Post)
+        {
             string message = Post.OP + "responded to your thread with: " + Post.CommentText;
-            foreach (var o in Observers) {
+            foreach (var o in Observers)
+            {
                 o.Receiver = this.OP;
                 o.Message = message;
                 o.SendMessage();
@@ -47,7 +60,7 @@ namespace Avans_Devops.Composite
         }
         public void OpenThread()
         {
-            if(this.IsClosed == true && ParentPost == null)
+            if (this.IsClosed == true && ParentPost == null)
                 this.IsClosed = false;
             else
             {
@@ -56,7 +69,7 @@ namespace Avans_Devops.Composite
         }
         public void CloseThread()
         {
-            if (this.IsClosed == true && ParentPost == null)
+            if (this.IsClosed == false && ParentPost == null)
                 this.IsClosed = true;
             else
             {

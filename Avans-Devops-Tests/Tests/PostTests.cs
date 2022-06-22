@@ -1,18 +1,14 @@
-﻿using Avans_Devops;
-using Avans_Devops.Composite;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
+using Avans_Devops.Composite;
 
-namespace Avans_Devops_Tests.Tests
+namespace Avans_Devops.Tests
 {
     public class PostTests
     {
         [Fact]
-        public void AddChild()
+        public void AddChildToThread()
         {
             //Arrange
             BacklogItem backlogItem1 = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
@@ -42,7 +38,7 @@ namespace Avans_Devops_Tests.Tests
         }
 
         [Fact]
-        public void RemoveChild()
+        public void RemoveChildFromThread()
         {
             //Arrange
             BacklogItem backlogItem1 = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
@@ -72,6 +68,88 @@ namespace Avans_Devops_Tests.Tests
             //Assert
             Assert.True(thread1.Posts.Count == 1);
             Assert.True(thread2.Posts.Count == 2);
+        }
+
+        [Fact]
+        public void ChangeCommentIntoThread()
+        {
+            //Arrange
+            BacklogItem backlogItem1 = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
+            Thread thread1 = new Thread(1, backlogItem1, null, "Thread text 1", null);
+            Comment comment1 = new Comment(thread1.PostID, thread1, "Comment text 1", null);
+            thread1.AddChild(comment1);
+
+            //Act
+            Comment comment2 = new Comment(thread1.PostID, thread1, "Comment text 1", null);
+            thread1.Posts[0].AddChild(comment2);
+
+            var temp = thread1.Posts[0].GetType();
+            
+            //Assert
+            Assert.True(temp == typeof(Thread));
+        }
+
+        [Fact]
+        public void ThreadCanSaveCommentsAndThreads()
+        {
+            //Arrange
+            BacklogItem backlogItem1 = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
+            Thread thread1 = new Thread(1, backlogItem1, null, "Thread text 1", null);
+            Comment comment1 = new Comment(thread1.PostID, thread1, "Comment text 1", null);
+            Thread thread2 = new Thread(1, backlogItem1, null, "Thread text 1", null);
+
+            //Act
+            thread1.AddChild(comment1);
+            thread1.AddChild(thread2);
+
+
+            //Assert
+            Assert.True(thread1.Posts[0].GetType() == typeof(Comment));
+            Assert.True(thread1.Posts[1].GetType() == typeof(Thread));
+        }
+
+        [Fact]
+        public void openThread()
+        {
+            //Arrange
+            BacklogItem backlogItem1 = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
+            Thread thread1 = new Thread(1, backlogItem1, null, "Thread text 1", null);
+
+            //Act
+            thread1.OpenThread();
+
+            //Assert
+            Assert.False(thread1.IsClosed);
+        }
+
+        [Fact]
+        public void CloseThread()
+        {
+            //Arrange
+            BacklogItem backlogItem1 = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
+            Thread thread1 = new Thread(1, backlogItem1, null, "Thread text 1", null);
+
+            //Act
+            thread1.CloseThread();
+
+            //Assert
+            Assert.True(thread1.IsClosed);
+        }
+
+        [Fact]
+        public void CantAddCommentToClosedThread()
+        {
+            //Arrange
+            BacklogItem backlogItem1 = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
+            Thread thread1 = new Thread(1, backlogItem1, null, "Thread text 1", null);
+            Comment comment1 = new Comment(thread1.PostID, thread1, "Comment text 1", null);
+
+            //Act
+            thread1.CloseThread();
+            thread1.AddChild(comment1);
+
+            //Assert
+            Assert.True(thread1.Posts.Count == 0);
         }
     }
 }
