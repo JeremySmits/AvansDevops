@@ -8,8 +8,8 @@ namespace Avans_Devops.Observe
 {
     public interface IObservable
     {
-        public void AttachObserver() { }
-        public void DetachObserver() { }
-        public void NotifyObservers() { }
+        public void AttachObserver(Observer observer);
+        public void DetachObserver(Observer observer);
+        public void NotifyObservers();
     }
 }

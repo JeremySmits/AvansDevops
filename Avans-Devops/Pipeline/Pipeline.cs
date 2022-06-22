@@ -56,7 +56,19 @@ namespace Avans_Devops.Pipeline
                     }
                     // Else het onderdeel is leeg en gaat verder
                 }
-                NotifyObservers(failed);
+                Observer observer = new Observer();
+                // observer.Receiver = this.OP;
+                String message;
+                // Als failed null is dat is de pipeline geslaagd
+                if (failed == null) {
+                    message = "Pipeline " + this.Title + " has succeeded!";
+                } else {
+                    message = "Item " + failed[0] + " in pipeline " + this.Title;
+                }
+                observer.Message = message;
+                NotifyObservers();
+
+                // DEZE MELDINGEN GEBEUREN IN SPRINT!!!
 
                 // Als pipeline succesvol is, zet sprint op finished
                 if (failed == null) {
@@ -86,17 +98,8 @@ namespace Avans_Devops.Pipeline
             this.Observers.Remove(observer);
         }
 
-        public void NotifyObservers(String failed) {
-            String message;
-            // Als failed null is dat is de pipeline geslaagd
-            if (failed == null) {
-                message = "Pipeline " + this.Title + " has succeeded!";
-            } else {
-                message = "Item " + failed[0] + " in pipeline " + this.Title;
-            }
-
+        public void NotifyObservers() {
             foreach (var o in Observers) {
-                o.Message = message;
                 o.SendMessage();
             }
         }
