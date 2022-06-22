@@ -4,7 +4,7 @@ using Avans_Devops.Observe;
 
 namespace Avans_Devops.Pipeline
 {
-	public class TestPipeline : IPipeline
+	public class TestPipeline : IPipeline, IObservable
 	{
 		public string Title { get; set; }
         public int PipelineId { get; set; }
