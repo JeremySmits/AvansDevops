@@ -8,6 +8,10 @@ namespace Avans_Devops.Adapter
 {
     public class SlackAdapter : IAdapter
     {
-        public void SendMessage(User Receiver, string Message) { }
+        public void SendMessage(string Address, string Message)
+        {
+            Console.Write("I am pretending to send a notification using slack here!");
+			NotificationsMock.StoreNotification(Address, Message, NotificationType.Slack);
+        }
     }
 }

@@ -8,6 +8,6 @@ namespace Avans_Devops.Adapter
 {
     public interface IAdapter
     {
-        public void SendMessage(User Receiver, string Message);
+        public void SendMessage(string Address, string Message);
     }
 }

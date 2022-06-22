@@ -28,11 +28,11 @@ namespace Avans_Devops.Observe
                     switch (notificationPreference.NotificationType)
                     {
                         case NotificationType.Email:
-                            emailAdapter.SendMessage(this.Receiver, this.Message);
+                            emailAdapter.SendMessage(notificationPreference.Address, this.Message);
                             adaptersUsed.Add(emailAdapter);
                             break;
                         case NotificationType.Slack:
-                            slackAdapter.SendMessage(this.Receiver, this.Message);
+                            slackAdapter.SendMessage(notificationPreference.Address, this.Message);
                             adaptersUsed.Add(slackAdapter);
                             break;
                     }
