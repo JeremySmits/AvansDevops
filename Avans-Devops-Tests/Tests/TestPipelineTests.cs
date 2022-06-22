@@ -12,10 +12,10 @@ namespace Avans_Devops_Tests.Tests
     public class TestPipelineTests
     {
         [Fact]
-        public void tryValidTestPipeline()
+        public void TryValidTestPipeline()
         {
             //Arrange
-            var testPipeline = PipelineFactory.createPipeline(PipelineType.Test, "testPipeline");
+            var testPipeline = PipelineFactory.CreatePipeline(PipelineType.Test, "testPipeline");
 
             testPipeline.Sources.Add("Source 1");
             testPipeline.Packages.Add("Package 1");
@@ -25,7 +25,7 @@ namespace Avans_Devops_Tests.Tests
             testPipeline.Utilities.Add("Utility 1");
 
 			//Act
-            var canRun = testPipeline.canRun();
+            var canRun = testPipeline.CanRun();
 
             //Assert
             Assert.True(canRun);
@@ -67,7 +67,7 @@ namespace Avans_Devops_Tests.Tests
             testPipeline.Utilities.Add("Utility 1");
 
 			//Act
-            var canRun = testPipeline.canRun();
+            var canRun = testPipeline.CanRun();
 
             //Assert
             Assert.False(canRun);
@@ -89,7 +89,7 @@ namespace Avans_Devops_Tests.Tests
             testPipeline.Utilities.Add("Utility 1");
 
 			//Act
-            var canRun = testPipeline.canRun();
+            var canRun = testPipeline.CanRun();
 
             //Assert
             Assert.False(canRun);

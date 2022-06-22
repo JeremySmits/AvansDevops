@@ -12,10 +12,10 @@ namespace Avans_Devops_Tests.Tests
     public class DeploymentPipelineTests
     {
         [Fact]
-        public void tryValidDeploymentPipeline()
+        public void TryValidDeploymentPipeline()
         {
             //Arrange
-            var deploymentPipeline = PipelineFactory.createPipeline(PipelineType.Deployment, "deploymentPipeline");
+            var deploymentPipeline = PipelineFactory.CreatePipeline(PipelineType.Deployment, "deploymentPipeline");
 
             deploymentPipeline.Sources.Add("Source 1");
             deploymentPipeline.Packages.Add("Package 1");
@@ -27,17 +27,17 @@ namespace Avans_Devops_Tests.Tests
             deploymentPipeline.Utilities.Add("Utility 1");
 
 			//Act
-            var canRun = deploymentPipeline.canRun();
+            var canRun = deploymentPipeline.CanRun();
 
             //Assert
             Assert.True(canRun);
         }
 
         [Fact]
-        public void tryInvalidDeploymentPipelineWithoutDeployment()
+        public void TryInvalidDeploymentPipelineWithoutDeployment()
         {
             //Arrange
-            var deploymentPipeline = PipelineFactory.createPipeline(PipelineType.Deployment, "deploymentPipeline");
+            var deploymentPipeline = PipelineFactory.CreatePipeline(PipelineType.Deployment, "deploymentPipeline");
 
             deploymentPipeline.Sources.Add("Source 1");
             deploymentPipeline.Packages.Add("Package 1");
@@ -47,7 +47,7 @@ namespace Avans_Devops_Tests.Tests
             deploymentPipeline.Utilities.Add("Utility 1");
 
 			//Act
-            var canRun = deploymentPipeline.canRun();
+            var canRun = deploymentPipeline.CanRun();
 
             //Assert
             Assert.False(canRun);

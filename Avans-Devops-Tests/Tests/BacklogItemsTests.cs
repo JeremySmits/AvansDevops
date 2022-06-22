@@ -14,7 +14,7 @@ namespace Avans_Devops_Tests.Tests
         public void BacklogItemStartInToDo()
         {
             //Arrange
-            BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
+            BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
 
             //Assert
             Assert.True(BacklogItem.State == PhaseState.ToDo);
@@ -24,7 +24,7 @@ namespace Avans_Devops_Tests.Tests
         public void BacklogItemFromTodoToDoing()
         {
             //Arrange
-            BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
+            BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
 
             //Act
             BacklogItem.SwitchState("Doing");
@@ -36,7 +36,7 @@ namespace Avans_Devops_Tests.Tests
         public void BacklogItemFromDoingToReadyForTesting()
         {
             //Arrange
-            BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
+            BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
 
             //Act
             BacklogItem.SwitchState("Doing");
@@ -51,7 +51,7 @@ namespace Avans_Devops_Tests.Tests
         public void BacklogItemFromReadyForTestingToTesting()
         {
             //Arrange
-            BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
+            BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
 
             //Act
             BacklogItem.SwitchState("Doing");
@@ -66,7 +66,7 @@ namespace Avans_Devops_Tests.Tests
         public void BacklogItemFromTestingToDone()
         {
             //Arrange
-            BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
+            BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
 
             //Act
             BacklogItem.SwitchState("Doing");
@@ -82,7 +82,7 @@ namespace Avans_Devops_Tests.Tests
         public void BacklogItemFromTestingToToDo()
         {
             //Arrange
-            BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
+            BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
 
             //Act
             BacklogItem.SwitchState("Doing");
@@ -98,7 +98,7 @@ namespace Avans_Devops_Tests.Tests
         public void BacklogItemFromTodoToDone()
         {
             //Arrange
-            BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
+            BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
 
             //Act
             BacklogItem.SwitchState("Done");
@@ -110,7 +110,7 @@ namespace Avans_Devops_Tests.Tests
         public void BacklogItemFromTodoToTesting()
         {
             //Arrange
-            BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
+            BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
 
             //Act
             BacklogItem.SwitchState("Testing");
@@ -122,7 +122,7 @@ namespace Avans_Devops_Tests.Tests
         public void BacklogItemFromTodoToReadyForTesting()
         {
             //Arrange
-            BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
+            BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
 
             //Act
             BacklogItem.SwitchState("ReadyForTesting");
@@ -134,7 +134,7 @@ namespace Avans_Devops_Tests.Tests
         public void BacklogItemFromDoingToToDo()
         {
             //Arrange
-            BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
+            BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
 
             //Act
             BacklogItem.SwitchState("Doing");
@@ -147,7 +147,7 @@ namespace Avans_Devops_Tests.Tests
         public void BacklogItemFromDoingToDone()
         {
             //Arrange
-            BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
+            BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
 
             //Act
             BacklogItem.SwitchState("Doing");

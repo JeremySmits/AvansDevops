@@ -27,7 +27,7 @@ namespace Avans_Devops.Composite
         {
             if (!IsClosed && BacklogItem.State != PhaseState.Done)
             {
-                Observer observer = new Observer();
+                Observer observer = new();
                 observer.Receiver = this.OP;
                 string message = Post.OP + "responded to your thread with: " + Post.CommentText;
                 observer.Message = message;

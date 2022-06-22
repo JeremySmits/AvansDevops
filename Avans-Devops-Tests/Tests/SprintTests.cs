@@ -74,7 +74,7 @@ namespace Avans_Devops_Tests.Tests
         {
             //Arrange
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
-            Sprint sprint = new InActivateSprint(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
+            Sprint sprint;
 
             //Act
             sprint = new InActivateSprint(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
@@ -88,7 +88,7 @@ namespace Avans_Devops_Tests.Tests
         {
             //Arrange
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
-            Sprint sprint = new InActivateSprint(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
+            Sprint sprint;
 
             //Act
             sprint = new FinishedSprint(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);

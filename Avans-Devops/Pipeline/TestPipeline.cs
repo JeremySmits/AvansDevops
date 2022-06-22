@@ -14,7 +14,7 @@ namespace Avans_Devops.Pipeline
 		public override bool CanRun()
 		{
 			// A testing pipeline may only run if it has tests, analyses (test results) and no deployments.
-			return HasTests() && HasAnalyses() && !hasDeployment();
+			return HasTests() && HasAnalyses() && !HasDeployment();
 		}
 
 		public bool HasTests(){

@@ -13,10 +13,10 @@ namespace Avans_Devops_Tests.Tests
     {
 
         [Fact]
-        public void tryValidGenericPipeline()
+        public void TryValidGenericPipeline()
         {
             //Arrange
-            var genericPipeline = PipelineFactory.createPipeline(PipelineType.Generic, "genericPipeline");
+            var genericPipeline = PipelineFactory.CreatePipeline(PipelineType.Generic, "genericPipeline");
 
             genericPipeline.Sources.Add("Source 1");
             genericPipeline.Builds.Add("Build 1");
@@ -24,7 +24,7 @@ namespace Avans_Devops_Tests.Tests
             genericPipeline.Deploys.Add("Deploy 1");
 
 			//Act
-            var canRun = genericPipeline.canRun();
+            var canRun = genericPipeline.CanRun();
 
             //Assert
             Assert.True(canRun);
@@ -34,7 +34,7 @@ namespace Avans_Devops_Tests.Tests
         public void RunSuccessGenericPipeline()
         {
             //Arrange
-            var genericPipeline = PipelineFactory.createPipeline(PipelineType.Generic, "genericPipeline");
+            var genericPipeline = PipelineFactory.CreatePipeline(PipelineType.Generic, "genericPipeline");
 
             genericPipeline.Sources.Add("Source 1");
             genericPipeline.Packages.Add("Package 1");
@@ -56,7 +56,7 @@ namespace Avans_Devops_Tests.Tests
         public void RunFailureGenericPipeline()
         {
             //Arrange
-            var genericPipeline = PipelineFactory.createPipeline(PipelineType.Generic, "genericPipeline");
+            var genericPipeline = PipelineFactory.CreatePipeline(PipelineType.Generic, "genericPipeline");
 
             genericPipeline.Sources.Add("Source 1");
             genericPipeline.Packages.Add("Package 1");

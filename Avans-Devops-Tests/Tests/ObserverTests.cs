@@ -14,9 +14,9 @@ namespace Avans_Devops.Tests
 		public void AttachSingleThreadObserver()
 		{
 			//Arrange
-			BacklogItem backlogItem = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
-			Thread thread = new Thread(1, backlogItem, null, "Thread text 1", null);
-			Observer observer = new Observer();
+			BacklogItem backlogItem = new(1, null, 1, "Backlog Item Name 1", 1, 1);
+			Thread thread = new(1, backlogItem, null, "Thread text 1", null);
+			Observer observer = new();
 
 			//Act
 			thread.AttachObserver(observer);
@@ -29,11 +29,11 @@ namespace Avans_Devops.Tests
 		public void AttachMultipleThreadObservers()
 		{
 			//Arrange
-			BacklogItem backlogItem = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
-			Thread thread = new Thread(1, backlogItem, null, "Thread text 1", null);
-			Observer observer1 = new Observer();
-			Observer observer2 = new Observer();
-			Observer observer3 = new Observer();
+			BacklogItem backlogItem = new(1, null, 1, "Backlog Item Name 1", 1, 1);
+			Thread thread = new(1, backlogItem, null, "Thread text 1", null);
+			Observer observer1 = new();
+			Observer observer2 = new();
+			Observer observer3 = new();
 
 			//Act
 			thread.AttachObserver(observer1);
@@ -48,9 +48,9 @@ namespace Avans_Devops.Tests
 		public void DetachSingleThreadObserver()
 		{
 			//Arrange
-			BacklogItem backlogItem = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
-			Thread thread = new Thread(1, backlogItem, null, "Thread text 1", null);
-			Observer observer = new Observer();
+			BacklogItem backlogItem = new(1, null, 1, "Backlog Item Name 1", 1, 1);
+			Thread thread = new(1, backlogItem, null, "Thread text 1", null);
+			Observer observer = new();
 
 			//Act
 			thread.AttachObserver(observer);
@@ -65,12 +65,12 @@ namespace Avans_Devops.Tests
 		public void DetachMultipleThreadObservers()
 		{
 			//Arrange
-			BacklogItem backlogItem = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
-			Thread thread = new Thread(1, backlogItem, null, "Thread text 1", null);
-			Observer observer1 = new Observer();
-			Observer observer2 = new Observer();
-			Observer observer3 = new Observer();
-			Observer observer4 = new Observer();
+			BacklogItem backlogItem = new(1, null, 1, "Backlog Item Name 1", 1, 1);
+			Thread thread = new(1, backlogItem, null, "Thread text 1", null);
+			Observer observer1 = new();
+			Observer observer2 = new();
+			Observer observer3 = new();
+			Observer observer4 = new();
 
 			//Act
 			thread.AttachObserver(observer1);
@@ -89,10 +89,10 @@ namespace Avans_Devops.Tests
         public void ThreadNotificationSingleObserver()
         {
             //Arrange
-			BacklogItem backlogItem = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
-			Thread thread = new Thread(1, backlogItem, null, "Thread text 1", null);
-			Comment comment = new Comment(thread.PostID, thread, "Comment text 1", null);
-			Observer observer = new Observer();
+			BacklogItem backlogItem = new(1, null, 1, "Backlog Item Name 1", 1, 1);
+			Thread thread = new(1, backlogItem, null, "Thread text 1", null);
+			Comment comment = new(thread.PostID, thread, "Comment text 1", null);
+			Observer observer = new();
 
             //Act
 			thread.AttachObserver(observer);
@@ -106,11 +106,11 @@ namespace Avans_Devops.Tests
         public void ThreadNotificationMultipleObservers()
         {
             //Arrange
-			BacklogItem backlogItem = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
-			Thread thread = new Thread(1, backlogItem, null, "Thread text 1", null);
-			Comment comment = new Comment(thread.PostID, thread, "Comment text 1", null);
-			Observer observer1 = new Observer();
-			Observer observer2 = new Observer();
+			BacklogItem backlogItem = new(1, null, 1, "Backlog Item Name 1", 1, 1);
+			Thread thread = new(1, backlogItem, null, "Thread text 1", null);
+			Comment comment = new(thread.PostID, thread, "Comment text 1", null);
+			Observer observer1 = new();
+			Observer observer2 = new();
 
             //Act
 			thread.AttachObserver(observer1);
@@ -126,11 +126,11 @@ namespace Avans_Devops.Tests
 		public void AttachFailReleaseObserver()
 		{
 			//Arrange
-			FailRelease failRelease = new FailRelease();
+			FailRelease failRelease = new();
 			string message = "The release has been cancelled!";
 
-			User scrumMaster = new User(1, "Scrum Master Placeholder", Roles.ScrumMaster, "scrum@master.com");
-            Observer scrumMasterObserver = new Observer();
+			User scrumMaster = new(1, "Scrum Master Placeholder", Roles.ScrumMaster, "scrum@master.com");
+            Observer scrumMasterObserver = new();
             scrumMasterObserver.Receiver = scrumMaster;
             scrumMasterObserver.Message = message;
 
@@ -145,11 +145,11 @@ namespace Avans_Devops.Tests
 		public void DetachFailReleaseObserver()
 		{
 			//Arrange
-			FailRelease failRelease = new FailRelease();
+			FailRelease failRelease = new();
 			string message = "The release has been cancelled!";
 
-			User scrumMaster = new User(1, "Scrum Master Placeholder", Roles.ScrumMaster, "scrum@master.com");
-            Observer scrumMasterObserver = new Observer();
+			User scrumMaster = new(1, "Scrum Master Placeholder", Roles.ScrumMaster, "scrum@master.com");
+            Observer scrumMasterObserver = new();
             scrumMasterObserver.Receiver = scrumMaster;
             scrumMasterObserver.Message = message;
 
@@ -165,16 +165,16 @@ namespace Avans_Devops.Tests
 		public void AttachMultipleFailReleaseObservers()
 		{
 			//Arrange
-			FailRelease failRelease = new FailRelease();
+			FailRelease failRelease = new();
 			string message = "The release has been cancelled!";
 
-			User scrumMaster = new User(1, "Scrum Master Placeholder", Roles.ScrumMaster, "scrum@master.com");
-            Observer scrumMasterObserver = new Observer();
+			User scrumMaster = new(1, "Scrum Master Placeholder", Roles.ScrumMaster, "scrum@master.com");
+            Observer scrumMasterObserver = new();
             scrumMasterObserver.Receiver = scrumMaster;
             scrumMasterObserver.Message = message;
 
-            User productOwner = new User(2, "Product Owner Placeholder", Roles.ProductOwner, "product@owner.com");
-            Observer productOwnerObserver = new Observer();
+            User productOwner = new(2, "Product Owner Placeholder", Roles.ProductOwner, "product@owner.com");
+            Observer productOwnerObserver = new();
             productOwnerObserver.Receiver = productOwner;
             productOwnerObserver.Message = message;
 
@@ -190,16 +190,16 @@ namespace Avans_Devops.Tests
 		public void DetachMultipleFailReleaseObservers()
 		{
 			//Arrange
-			FailRelease failRelease = new FailRelease();
+			FailRelease failRelease = new();
 			string message = "The release has been cancelled!";
 
-			User scrumMaster = new User(1, "Scrum Master Placeholder", Roles.ScrumMaster, "scrum@master.com");
-            Observer scrumMasterObserver = new Observer();
+			User scrumMaster = new(1, "Scrum Master Placeholder", Roles.ScrumMaster, "scrum@master.com");
+            Observer scrumMasterObserver = new();
             scrumMasterObserver.Receiver = scrumMaster;
             scrumMasterObserver.Message = message;
 
-            User productOwner = new User(2, "Product Owner Placeholder", Roles.ProductOwner, "product@owner.com");
-            Observer productOwnerObserver = new Observer();
+            User productOwner = new(2, "Product Owner Placeholder", Roles.ProductOwner, "product@owner.com");
+            Observer productOwnerObserver = new();
             productOwnerObserver.Receiver = productOwner;
             productOwnerObserver.Message = message;
 
@@ -218,7 +218,7 @@ namespace Avans_Devops.Tests
 		public void FailReleaseNotificationObserver()
 		{
 			//Arrange
-			FailRelease failRelease = new FailRelease();
+			FailRelease failRelease = new();
 			// Observer observer = new Observer();
 			
 			//Act
@@ -235,8 +235,8 @@ namespace Avans_Devops.Tests
 		public void AttachPipelineObserver()
 		{
 			//Arrange
-			var pipeline = PipelineFactory.createPipeline(PipelineType.Deployment, "deploymentPipeline");
-			Observer observer = new Observer();
+			var pipeline = PipelineFactory.CreatePipeline(PipelineType.Deployment, "deploymentPipeline");
+			Observer observer = new();
 
 			//Act
 			pipeline.AttachObserver(observer);
@@ -249,9 +249,9 @@ namespace Avans_Devops.Tests
 		public void AttachMultiplePipelineObservers()
 		{
 			//Arrange
-			var pipeline = PipelineFactory.createPipeline(PipelineType.Deployment, "deploymentPipeline");
-			Observer observer1 = new Observer();
-			Observer observer2 = new Observer();
+			var pipeline = PipelineFactory.CreatePipeline(PipelineType.Deployment, "deploymentPipeline");
+			Observer observer1 = new();
+			Observer observer2 = new();
 
 			//Act
 			pipeline.AttachObserver(observer1);
@@ -265,8 +265,8 @@ namespace Avans_Devops.Tests
 		public void DetachPipelineObserver()
 		{
 			//Arrange
-			var pipeline = PipelineFactory.createPipeline(PipelineType.Deployment, "deploymentPipeline");
-			Observer observer = new Observer();
+			var pipeline = PipelineFactory.CreatePipeline(PipelineType.Deployment, "deploymentPipeline");
+			Observer observer = new();
 
 			//Act
 			pipeline.AttachObserver(observer);
@@ -280,10 +280,10 @@ namespace Avans_Devops.Tests
 		public void DetachMultiplePipelineObservers()
 		{
 			//Arrange
-			var pipeline = PipelineFactory.createPipeline(PipelineType.Deployment, "deploymentPipeline");
-			Observer observer1 = new Observer();
-			Observer observer2 = new Observer();
-			Observer observer3 = new Observer();
+			var pipeline = PipelineFactory.CreatePipeline(PipelineType.Deployment, "deploymentPipeline");
+			Observer observer1 = new();
+			Observer observer2 = new();
+			Observer observer3 = new();
 
 			//Act
 			pipeline.AttachObserver(observer1);

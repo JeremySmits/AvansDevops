@@ -14,7 +14,7 @@ namespace Avans_Devops_Tests.Tests
         public void ChangeUserRole()
         {
             //Arrange
-            User user = new User(1, "TestUser", Roles.Developer, "Test@User.com");
+            User user = new(1, "TestUser", Roles.Developer, "Test@User.com");
 
             //Act
             user.ChangeRole(Roles.ProductOwner);
@@ -27,7 +27,7 @@ namespace Avans_Devops_Tests.Tests
         public void AddOneNotificationPreference()
         {
             //Arrange
-            User user = new User(1, "TestUser", Roles.Developer, "Test@User.com");
+            User user = new(1, "TestUser", Roles.Developer, "Test@User.com");
 
             //Act
             user.AddNotificationPreference(NotificationType.Email, user.Email);
@@ -40,7 +40,7 @@ namespace Avans_Devops_Tests.Tests
         public void AddMultipleNotificationPreferences()
         {
             //Arrange
-            User user = new User(1, "TestUser", Roles.Developer, "Test@User.com");
+            User user = new(1, "TestUser", Roles.Developer, "Test@User.com");
 
             //Act
             user.AddNotificationPreference(NotificationType.Email, user.Email);
@@ -54,7 +54,7 @@ namespace Avans_Devops_Tests.Tests
         public void RemoveOneNotificationPreference()
         {
             //Arrange
-            User user = new User(1, "TestUser", Roles.Developer, "Test@User.com");
+            User user = new(1, "TestUser", Roles.Developer, "Test@User.com");
 
             //Act
             user.AddNotificationPreference(NotificationType.Email, user.Email);
@@ -70,7 +70,7 @@ namespace Avans_Devops_Tests.Tests
         public void RemoveMultipleNotificationPreferences()
         {
             //Arrange
-            User user = new User(1, "TestUser", Roles.Developer, "Test@User.com");
+            User user = new(1, "TestUser", Roles.Developer, "Test@User.com");
 
             //Act
             user.AddNotificationPreference(NotificationType.Email, user.Email);
