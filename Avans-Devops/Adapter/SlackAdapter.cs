@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Avans_Devops.Adapter
 {
-    public class SlackAdapter
+    public class SlackAdapter : IAdapter
     {
         public void SendMessage(User Receiver, string Message) { }
     }

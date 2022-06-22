@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Avans_Devops.Adapter
 {
-    public class EmailAdapter: IAdapter
+    public interface IAdapter
     {
-        public void SendMessage(User Receiver, string Message) { }
+        public void SendMessage(User Receiver, string Message);
     }
 }
