@@ -6,7 +6,11 @@ namespace Avans_Devops.Pipeline
 {
 	public class GenericPipeline : Pipeline, IObservable
 	{
-		public override bool canRun()
+        public GenericPipeline()
+        {
+			Observers = new();
+        }
+	public override bool canRun()
 		{
 			// A generic pipeline may always run, even if it has no steps.
 			return true;

@@ -6,6 +6,11 @@ namespace Avans_Devops.Pipeline
 {
 	public class TestPipeline : Pipeline, IObservable
 	{
+        public TestPipeline()
+        {
+			Observers = new();
+		}
+
 		public override bool canRun()
 		{
 			// A testing pipeline may only run if it has tests, analyses (test results) and no deployments.

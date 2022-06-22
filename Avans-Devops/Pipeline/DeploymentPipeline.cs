@@ -6,6 +6,11 @@ namespace Avans_Devops.Pipeline
 {
 	public class DeploymentPipeline : Pipeline, IObservable
 	{
+        public DeploymentPipeline()
+        {
+			Observers = new();
+        }
+
 		public override bool canRun()
 		{
 			// A deployment pipeline may only run if it has deployments
