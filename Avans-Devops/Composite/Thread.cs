@@ -23,11 +23,11 @@ namespace Avans_Devops.Composite
             OP = oP;
             IsClosed = false;
         }
-        public void AddChild(Post Post) {
+        public override void AddChild(Post Post) {
             this.Posts.Add(Post);
             NotifyObservers(Post);
         }
-        public void RemoveChild(Post Post) {
+        public override void RemoveChild(Post Post) {
             this.Posts.Remove(Post);
         }
 
