@@ -81,7 +81,7 @@ namespace Avans_Devops
                         //this.Observers.Add(observer);
                         //NotifyObservers();
                         State = PhaseState.Done;
-                        FinishedOn = DateTime.Now;
+                        FinishedOn = DateTime.Now.Date;
                     }
                     break;
                 case PhaseState.Done:

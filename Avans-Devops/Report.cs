@@ -15,11 +15,10 @@ namespace Avans_Devops
         public Report(Sprint sprint)
         {
             // BurnDownChart
-            BurnDownChart = new SortedDictionary<DateTime?, int>();
-            GenerateBurnDownChart(sprint.BacklogItems, sprint.EndDate);
-    
+            BurnDownChart = GenerateBurnDownChart(sprint.BacklogItems, sprint.EndDate);
+            
             // Effort per developer
-            GenerateDeveloperEffortValues(sprint.BacklogItems);
+            DeveloperEffortValues = GenerateDeveloperEffortValues(sprint.BacklogItems);
 
             Random rnd = new Random();
             ReportId = rnd.Next(9999);
@@ -40,8 +39,9 @@ namespace Avans_Devops
 
         }
 
-        public void GenerateBurnDownChart(List<BacklogItem> BacklogItems, DateTime endTime)
+        public SortedDictionary<DateTime?, int> GenerateBurnDownChart(List<BacklogItem> BacklogItems, DateTime endTime)
         {
+            SortedDictionary<DateTime?, int> BurnDownChart = new SortedDictionary<DateTime?, int>();
             List<BacklogItem> FinishedBacklogItems = new List<BacklogItem>();
             List<BacklogItem> NonFinishedBacklogItems = new List<BacklogItem>();
             int totalEffort = 0;
@@ -74,23 +74,17 @@ namespace Avans_Devops
                 }
             }
 
-            DateTime lastDate = (DateTime)BurnDownChart.Keys.Last();
-
-            if (BurnDownChart.ContainsKey(lastDate))
-            {
-                BurnDownChart[lastDate] = (int)BurnDownChart[lastDate] + totalEffort;
-            }
-            else
-            {
-                BurnDownChart[lastDate] = totalEffort;
-            }
+            return BurnDownChart;
         }
-        public void GenerateDeveloperEffortValues(List<BacklogItem> BacklogItems)
+        public Dictionary<User, int> GenerateDeveloperEffortValues(List<BacklogItem> BacklogItems)
         {
+            Dictionary<User, int> DeveloperEffortValues = new Dictionary<User, int>();
+
             foreach (BacklogItem backlogItem in BacklogItems)
             {
                 foreach (Activity activity in backlogItem.Activities)
                 {
+                    DeveloperEffortValues.Add(activity.ResponsibleDeveloper, activity.Effort);
                     if (activity.State == PhaseState.Done) {
                         if (DeveloperEffortValues.ContainsKey(activity.ResponsibleDeveloper))
                         {
@@ -98,12 +92,13 @@ namespace Avans_Devops
                         }
                         else
                         {
-                            DeveloperEffortValues[activity.ResponsibleDeveloper] = activity.Effort;
+                            DeveloperEffortValues.Add(activity.ResponsibleDeveloper, activity.Effort);
                         }
                     }
                 }
             }
 
+            return DeveloperEffortValues;
         }
     }
 }
