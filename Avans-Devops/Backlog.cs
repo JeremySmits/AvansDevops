@@ -11,6 +11,7 @@ namespace Avans_Devops
         public List<User> ScrumTeam { get; set; }
         public List<Sprint> Sprints { get; set; }
         public List<BacklogItem> BackLogItems { get; set; }
+        public Company Company { get; set; }
 
         public Backlog(int backlogId, string name, string description)
         {
@@ -20,6 +21,18 @@ namespace Avans_Devops
             ScrumTeam = new List<User>();
             Sprints = new List<Sprint>();
             BackLogItems = new List<BacklogItem>();
+            Company = new Company("Default Company", "Default logo");
+        }
+
+        public Backlog(int backlogId, string name, string description, Company company)
+        {
+            BacklogId = backlogId;
+            Name = name;
+            Description = description;
+            ScrumTeam = new List<User>();
+            Sprints = new List<Sprint>();
+            BackLogItems = new List<BacklogItem>();
+            Company = company;
         }
 
         public void AddSprint(Sprint Sprint) 

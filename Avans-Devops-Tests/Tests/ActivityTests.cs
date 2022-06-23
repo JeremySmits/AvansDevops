@@ -21,8 +21,8 @@ namespace Avans_Devops_Tests.Tests
             //Act
             User user = new(1, "Jeremy", Roles.Developer, "jsmits9@avans.nl");
 
-            Activity Activity = new("Riem pakken", user, 1);
-            Activity Activity2 = new("Hond zoeken", user, 1);
+            Activity Activity = new("Riem pakken", user, 1, 3);
+            Activity Activity2 = new("Hond zoeken", user, 1, 3);
             BacklogItem.AddActivity(Activity);
             BacklogItem.AddActivity(Activity2);
 
@@ -40,8 +40,8 @@ namespace Avans_Devops_Tests.Tests
 
             //Act
             User user = new(1, "Jeremy", Roles.Developer, "jsmits9@avans.nl");
-            Activity Activity = new("Riem pakken", user, 1);
-            Activity Activity2 = new("Hond zoeken", user, 1);
+            Activity Activity = new("Riem pakken", user, 1, 2);
+            Activity Activity2 = new("Hond zoeken", user, 1, 2);
             BacklogItem.AddActivity(Activity);
             BacklogItem.AddActivity(Activity2);
 

@@ -101,5 +101,10 @@ namespace Avans_Devops
         {
             return null;
         }
+
+        public Report GenerateReport()
+        {
+            return null;
+        }
     }
 }

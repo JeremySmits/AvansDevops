@@ -12,13 +12,15 @@ namespace Avans_Devops
         public User ResponsibleDeveloper { get; set; }
         public int BacklogItemId { get; set; }
         public PhaseState State { get; set; }
+        public int Effort { get; set; }
 
-        public Activity(string name, User responsibleDeveloper, int backlogItemId)
+        public Activity(string name, User responsibleDeveloper, int backlogItemId, int effort)
         {
             Name = name;
             ResponsibleDeveloper = responsibleDeveloper;
             BacklogItemId = backlogItemId;
             State = PhaseState.ToDo;
+            Effort = effort;
         }
     }
 }

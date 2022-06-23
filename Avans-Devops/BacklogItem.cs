@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Avans_Devops.Observe;
 
 namespace Avans_Devops
 {
@@ -13,6 +15,7 @@ namespace Avans_Devops
         public List<Activity> Activities { get; set; }
         public int ThreatId { get; set; }
         public int Effort { get; set; }
+        public DateTime? FinishedOn { get; set; }
 
         public BacklogItem(int sprintId, int backlogId,int backlogItemId, string name, int threatId, int effort)
         {
@@ -24,6 +27,7 @@ namespace Avans_Devops
             Activities = new List<Activity>();
             ThreatId = threatId;
             Effort = effort;
+            FinishedOn = null;
         }
 
         public void AddActivity(Activity Activity) 
@@ -67,11 +71,12 @@ namespace Avans_Devops
                     if (nextstate == "Done")
                     {
                         State = PhaseState.Done;
+                        FinishedOn = DateTime.Now;
                     }
                     break;
                 case PhaseState.Done:
                     break;
             }
         }
-    }
+	}
 }
