@@ -61,7 +61,7 @@ namespace Avans_Devops_Tests.Tests
 
             //Act
 
-            Activity Activity = new("Riem pakken", user, 1);
+            Activity Activity = new("Riem pakken", user, 1, 2);
 
             //Assert
             Assert.True(Activity.ResponsibleDeveloper == user);
