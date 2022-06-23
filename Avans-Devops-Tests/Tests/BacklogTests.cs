@@ -10,12 +10,12 @@ namespace Avans_Devops.Tests
         public void AddSprintToBacklog()
         {
             //Arrange
-            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking", null);
+            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
 
             //Act
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
-            backlog.AddSprint(new InActivateSprint(1,1,"Sprint 1", DateTime.Today, DateTime.Today.AddDays(1),"Type 1", user));
-            backlog.AddSprint(new InActivateSprint(2, 1, "Sprint 2", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user));
+            backlog.AddSprint(new InActivateSprint(1, backlog, "Sprint 1", DateTime.Today, DateTime.Today.AddDays(1),"Type 1", user));
+            backlog.AddSprint(new InActivateSprint(2, backlog, "Sprint 2", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user));
 
             //Assert
             Assert.True(backlog.Sprints.Count == 2);
@@ -25,12 +25,12 @@ namespace Avans_Devops.Tests
         public void RemoveSprintFromBacklog()
         {
             //Arrange
-            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking", null);
+            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
 
             //Act
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
-            backlog.AddSprint(new InActivateSprint(1, 1, "Sprint 1", DateTime.Today, DateTime.Today.AddDays(1), "Type 1", user));
-            backlog.AddSprint(new InActivateSprint(2, 1, "Sprint 2", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user));
+            backlog.AddSprint(new InActivateSprint(1, backlog, "Sprint 1", DateTime.Today, DateTime.Today.AddDays(1), "Type 1", user));
+            backlog.AddSprint(new InActivateSprint(2, backlog, "Sprint 2", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user));
 
             backlog.RemoveSprint(2);
 
@@ -42,7 +42,7 @@ namespace Avans_Devops.Tests
         public void AddUserToBacklog()
         {
             //Arrange
-            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking", null);
+            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
 
             //Act
             backlog.AddUser(new User(1, "Jeremy Smits", Roles.Developer, "Jsmits9Avans.nl"));
@@ -56,7 +56,7 @@ namespace Avans_Devops.Tests
         public void RemoveUsersFromBacklog()
         {
             //Arrange
-            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking", null);
+            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
 
             //Act
             backlog.AddUser(new User(1, "Jeremy Smits", Roles.Developer, "Jsmits9Avans.nl"));
@@ -71,7 +71,7 @@ namespace Avans_Devops.Tests
         public void AddBacklogItemToBacklog()
         {
             //Arrange
-            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking", null);
+            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
 
             //Act
             backlog.AddBacklogItem(new BacklogItem(1, backlog, 1, "Hond uitlaten",  0, 2));
@@ -86,7 +86,7 @@ namespace Avans_Devops.Tests
         public void RemoveBacklogItemFromBacklog()
         {
             //Arrange
-            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking", null);
+            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
 
 
             //Act
@@ -105,7 +105,7 @@ namespace Avans_Devops.Tests
         public void CanCreateNewBacklog()
         {
             //Arrange
-            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking", null);
+            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
 
             //Assert
             Assert.True(backlog.Name == "Avans Devops");

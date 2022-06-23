@@ -8,10 +8,10 @@ namespace Avans_Devops
 {
     public class InActivateSprint : Sprint
     {
-        public InActivateSprint(int sprintId, int backlogId, string name, DateTime startDate, DateTime endDate, string sprintType, User scrumMaster)
+        public InActivateSprint(int sprintId, Backlog backlog, string name, DateTime startDate, DateTime endDate, string sprintType, User scrumMaster)
         {
             SprintId = sprintId;
-            BacklogId = backlogId;
+            Backlog = backlog;
             Name = name;
             StartDate = startDate;
             EndDate = endDate;
@@ -34,12 +34,12 @@ namespace Avans_Devops
             }
         }
 
-        public override void UpdateSprinteDetails(int sprintId, int backlogId,
+        public override void UpdateSprinteDetails(int sprintId, Backlog backlog,
             string name, DateTime startDate, DateTime endDate, string sprintType,
             User scrumMaster)
         {
             SprintId = sprintId;
-            BacklogId = backlogId;
+            Backlog = backlog;
             Name = name;
             StartDate = startDate;
             EndDate = endDate;

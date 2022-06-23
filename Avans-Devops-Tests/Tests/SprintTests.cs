@@ -15,7 +15,7 @@ namespace Avans_Devops_Tests.Tests
         {
             //Arrange
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
-            ActiveSprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(-10), DateTime.Today.AddDays(10), "Type 1", user);
+            ActiveSprint sprint = new(1, null, "Sprint 1", DateTime.Today.AddDays(-10), DateTime.Today.AddDays(10), "Type 1", user);
             BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
 
 
@@ -31,7 +31,7 @@ namespace Avans_Devops_Tests.Tests
         {
             //Arrange
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
-            InActivateSprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
+            InActivateSprint sprint = new(1, null, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
             BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
 
 
@@ -47,7 +47,7 @@ namespace Avans_Devops_Tests.Tests
         {
             //Arrange
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
-            FinishedSprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(-10), DateTime.Today.AddDays(10), "Type 1", user);
+            FinishedSprint sprint = new(1, null, "Sprint 1", DateTime.Today.AddDays(-10), DateTime.Today.AddDays(10), "Type 1", user);
             BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
 
 
@@ -63,7 +63,7 @@ namespace Avans_Devops_Tests.Tests
         {
             //Arrange
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
-            InActivateSprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
+            InActivateSprint sprint = new(1, null, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
 
             //Assert
             Assert.True(sprint.ScrumMaster != null);
@@ -77,7 +77,7 @@ namespace Avans_Devops_Tests.Tests
             Sprint sprint;
 
             //Act
-            sprint = new InActivateSprint(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
+            sprint = new InActivateSprint(1, null, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
 
             //Assert
             Assert.True(sprint.GetTypeSprint() == "Inactive");
@@ -91,7 +91,7 @@ namespace Avans_Devops_Tests.Tests
             Sprint sprint;
 
             //Act
-            sprint = new FinishedSprint(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
+            sprint = new FinishedSprint(1, null, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
 
 
             //Assert
@@ -102,11 +102,11 @@ namespace Avans_Devops_Tests.Tests
         public void SetSprintToFinishedWhenPipelineSucces()
         {
             //Arrange
-            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking", null);
+            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
 
             //Act
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
-            backlog.AddSprint(new ActiveSprint(1, 1, "Sprint 1", DateTime.Today, DateTime.Today.AddDays(1), "Type 1", user));
+            backlog.AddSprint(new ActiveSprint(1, null, "Sprint 1", DateTime.Today, DateTime.Today.AddDays(1), "Type 1", user));
 
             //Assert
             Assert.True(backlog.RunSprintDeployment(backlog.Sprints[0],1) && backlog.Sprints[0].GetTypeSprint() == "Finished");
@@ -116,11 +116,11 @@ namespace Avans_Devops_Tests.Tests
         public void SetSprintNotToFinishedWhenPipelineFail()
         {
             //Arrange
-            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking", null);
+            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
 
             //Act
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
-            backlog.AddSprint(new ActiveSprint(1, 1, "Sprint 1", DateTime.Today, DateTime.Today.AddDays(1), "Type 1", user));
+            backlog.AddSprint(new ActiveSprint(1, null, "Sprint 1", DateTime.Today, DateTime.Today.AddDays(1), "Type 1", user));
 
             //Assert
             Assert.True(!backlog.RunSprintDeployment(backlog.Sprints[0], 9) && backlog.Sprints[0].GetTypeSprint() == "Active");

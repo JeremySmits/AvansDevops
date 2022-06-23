@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Avans_Devops.Observe;
+using System;
+using System.Collections.Generic;
 
 namespace Avans_Devops
 {
-    public class BacklogItem
+    public class BacklogItem : IObservable
     {
         public int SprintId { get; set; }
         public Sprint Sprint { get; set; }
@@ -11,8 +13,10 @@ namespace Avans_Devops
         public string Name { get; set; }
         public PhaseState State { get; set; }
         public List<Activity> Activities { get; set; }
+        public User ResponsibleDeveloper { get; set; }
         public int ThreatId { get; set; }
         public int Effort { get; set; }
+        public List<Observer> Observers { get; set; }
 
         public BacklogItem(int sprintId, Backlog backlog, int backlogItemId, string name, int threatId, int effort)
         {
@@ -24,6 +28,7 @@ namespace Avans_Devops
             Activities = new List<Activity>();
             ThreatId = threatId;
             Effort = effort;
+            Observers = new();
         }
 
         public void AddActivity(Activity Activity) 
@@ -66,6 +71,12 @@ namespace Avans_Devops
                     }
                     if (nextstate == "Done")
                     {
+                        //State = PhaseState.Done;
+                        //Observer observer = new();
+                        //observer.Receiver = this.Sprint.ScrumMaster;
+                        //observer.Message = "BacklogItem " + this.Name + " is done!";
+                        //this.Observers.Add(observer);
+                        //NotifyObservers();
                         State = PhaseState.Done;
                     }
                     break;
