@@ -12,6 +12,7 @@ namespace Avans_Devops
         Doing,
         ReadyForTesting,
         Testing,
+        Tested,
         Done
     }
 }

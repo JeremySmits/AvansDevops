@@ -71,19 +71,26 @@ namespace Avans_Devops
                     {
                         State = PhaseState.ToDo;
                     }
+                    if (nextstate == "Tested")
+                    {
+                        State = PhaseState.Tested;
+                    }
+                    break;
+                case PhaseState.Tested:
                     if (nextstate == "Done")
                     {
-                        State = PhaseState.Done;
                         Observer observer = new();
                         observer.Receiver = this.Sprint.ScrumMaster;
                         observer.Message = "BacklogItem: " + this.Name + " is done!";
                         this.Observers.Add(observer);
                         NotifyObservers();
                         State = PhaseState.Done;
-                        FinishedOn = DateTime.Now;
+                        FinishedOn = DateTime.Now;                       
                     }
-                    break;
-                        case PhaseState.Done:
+                    if (nextstate == "ToDo")
+                    {
+                        State = PhaseState.ToDo;
+                    }
                     break;
             }
         }

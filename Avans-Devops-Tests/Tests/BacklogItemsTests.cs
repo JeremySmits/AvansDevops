@@ -64,7 +64,7 @@ namespace Avans_Devops_Tests.Tests
         }
 
         [Fact]
-        public void BacklogItemFromTestingToDone()
+        public void BacklogItemFromTestingToTested()
         {
             //Arrange
             BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
@@ -74,10 +74,10 @@ namespace Avans_Devops_Tests.Tests
             BacklogItem.SwitchState("Doing");
             BacklogItem.SwitchState("ReadyForTesting");
             BacklogItem.SwitchState("Testing");
-            BacklogItem.SwitchState("Done");
+            BacklogItem.SwitchState("Tested");
 
             //Assert
-            Assert.True(BacklogItem.State == PhaseState.Done);
+            Assert.True(BacklogItem.State == PhaseState.Tested);
         }
 
         [Fact]
@@ -176,6 +176,7 @@ namespace Avans_Devops_Tests.Tests
             BacklogItem.SwitchState("Doing");
             BacklogItem.SwitchState("ReadyForTesting");
             BacklogItem.SwitchState("Testing");
+            BacklogItem.SwitchState("Tested");
             BacklogItem.SwitchState("Done");
 
             //Assert
