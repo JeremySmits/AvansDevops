@@ -1,4 +1,5 @@
 ﻿using Avans_Devops;
+using Avans_Devops.Adapter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,6 +68,7 @@ namespace Avans_Devops_Tests.Tests
         {
             //Arrange
             BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
+            BacklogItem.Sprint = new ActiveSprint(1, null, "Sprint 1", DateTime.Today, DateTime.Now.AddDays(10), "", new User(1, "John", Roles.ScrumMaster, "John@avans.nl"));
 
             //Act
             BacklogItem.SwitchState("Doing");
@@ -155,6 +157,29 @@ namespace Avans_Devops_Tests.Tests
 
             //Assert
             Assert.True(BacklogItem.State != PhaseState.Done);
+        }
+
+        [Fact]
+        public void TestDoneMessageToScrumMaster()
+        {
+            //Arrange
+            BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
+            User user = new User(1, "John", Roles.ScrumMaster, "John@avans.nl");
+            user.AddNotificationPreference(NotificationType.Email, user.Email);
+            NotificationsMock.EmptyNotifications();
+
+
+            BacklogItem.Sprint = new ActiveSprint(1, null, "Sprint 1", DateTime.Today, DateTime.Now.AddDays(10), "", user);
+            NotificationsMock.EmptyNotifications();
+
+            //Act
+            BacklogItem.SwitchState("Doing");
+            BacklogItem.SwitchState("ReadyForTesting");
+            BacklogItem.SwitchState("Testing");
+            BacklogItem.SwitchState("Done");
+
+            //Assert
+            Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email);
         }
 
     }
