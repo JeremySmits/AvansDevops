@@ -14,15 +14,29 @@ namespace Avans_Devops
         public Dictionary<User, int> DeveloperEffortValues;
         public Report(Sprint sprint)
         {
+            // BurnDownChart
             BurnDownChart = new SortedDictionary<DateTime?, int>();
             GenerateBurnDownChart(sprint.BacklogItems, sprint.EndDate);
     
+            // Effort per developer
             GenerateDeveloperEffortValues(sprint.BacklogItems);
 
             Random rnd = new Random();
             ReportId = rnd.Next(9999);
 
             Header = new List<string>();
+            // Projectnaam
+            Header.Add(sprint.Backlog.Name);
+            // Bedrijfsnaam
+            Header.Add(sprint.Backlog.Company.Name);
+            // Bedrijfslogo
+            Header.Add(sprint.Backlog.Company.Logo);
+
+            Footer = new List<string>();
+            // Versie
+            Footer.Add(sprint.Name);
+            // Datum
+            Footer.Add(sprint.StartDate + " - " + sprint.EndDate);
 
         }
 

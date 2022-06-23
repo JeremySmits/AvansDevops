@@ -104,7 +104,7 @@ namespace Avans_Devops
 
         public Report GenerateReport()
         {
-            return null;
+            return new Report(this);
         }
     }
 }
