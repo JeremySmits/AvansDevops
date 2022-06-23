@@ -1,7 +1,6 @@
 ﻿using Avans_Devops.Observe;
 using System;
 using System.Collections.Generic;
-using Avans_Devops.Observe;
 
 namespace Avans_Devops
 {
@@ -74,19 +73,27 @@ namespace Avans_Devops
                     }
                     if (nextstate == "Done")
                     {
-                        //State = PhaseState.Done;
-                        //Observer observer = new();
-                        //observer.Receiver = this.Sprint.ScrumMaster;
-                        //observer.Message = "BacklogItem " + this.Name + " is done!";
-                        //this.Observers.Add(observer);
-                        //NotifyObservers();
+                        State = PhaseState.Done;
+                        Observer observer = new();
+                        observer.Receiver = this.Sprint.ScrumMaster;
+                        observer.Message = "BacklogItem: " + this.Name + " is done!";
+                        this.Observers.Add(observer);
+                        NotifyObservers();
                         State = PhaseState.Done;
                         FinishedOn = DateTime.Now;
                     }
                     break;
-                case PhaseState.Done:
+                        case PhaseState.Done:
                     break;
             }
         }
-	}
+        public void NotifyObservers()
+        {
+            foreach (var o in Observers)
+            {
+                o.SendMessage();
+            }
+        }
+    }
+
 }
