@@ -11,18 +11,18 @@ namespace Avans_Devops.Tests
         public void AddChildToThread()
         {
             //Arrange
-            BacklogItem backlogItem1 = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
-            BacklogItem backlogItem2 = new BacklogItem(1, 1, 2, "Backlog Item Name 2", 1, 1);
+            BacklogItem backlogItem1 = new(1, null, 1, "Backlog Item Name 1", 1, 1);
+            BacklogItem backlogItem2 = new(1, null, 2, "Backlog Item Name 2", 1, 1);
 
-            Thread thread1 = new Thread(1, backlogItem1, null, "Thread text 1", null);
-            Thread thread2 = new Thread(2, backlogItem2, null, "Thread text 2", null);
+            Thread thread1 = new(1, backlogItem1, null, "Thread text 1", null);
+            Thread thread2 = new(2, backlogItem2, null, "Thread text 2", null);
 
-            Comment comment1 = new Comment(thread1.PostID, thread1, "Comment text 1", null);
-            Comment comment2 = new Comment(thread1.PostID, thread1, "Comment text 2", null);
+            Comment comment1 = new(thread1.PostID, thread1, "Comment text 1", null);
+            Comment comment2 = new(thread1.PostID, thread1, "Comment text 2", null);
 
-            Comment comment3 = new Comment(thread2.PostID, thread2, "Comment text 3", null);
-            Comment comment4 = new Comment(thread2.PostID, thread2, "Comment text 4", null);
-            Comment comment5 = new Comment(thread2.PostID, thread2, "Comment text 5", null);
+            Comment comment3 = new(thread2.PostID, thread2, "Comment text 3", null);
+            Comment comment4 = new(thread2.PostID, thread2, "Comment text 4", null);
+            Comment comment5 = new(thread2.PostID, thread2, "Comment text 5", null);
 
             //Act
             thread1.AddChild(comment1);
@@ -41,18 +41,18 @@ namespace Avans_Devops.Tests
         public void RemoveChildFromThread()
         {
             //Arrange
-            BacklogItem backlogItem1 = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
-            BacklogItem backlogItem2 = new BacklogItem(1, 1, 2, "Backlog Item Name 2", 1, 1);
+            BacklogItem backlogItem1 = new(1, null, 1, "Backlog Item Name 1", 1, 1);
+            BacklogItem backlogItem2 = new(1, null, 2, "Backlog Item Name 2", 1, 1);
 
-            Thread thread1 = new Thread(1, backlogItem1, null, "Thread text 1", null);
-            Thread thread2 = new Thread(2, backlogItem2, null, "Thread text 2", null);
+            Thread thread1 = new(1, backlogItem1, null, "Thread text 1", null);
+            Thread thread2 = new(2, backlogItem2, null, "Thread text 2", null);
 
-            Comment comment1 = new Comment(thread1.PostID, thread1, "Comment text 1", null);
-            Comment comment2 = new Comment(thread1.PostID, thread1, "Comment text 2", null);
+            Comment comment1 = new(thread1.PostID, thread1, "Comment text 1", null);
+            Comment comment2 = new(thread1.PostID, thread1, "Comment text 2", null);
 
-            Comment comment3 = new Comment(thread2.PostID, thread2, "Comment text 3", null);
-            Comment comment4 = new Comment(thread2.PostID, thread2, "Comment text 4", null);
-            Comment comment5 = new Comment(thread2.PostID, thread2, "Comment text 5", null);
+            Comment comment3 = new(thread2.PostID, thread2, "Comment text 3", null);
+            Comment comment4 = new(thread2.PostID, thread2, "Comment text 4", null);
+            Comment comment5 = new(thread2.PostID, thread2, "Comment text 5", null);
 
             //Act
             thread1.AddChild(comment1);
@@ -74,13 +74,13 @@ namespace Avans_Devops.Tests
         public void ChangeCommentIntoThread()
         {
             //Arrange
-            BacklogItem backlogItem1 = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
-            Thread thread1 = new Thread(1, backlogItem1, null, "Thread text 1", null);
-            Comment comment1 = new Comment(thread1.PostID, thread1, "Comment text 1", null);
+            BacklogItem backlogItem1 = new(1, null, 1, "Backlog Item Name 1", 1, 1);
+            Thread thread1 = new(1, backlogItem1, null, "Thread text 1", null);
+            Comment comment1 = new(thread1.PostID, thread1, "Comment text 1", null);
             thread1.AddChild(comment1);
 
             //Act
-            Comment comment2 = new Comment(thread1.PostID, thread1, "Comment text 1", null);
+            Comment comment2 = new(thread1.PostID, thread1, "Comment text 1", null);
             thread1.Posts[0].AddChild(comment2);
 
             var temp = thread1.Posts[0].GetType();
@@ -93,10 +93,10 @@ namespace Avans_Devops.Tests
         public void ThreadCanSaveCommentsAndThreads()
         {
             //Arrange
-            BacklogItem backlogItem1 = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
-            Thread thread1 = new Thread(1, backlogItem1, null, "Thread text 1", null);
-            Comment comment1 = new Comment(thread1.PostID, thread1, "Comment text 1", null);
-            Thread thread2 = new Thread(1, backlogItem1, null, "Thread text 1", null);
+            BacklogItem backlogItem1 = new(1, null, 1, "Backlog Item Name 1", 1, 1);
+            Thread thread1 = new(1, backlogItem1, null, "Thread text 1", null);
+            Comment comment1 = new(thread1.PostID, thread1, "Comment text 1", null);
+            Thread thread2 = new(1, backlogItem1, null, "Thread text 1", null);
 
             //Act
             thread1.AddChild(comment1);
@@ -109,11 +109,11 @@ namespace Avans_Devops.Tests
         }
 
         [Fact]
-        public void openThread()
+        public void OpenThread()
         {
             //Arrange
-            BacklogItem backlogItem1 = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
-            Thread thread1 = new Thread(1, backlogItem1, null, "Thread text 1", null);
+            BacklogItem backlogItem1 = new(1, null, 1, "Backlog Item Name 1", 1, 1);
+            Thread thread1 = new(1, backlogItem1, null, "Thread text 1", null);
 
             //Act
             thread1.OpenThread();
@@ -126,8 +126,8 @@ namespace Avans_Devops.Tests
         public void CloseThread()
         {
             //Arrange
-            BacklogItem backlogItem1 = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
-            Thread thread1 = new Thread(1, backlogItem1, null, "Thread text 1", null);
+            BacklogItem backlogItem1 = new(1, null, 1, "Backlog Item Name 1", 1, 1);
+            Thread thread1 = new(1, backlogItem1, null, "Thread text 1", null);
 
             //Act
             thread1.CloseThread();
@@ -140,9 +140,9 @@ namespace Avans_Devops.Tests
         public void CantAddCommentToClosedThread()
         {
             //Arrange
-            BacklogItem backlogItem1 = new BacklogItem(1, 1, 1, "Backlog Item Name 1", 1, 1);
-            Thread thread1 = new Thread(1, backlogItem1, null, "Thread text 1", null);
-            Comment comment1 = new Comment(thread1.PostID, thread1, "Comment text 1", null);
+            BacklogItem backlogItem1 = new(1, null, 1, "Backlog Item Name 1", 1, 1);
+            Thread thread1 = new(1, backlogItem1, null, "Thread text 1", null);
+            Comment comment1 = new(thread1.PostID, thread1, "Comment text 1", null);
 
             //Act
             thread1.CloseThread();

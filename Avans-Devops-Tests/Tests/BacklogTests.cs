@@ -14,8 +14,8 @@ namespace Avans_Devops.Tests
 
             //Act
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
-            backlog.AddSprint(new InActivateSprint(1,1,"Sprint 1", DateTime.Today, DateTime.Today.AddDays(1),"Type 1", user));
-            backlog.AddSprint(new InActivateSprint(2, 1, "Sprint 2", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user));
+            backlog.AddSprint(new InActivateSprint(1, backlog, "Sprint 1", DateTime.Today, DateTime.Today.AddDays(1),"Type 1", user));
+            backlog.AddSprint(new InActivateSprint(2, backlog, "Sprint 2", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user));
 
             //Assert
             Assert.True(backlog.Sprints.Count == 2);
@@ -29,8 +29,8 @@ namespace Avans_Devops.Tests
 
             //Act
             User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
-            backlog.AddSprint(new InActivateSprint(1, 1, "Sprint 1", DateTime.Today, DateTime.Today.AddDays(1), "Type 1", user));
-            backlog.AddSprint(new InActivateSprint(2, 1, "Sprint 2", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user));
+            backlog.AddSprint(new InActivateSprint(1, backlog, "Sprint 1", DateTime.Today, DateTime.Today.AddDays(1), "Type 1", user));
+            backlog.AddSprint(new InActivateSprint(2, backlog, "Sprint 2", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user));
 
             backlog.RemoveSprint(2);
 
@@ -74,9 +74,9 @@ namespace Avans_Devops.Tests
             Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
 
             //Act
-            backlog.AddBacklogItem(new BacklogItem(1, 1, 1, "Hond uitlaten",  0, 2));
-            backlog.AddBacklogItem(new BacklogItem(1, 1, 2, "Kat uitlaten", 0, 2));
-            backlog.AddBacklogItem(new BacklogItem(1, 1, 3, "Goudvis uitlaten", 0, 10));
+            backlog.AddBacklogItem(new BacklogItem(1, backlog, 1, "Hond uitlaten",  0, 2));
+            backlog.AddBacklogItem(new BacklogItem(1, backlog, 2, "Kat uitlaten", 0, 2));
+            backlog.AddBacklogItem(new BacklogItem(1, backlog, 3, "Goudvis uitlaten", 0, 10));
 
             //Assert
             Assert.True(backlog.BackLogItems.Count == 3);
@@ -90,9 +90,9 @@ namespace Avans_Devops.Tests
 
 
             //Act
-            backlog.AddBacklogItem(new BacklogItem(1, 1, 1, "Hond uitlaten", 0, 2));
-            backlog.AddBacklogItem(new BacklogItem(1, 1, 2, "Kat uitlaten", 0, 2));
-            backlog.AddBacklogItem(new BacklogItem(1, 1, 3, "Goudvis uitlaten", 0, 10));
+            backlog.AddBacklogItem(new BacklogItem(1, backlog, 1, "Hond uitlaten", 0, 2));
+            backlog.AddBacklogItem(new BacklogItem(1, backlog, 2, "Kat uitlaten", 0, 2));
+            backlog.AddBacklogItem(new BacklogItem(1, backlog, 3, "Goudvis uitlaten", 0, 10));
 
 
             backlog.RemoveBacklogItem(2);

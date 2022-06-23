@@ -92,7 +92,7 @@ namespace Avans_Devops
                         List<Sprint> sprintsCopy = new();
                         if (s.SprintId == sprint.SprintId)
                         {
-                            sprintsCopy.Add(new FinishedSprint(sprint.SprintId, sprint.BacklogId, sprint.Name,
+                            sprintsCopy.Add(new FinishedSprint(sprint.SprintId, sprint.Backlog, sprint.Name,
                                 sprint.StartDate, sprint.EndDate, sprint.SprintType, sprint.ScrumMaster));
                         }
                         else

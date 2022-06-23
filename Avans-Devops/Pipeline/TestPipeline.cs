@@ -11,21 +11,21 @@ namespace Avans_Devops.Pipeline
 			Observers = new();
 		}
 
-		public override bool canRun()
+		public override bool CanRun()
 		{
 			// A testing pipeline may only run if it has tests, analyses (test results) and no deployments.
-			return hasTests() && hasAnalyses() && !hasDeployment();
+			return HasTests() && HasAnalyses() && !HasDeployment();
 		}
 
-		public bool hasTests(){
+		public bool HasTests(){
 			return this.Tests != null && this.Tests.Count > 0;
 		}
 
-		public bool hasAnalyses(){
+		public bool HasAnalyses(){
 			return this.Analyses != null && this.Analyses.Count > 0;
 		}
 
-		public bool hasDeployment(){
+		public bool HasDeployment(){
 			return this.Deploys != null && this.Deploys.Count > 0;
 		}
 	}

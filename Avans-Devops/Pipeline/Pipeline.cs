@@ -22,12 +22,12 @@ namespace Avans_Devops.Pipeline
 
         public List<Observer> Observers { get; set;}
 
-        public virtual bool canRun() { return false;  }
+        public virtual bool CanRun() { return false;  }
 
 		public bool RunPipeline() {
-            if (canRun()){
+            if (CanRun()){
 
-                List<List<string>> steps = new List<List<string>>();
+                List<List<string>> steps = new();
                 steps.Add(this.Sources);
                 steps.Add(this.Packages);
                 steps.Add(this.Builds);
@@ -56,7 +56,7 @@ namespace Avans_Devops.Pipeline
                     }
                     // Else het onderdeel is leeg en gaat verder
                 }
-                Observer observer = new Observer();
+                Observer observer = new();
                 // observer.Receiver = this.OP;
                 String message;
                 // Als failed null is dat is de pipeline geslaagd

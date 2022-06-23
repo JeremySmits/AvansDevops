@@ -12,15 +12,16 @@ namespace Avans_Devops.Observe
         public List<string> NotificationMemory { get; } = new List<string>();
         public User Receiver { get; set; }
         public string Message { get; set; }
+
         public List<IAdapter> SendMessage() {
             string notification = this.Receiver + "will get a message with " + this.Message;
             NotificationMemory.Add(notification);
 
             // This will be used to check if the right adapter has been used
-            List<IAdapter> adaptersUsed = new List<IAdapter>();
+            List<IAdapter> adaptersUsed = new();
 
-            EmailAdapter emailAdapter = new EmailAdapter();
-            SlackAdapter slackAdapter = new SlackAdapter();
+            EmailAdapter emailAdapter = new();
+            SlackAdapter slackAdapter = new();
 
             if (this.Receiver != null && this.Message != null){
                 foreach (NotificationPreference notificationPreference in Receiver.NotificationPreferences)

@@ -14,8 +14,10 @@ namespace Avans_Devops_Tests.Tests
         public void AddActivityToBacklog()
         {
             //Arrange
-            InActivateSprint sprint = new(1, 1, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", new User(1,"ScrumMaster",Roles.ScrumMaster,"Scrum@Master.com"));
-            BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
+            Backlog backlog = new(1, "", "");            
+            InActivateSprint sprint = new(1, backlog, "Sprint 1", DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", new User(1,"ScrumMaster",Roles.ScrumMaster,"Scrum@Master.com"));
+            backlog.AddSprint(sprint);
+            BacklogItem BacklogItem = new(1, backlog, 1, "Hond Uitlaten", 1, 2);
             BacklogItem.Sprint = sprint;
 
             //Act
@@ -34,8 +36,10 @@ namespace Avans_Devops_Tests.Tests
         {
             //Arrange
             User ScrumUser = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
-            InActivateSprint sprint = new(1, 1, "Sprint 1", DateTime.Today, DateTime.Today.AddDays(1), "Type 1", ScrumUser);
-            BacklogItem BacklogItem = new(1, 1, 1, "Hond Uitlaten", 1, 2);
+            Backlog backlog = new(1, "", "");
+            InActivateSprint sprint = new(1, backlog, "Sprint 1", DateTime.Today, DateTime.Today.AddDays(1), "Type 1", ScrumUser);
+            backlog.AddSprint(sprint);
+            BacklogItem BacklogItem = new(1, backlog, 1, "Hond Uitlaten", 1, 2);
             BacklogItem.Sprint = sprint;
 
             //Act
@@ -47,6 +51,20 @@ namespace Avans_Devops_Tests.Tests
 
             //Assert
             Assert.True(BacklogItem.Activities.Count == 0);
+        }
+
+        [Fact]
+        public void AddUserToActivity()
+        {
+            //Arrange
+            User user = new(1, "Jeremy", Roles.Developer, "jsmits9@avans.nl");
+
+            //Act
+
+            Activity Activity = new("Riem pakken", user, 1);
+
+            //Assert
+            Assert.True(Activity.ResponsibleDeveloper == user);
         }
     }
 }

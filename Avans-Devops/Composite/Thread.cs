@@ -12,7 +12,7 @@ namespace Avans_Devops.Composite
         public BacklogItem BacklogItem { get; }
         public bool IsClosed { get; set; }
         public List<Post> Posts { get; } = new List<Post>();
-        public List<Observer> Observers { get; } = new List<Observer>();
+        public List<Observer> Observers { get; set; } = new List<Observer>();
 
         public Thread(int postID, BacklogItem backlogItem, Thread parentPost, string commentText, User oP)
         {
@@ -27,7 +27,7 @@ namespace Avans_Devops.Composite
         {
             if (!IsClosed && BacklogItem.State != PhaseState.Done)
             {
-                Observer observer = new Observer();
+                Observer observer = new();
                 observer.Receiver = this.OP;
                 string message = Post.OP + "responded to your thread with: " + Post.CommentText;
                 observer.Message = message;

@@ -8,10 +8,10 @@ namespace Avans_Devops
 {
     public class ActiveSprint : Sprint
     {
-        public ActiveSprint(int sprintId, int backlogId, string name, DateTime startDate, DateTime endDate, string sprintType, User scrumMaster)
+        public ActiveSprint(int sprintId, Backlog backlog, string name, DateTime startDate, DateTime endDate, string sprintType, User scrumMaster)
         {
             SprintId = sprintId;
-            BacklogId = backlogId;
+            Backlog = backlog;
             Name = name;
             StartDate = startDate;
             EndDate = endDate;

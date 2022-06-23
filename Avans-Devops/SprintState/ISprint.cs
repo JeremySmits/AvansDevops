@@ -6,7 +6,7 @@ namespace Avans_Devops
     public abstract class Sprint
     {
         public int SprintId { get; set; }
-        public int BacklogId { get; set; }
+        public Backlog Backlog { get; set; }
         public string Name { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
@@ -59,7 +59,7 @@ namespace Avans_Devops
             }
         }
 
-        public virtual void UpdateSprinteDetails(int sprintId, int backlogId, 
+        public virtual void UpdateSprinteDetails(int sprintId, Backlog backlog, 
             string name, DateTime startDate, DateTime endDate, string sprintType, 
             User scrumMaster)
         {

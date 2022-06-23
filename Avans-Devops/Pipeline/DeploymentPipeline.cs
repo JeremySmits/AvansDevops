@@ -11,7 +11,7 @@ namespace Avans_Devops.Pipeline
 			Observers = new();
         }
 
-		public override bool canRun()
+		public override bool CanRun()
 		{
 			// A deployment pipeline may only run if it has deployments
 			return Deploys != null && Deploys.Count != 0;

@@ -18,7 +18,7 @@ namespace Avans_Devops.Composite
 
 		public override void AddChild(Post Post) 
 		{
-			Thread tempThread = new Thread(PostID, ParentPost.BacklogItem, ParentPost, CommentText, OP);
+			Thread tempThread = new(PostID, ParentPost.BacklogItem, ParentPost, CommentText, OP);
 			tempThread.AddChild(Post);
 
 			ParentPost.Posts.Add(tempThread);

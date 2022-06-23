@@ -18,10 +18,10 @@ namespace Avans_Devops_Tests.Tests
             //Arrange
 			NotificationsMock.EmptyNotifications();
 
-            User user = new User(1, "TestUser", Roles.Developer, "Test@User.com");
+            User user = new(1, "TestUser", Roles.Developer, "Test@User.com");
 			user.AddNotificationPreference(NotificationType.Email, user.Email);
 
-			Observer observer = new Observer();
+			Observer observer = new();
 			observer.Receiver = user;
 			string message = "This is a test message!";
 			observer.Message = message;
@@ -41,11 +41,11 @@ namespace Avans_Devops_Tests.Tests
             //Arrange
 			NotificationsMock.EmptyNotifications();
 
-            User user = new User(1, "TestUser", Roles.Developer, "Test@User.com");
+            User user = new(1, "TestUser", Roles.Developer, "Test@User.com");
 			string slackAddress = "Slack test username";
             user.AddNotificationPreference(NotificationType.Slack, slackAddress);
 
-			Observer observer = new Observer();
+			Observer observer = new();
 			observer.Receiver = user;
 			string message = "This is a test message!";
 			observer.Message = message;
@@ -66,12 +66,12 @@ namespace Avans_Devops_Tests.Tests
             //Arrange
 			NotificationsMock.EmptyNotifications();
 
-            User user = new User(1, "TestUser", Roles.Developer, "Test@User.com");
+            User user = new(1, "TestUser", Roles.Developer, "Test@User.com");
 			user.AddNotificationPreference(NotificationType.Email, user.Email);
 			string slackAddress = "Slack test username";
             user.AddNotificationPreference(NotificationType.Slack, slackAddress);
 
-			Observer observer = new Observer();
+			Observer observer = new();
 			observer.Receiver = user;
 			string message = "This is a test message!";
 			observer.Message = message;

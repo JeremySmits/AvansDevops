@@ -25,7 +25,7 @@ namespace Avans_Devops
 
         public void AddNotificationPreference(NotificationType notificationType, string address)
         {
-            NotificationPreference newNotificationPreference = new NotificationPreference(notificationType, address);
+            NotificationPreference newNotificationPreference = new(notificationType, address);
             this.NotificationPreferences.Add(newNotificationPreference);
         }
 

@@ -1,32 +1,36 @@
-﻿using System;
+﻿using Avans_Devops.Observe;
+using System;
 using System.Collections.Generic;
 using Avans_Devops.Observe;
 
 namespace Avans_Devops
 {
-    public class BacklogItem
+    public class BacklogItem : IObservable
     {
         public int SprintId { get; set; }
         public Sprint Sprint { get; set; }
-        public int BacklogId { get; set; }
+        public Backlog Backlog { get; set; }
         public int BacklogItemId { get; set; }
         public string Name { get; set; }
         public PhaseState State { get; set; }
         public List<Activity> Activities { get; set; }
+        public User ResponsibleDeveloper { get; set; }
         public int ThreatId { get; set; }
-        public int Effort { get; set; }
         public DateTime? FinishedOn { get; set; }
+        public int Effort { get; set; }
+        public List<Observer> Observers { get; set; }
 
-        public BacklogItem(int sprintId, int backlogId,int backlogItemId, string name, int threatId, int effort)
+        public BacklogItem(int sprintId, Backlog backlog, int backlogItemId, string name, int threatId, int effort)
         {
             SprintId = sprintId;
-            BacklogId = backlogId;
+            Backlog = backlog;
             BacklogItemId = backlogItemId;
             Name = name;
             State = PhaseState.ToDo;
             Activities = new List<Activity>();
             ThreatId = threatId;
             Effort = effort;
+            Observers = new();
             FinishedOn = null;
         }
 
@@ -70,6 +74,12 @@ namespace Avans_Devops
                     }
                     if (nextstate == "Done")
                     {
+                        //State = PhaseState.Done;
+                        //Observer observer = new();
+                        //observer.Receiver = this.Sprint.ScrumMaster;
+                        //observer.Message = "BacklogItem " + this.Name + " is done!";
+                        //this.Observers.Add(observer);
+                        //NotifyObservers();
                         State = PhaseState.Done;
                         FinishedOn = DateTime.Now;
                     }
