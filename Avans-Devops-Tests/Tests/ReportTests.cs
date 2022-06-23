@@ -11,6 +11,33 @@ namespace Avans_Devops_Tests.Tests
     public class ReportTests
     {
         [Fact]
+        public void CreateReportWithFileType()
+        {
+            //Arrange
+			string projectName = "Test project";
+			string companyName = "Test Company";
+			string companyLogo = "Test Logo";
+			string sprintName = "Sprint Name";
+			Company company = new Company(companyName, companyLogo);
+            Backlog backlog = new(1, projectName, "Test description", company);            
+            InActivateSprint sprint = new(1, backlog, sprintName, DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", new User(1,"ScrumMaster", Roles.ScrumMaster,"Scrum@Master.com"));
+            backlog.AddSprint(sprint);
+            BacklogItem BacklogItem = new(1, backlog, 1, "Hond Uitlaten", 1, 2);
+            BacklogItem.Sprint = sprint;
+            User user = new(1, "Jeremy", Roles.Developer, "jsmits9@avans.nl");
+            Activity Activity = new("Riem pakken", user, 1, 3);
+            Activity Activity2 = new("Hond zoeken", user, 1, 3);
+            BacklogItem.AddActivity(Activity);
+            BacklogItem.AddActivity(Activity2);
+
+            //Act
+			Report report = sprint.GenerateReport(FileType.pdf);
+
+            //Assert
+            Assert.True(report.FileType == FileType.pdf);
+        }
+
+        [Fact]
         public void CreateReportWithHeader()
         {
             //Arrange
@@ -31,7 +58,7 @@ namespace Avans_Devops_Tests.Tests
             BacklogItem.AddActivity(Activity2);
 
             //Act
-			Report report = sprint.GenerateReport();
+			Report report = sprint.GenerateReport(FileType.pdf);
 
             //Assert
             Assert.True(report.Header.Count > 0);
@@ -61,7 +88,7 @@ namespace Avans_Devops_Tests.Tests
             BacklogItem.AddActivity(Activity2);
 
             //Act
-			Report report = sprint.GenerateReport();
+			Report report = sprint.GenerateReport(FileType.pdf);
 
             //Assert
             Assert.True(report.Footer.Count > 0);
@@ -105,7 +132,7 @@ namespace Avans_Devops_Tests.Tests
             BacklogItem1.AddActivity(Activity2);
 
             //Act
-			Report report = sprint.GenerateReport();
+			Report report = sprint.GenerateReport(FileType.pdf);
 
             //Assert
             Assert.True(report.BurnDownChart.Count > 0);
@@ -159,7 +186,7 @@ namespace Avans_Devops_Tests.Tests
 			BacklogItem2.SwitchState("Done");
 
             //Act
-			Report report = sprint.GenerateReport();
+			Report report = sprint.GenerateReport(FileType.pdf);
 
             //Assert
             // Assert.True(report.DeveloperEffortValues.Count == 0);

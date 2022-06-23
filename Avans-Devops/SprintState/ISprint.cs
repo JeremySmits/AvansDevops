@@ -102,9 +102,9 @@ namespace Avans_Devops
             return null;
         }
 
-        public Report GenerateReport()
+        public Report GenerateReport(FileType FileType)
         {
-            return new Report(this);
+            return new Report(this, FileType);
         }
     }
 }

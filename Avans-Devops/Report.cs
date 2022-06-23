@@ -5,6 +5,14 @@ using System.Linq;
 
 namespace Avans_Devops
 {
+    public enum FileType
+    {
+        pdf,
+        txt,
+        docx,
+        xslx
+    }
+
     public class Report
     {
         public int ReportId { get; set; }
@@ -12,7 +20,8 @@ namespace Avans_Devops
         public List<string> Footer { get; set; }
         public SortedDictionary<DateTime?, int> BurnDownChart;
         public Dictionary<User, int> DeveloperEffortValues;
-        public Report(Sprint sprint)
+        public FileType FileType;
+        public Report(Sprint sprint, FileType fileType)
         {
             // BurnDownChart
             BurnDownChart = GenerateBurnDownChart(sprint.BacklogItems, sprint.EndDate);
@@ -36,6 +45,8 @@ namespace Avans_Devops
             Footer.Add(sprint.Name);
             // Datum
             Footer.Add(sprint.StartDate + " - " + sprint.EndDate);
+
+            FileType = fileType;
 
         }
 
