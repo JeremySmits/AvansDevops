@@ -87,9 +87,9 @@ namespace Avans_Devops
                         State = PhaseState.Done;
                         FinishedOn = DateTime.Now;                       
                     }
-                    if (nextstate == "ToDo")
+                    if (nextstate == "Testing")
                     {
-                        State = PhaseState.ToDo;
+                        State = PhaseState.Testing;
                     }
                     break;
             }

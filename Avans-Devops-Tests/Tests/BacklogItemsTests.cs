@@ -81,6 +81,42 @@ namespace Avans_Devops_Tests.Tests
         }
 
         [Fact]
+        public void BacklogItemFromTestedToDone()
+        {
+            //Arrange
+            BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
+            BacklogItem.Sprint = new ActiveSprint(1, null, "Sprint 1", DateTime.Today, DateTime.Now.AddDays(10), "", new User(1, "John", Roles.ScrumMaster, "John@avans.nl"));
+
+            //Act
+            BacklogItem.SwitchState("Doing");
+            BacklogItem.SwitchState("ReadyForTesting");
+            BacklogItem.SwitchState("Testing");
+            BacklogItem.SwitchState("Tested");
+            BacklogItem.SwitchState("Done");
+
+            //Assert
+            Assert.True(BacklogItem.State == PhaseState.Done);
+        }
+
+        [Fact]
+        public void BacklogItemFromTestedToTesting()
+        {
+            //Arrange
+            BacklogItem BacklogItem = new(1, null, 1, "Hond Uitlaten", 1, 2);
+            BacklogItem.Sprint = new ActiveSprint(1, null, "Sprint 1", DateTime.Today, DateTime.Now.AddDays(10), "", new User(1, "John", Roles.ScrumMaster, "John@avans.nl"));
+
+            //Act
+            BacklogItem.SwitchState("Doing");
+            BacklogItem.SwitchState("ReadyForTesting");
+            BacklogItem.SwitchState("Testing");
+            BacklogItem.SwitchState("Tested");
+            BacklogItem.SwitchState("Testing");
+
+            //Assert
+            Assert.True(BacklogItem.State == PhaseState.Testing);
+        }
+
+        [Fact]
         public void BacklogItemFromTestingToToDo()
         {
             //Arrange
@@ -182,6 +218,5 @@ namespace Avans_Devops_Tests.Tests
             //Assert
             Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email);
         }
-
     }
 }

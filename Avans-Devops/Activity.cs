@@ -10,17 +10,33 @@ namespace Avans_Devops
     {
         public string Name { get; set; }
         public User ResponsibleDeveloper { get; set; }
-        public int BacklogItemId { get; set; }
+        public BacklogItem BacklogItem { get; set; }
         public PhaseState State { get; set; }
+        public DateTime? FinishedOn { get; set; }
         public int Effort { get; set; }
 
-        public Activity(string name, User responsibleDeveloper, int backlogItemId, int effort)
+        public Activity(string name, User responsibleDeveloper, BacklogItem backlogItem, int effort)
         {
             Name = name;
             ResponsibleDeveloper = responsibleDeveloper;
-            BacklogItemId = backlogItemId;
+            BacklogItem = backlogItem;
             State = PhaseState.ToDo;
             Effort = effort;
         }
+        public void SetActvityToDone()
+        {
+            FinishedOn = DateTime.Today;
+            bool AllActivitiesDone = true;
+
+            foreach(Activity activitiy in BacklogItem.Activities)
+            {
+                if (activitiy.FinishedOn == null)
+                    AllActivitiesDone = false;
+            }
+
+            if(AllActivitiesDone)
+                BacklogItem.FinishedOn = DateTime.Today;
+        }
+
     }
 }
