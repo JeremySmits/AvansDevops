@@ -111,6 +111,7 @@ namespace Avans_Devops_Tests.Tests
 
             BacklogItem BacklogItem1 = new(1, backlog, 1, "Hond Uitlaten", 1, 2);
 			sprint.AddBacklogItem(BacklogItem1);
+            backlog.AddBacklogItem(BacklogItem1);
 
 			BacklogItem1.SwitchState("Doing");
 			BacklogItem1.SwitchState("ReadyForTesting");
@@ -119,6 +120,7 @@ namespace Avans_Devops_Tests.Tests
 
             BacklogItem BacklogItem2 = new(1, backlog, 1, "Hond Uitlaten 2", 1, 2);
 			sprint.AddBacklogItem(BacklogItem2);
+            backlog.AddBacklogItem(BacklogItem2);
 
 			BacklogItem2.SwitchState("Doing");
 			BacklogItem2.SwitchState("ReadyForTesting");
