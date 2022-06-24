@@ -10,7 +10,7 @@ namespace Avans_Devops.Pipelines
         public DeploymentPipeline()
         {
 			Observers = new();
-			Release = new SuccesRelease();
+			Release = new SuccesRelease(Sprint);
 		}
 
 		public string Title { get; set; }

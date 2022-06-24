@@ -126,7 +126,7 @@ namespace Avans_Devops.Tests
 		public void AttachFailReleaseObserver()
 		{
 			//Arrange
-			FailRelease failRelease = new();
+			FailRelease failRelease = new(null);
 			string message = "The release has been cancelled!";
 
 			User scrumMaster = new(1, "Scrum Master Placeholder", Roles.ScrumMaster, "scrum@master.com");
@@ -145,7 +145,7 @@ namespace Avans_Devops.Tests
 		public void DetachFailReleaseObserver()
 		{
 			//Arrange
-			FailRelease failRelease = new();
+			FailRelease failRelease = new(null);
 			string message = "The release has been cancelled!";
 
 			User scrumMaster = new(1, "Scrum Master Placeholder", Roles.ScrumMaster, "scrum@master.com");
@@ -165,7 +165,7 @@ namespace Avans_Devops.Tests
 		public void AttachMultipleFailReleaseObservers()
 		{
 			//Arrange
-			FailRelease failRelease = new();
+			FailRelease failRelease = new(null);
 			string message = "The release has been cancelled!";
 
 			User scrumMaster = new(1, "Scrum Master Placeholder", Roles.ScrumMaster, "scrum@master.com");
@@ -190,7 +190,7 @@ namespace Avans_Devops.Tests
 		public void DetachMultipleFailReleaseObservers()
 		{
 			//Arrange
-			FailRelease failRelease = new();
+			FailRelease failRelease = new(null);
 			string message = "The release has been cancelled!";
 
 			User scrumMaster = new(1, "Scrum Master Placeholder", Roles.ScrumMaster, "scrum@master.com");
@@ -218,7 +218,7 @@ namespace Avans_Devops.Tests
 		public void FailReleaseNotificationObserver()
 		{
 			//Arrange
-			FailRelease failRelease = new();
+			FailRelease failRelease = new(null);
 			// Observer observer = new Observer();
 			
 			//Act

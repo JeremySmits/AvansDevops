@@ -20,6 +20,7 @@ namespace Avans_Devops.Pipelines
         public List<string> Deploys { get; set; }
         public List<string> Utilities { get; set; }
         public GitIntegration GitIntegration { get; set; }
+        public Sprint Sprint { get; set; }
         // public List<Observer> Observers { get; set;}
 
         public IRelease Release { get; set; }
