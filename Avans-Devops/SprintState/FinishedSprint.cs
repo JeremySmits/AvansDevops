@@ -19,6 +19,7 @@ namespace Avans_Devops
             BacklogItems = new();
             ScrumMaster = scrumMaster;
             IsFinished = false;
+            Observers = new();
         }
         public override string GetTypeSprint()
         {

@@ -135,5 +135,21 @@ namespace Avans_Devops_Tests.Tests
 
             //Assert
         }
+
+        [Fact]
+        public void SprintDoneMessageToScrumMaster()
+        {
+            //Arrange
+            User user = new User(1, "John", Roles.ScrumMaster, "John@avans.nl");
+            user.AddNotificationPreference(NotificationType.Email, user.Email);
+            Sprint sprint = new ActiveSprint(1, null, "Sprint 1", DateTime.Today, DateTime.Today.AddDays(14), "Active", user);
+
+            //Act
+            NotificationsMock.EmptyNotifications();
+            sprint.SetSprintToFinished();
+
+            //Assert
+            Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email);
+        }
     }
 }
