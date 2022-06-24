@@ -7,12 +7,6 @@ namespace Avans_Devops.Pipelines
 {
 	public class DeploymentPipeline : Pipeline, IObservable
 	{
-        public DeploymentPipeline()
-        {
-			Observers = new();
-			Release = new SuccesRelease(Sprint);
-		}
-
 		public string Title { get; set; }
 		public int PipelineId { get; set; }
 		public List<string> Sources { get; set; }
@@ -26,6 +20,13 @@ namespace Avans_Devops.Pipelines
 		public IRelease Release { get; set; }
 		public List<Observer> Observers { get; set; }
 		public Sprint Sprint { get; set; }
+
+        public DeploymentPipeline(string title)
+        {
+			Observers = new();
+			Release = new SuccesRelease(Sprint);
+			Title = title;
+		}
 
 		public bool CanRun()
 		{

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Avans_Devops.Observe;
 using Avans_Devops.Adapter;
 using Avans_Devops.Pipelines;
+using Avans_Devops.Releases;
 using Xunit;
 
 namespace Avans_Devops_Tests.Tests
@@ -31,9 +32,9 @@ namespace Avans_Devops_Tests.Tests
 			observer.SendMessage();
 
             //Assert
-            Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email);
-			Assert.True(NotificationsMock.NotificationStorage[0].Message == message);
-			Assert.True(NotificationsMock.NotificationStorage[0].NotificationType == NotificationType.Email);
+            Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email
+                && NotificationsMock.NotificationStorage[0].Message == message
+                    && NotificationsMock.NotificationStorage[0].NotificationType == NotificationType.Email);
         }
 
 		[Fact]
@@ -55,9 +56,9 @@ namespace Avans_Devops_Tests.Tests
 			observer.SendMessage();
 
             //Assert
-            Assert.True(NotificationsMock.NotificationStorage[0].Address == slackAddress);
-			Assert.True(NotificationsMock.NotificationStorage[0].Message == message);
-			Assert.True(NotificationsMock.NotificationStorage[0].NotificationType == NotificationType.Slack);
+            Assert.True(NotificationsMock.NotificationStorage[0].Address == slackAddress
+                && NotificationsMock.NotificationStorage[0].Message == message
+                && NotificationsMock.NotificationStorage[0].NotificationType == NotificationType.Slack);
         }
 
 
@@ -81,12 +82,12 @@ namespace Avans_Devops_Tests.Tests
 			observer.SendMessage();
 
             //Assert
-			Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email);
-			Assert.True(NotificationsMock.NotificationStorage[0].Message == message);
-			Assert.True(NotificationsMock.NotificationStorage[0].NotificationType == NotificationType.Email);
-            Assert.True(NotificationsMock.NotificationStorage[1].Address == slackAddress);
-			Assert.True(NotificationsMock.NotificationStorage[1].Message == message);
-			Assert.True(NotificationsMock.NotificationStorage[1].NotificationType == NotificationType.Slack);
+			Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email
+                && NotificationsMock.NotificationStorage[0].Message == message
+                && NotificationsMock.NotificationStorage[0].NotificationType == NotificationType.Email
+                && NotificationsMock.NotificationStorage[1].Address == slackAddress
+                && NotificationsMock.NotificationStorage[1].Message == message
+                && NotificationsMock.NotificationStorage[1].NotificationType == NotificationType.Slack);
         }
 
 		[Fact]
@@ -114,34 +115,6 @@ namespace Avans_Devops_Tests.Tests
         }
 
         [Fact]
-        public void NotificationOnPipelineSuccess()
-        {
-            //Arrange
-            NotificationsMock.EmptyNotifications();
-
-            var genericPipeline = PipelineFactory.CreatePipeline(PipelineType.Generic, "genericPipeline");
-
-            genericPipeline.Sources.Add("Source 1");
-            genericPipeline.Packages.Add("Package 1");
-            genericPipeline.Builds.Add("Build 1");
-            genericPipeline.Tests.Add("Test 1");
-            genericPipeline.Analyses.Add("Analysis 1");
-            genericPipeline.Deploys.Add("Deploy 1");
-            genericPipeline.Deploys.Add("Deploy 2");
-            genericPipeline.Utilities.Add("Utility 1");
-
-            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
-            User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
-            backlog.Pipeline = genericPipeline;
-
-			//Act
-            backlog.RunPipeline();
-
-            //Assert
-            Assert.True(true);
-        }
-
-        [Fact]
         public void SprintDoneMessageToScrumMaster()
         {
             //Arrange
@@ -156,5 +129,97 @@ namespace Avans_Devops_Tests.Tests
             //Assert
             Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email);
         }
+
+        [Fact]
+        public void NotificationOnPipelineSuccess()
+        {
+            //Arrange
+            NotificationsMock.EmptyNotifications();
+
+            string pipelineTitle = "Test title";
+            var genericPipeline = PipelineFactory.CreatePipeline(PipelineType.Generic, pipelineTitle);
+
+            genericPipeline.Sources.Add("Source 1");
+            genericPipeline.Packages.Add("Package 1");
+            genericPipeline.Builds.Add("Build 1");
+            genericPipeline.Tests.Add("Test 1");
+            genericPipeline.Analyses.Add("Analysis 1");
+            genericPipeline.Deploys.Add("Deploy 1");
+            genericPipeline.Deploys.Add("Deploy 2");
+            genericPipeline.Utilities.Add("Utility 1");
+
+            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
+            User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
+            user.AddNotificationPreference(NotificationType.Email, user.Email);
+            backlog.Pipeline = genericPipeline;
+            backlog.AddUser(user);
+
+            string message = "Pipeline " + pipelineTitle + " has succeeded!";
+
+			//Act
+            backlog.RunPipeline();
+
+            //Assert
+			Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email
+                && NotificationsMock.NotificationStorage[0].Message == message
+                && NotificationsMock.NotificationStorage[0].NotificationType == NotificationType.Email);
+        }
+
+        [Fact]
+        public void NotificationOnPipelineFail()
+        {
+            //Arrange
+            NotificationsMock.EmptyNotifications();
+
+            string pipelineTitle = "Test title";
+            var genericPipeline = PipelineFactory.CreatePipeline(PipelineType.Generic, pipelineTitle);
+
+            genericPipeline.Sources.Add("Source 1");
+            genericPipeline.Packages.Add("Package 1");
+            genericPipeline.Builds.Add("Build 1");
+            genericPipeline.Tests.Add("Fail");
+            genericPipeline.Analyses.Add("Analysis 1");
+            genericPipeline.Deploys.Add("Deploy 1");
+            genericPipeline.Deploys.Add("Deploy 2");
+            genericPipeline.Utilities.Add("Utility 1");
+
+            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
+            User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
+            user.AddNotificationPreference(NotificationType.Email, user.Email);
+            backlog.Pipeline = genericPipeline;
+            backlog.AddUser(user);
+
+            string message = "Item " + "Fail" + " in pipeline " + pipelineTitle;
+
+			//Act
+            backlog.RunPipeline();
+
+            //Assert
+			Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email
+                && NotificationsMock.NotificationStorage[0].Message == message
+                && NotificationsMock.NotificationStorage[0].NotificationType == NotificationType.Email);
+        }
+
+        [Fact]
+        public void NotificationOnFailRelease()
+        {
+            //Arrange
+            NotificationsMock.EmptyNotifications();
+
+            User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
+            user.AddNotificationPreference(NotificationType.Email, user.Email);
+            ActiveSprint sprint = new(1, null, "Sprint 1", DateTime.Today.AddDays(-10), DateTime.Today.AddDays(10), "Type 1", user);
+            string message = "The release has been cancelled!";
+            FailRelease failRelease = new FailRelease(sprint);
+
+		    //Act
+            failRelease.Proceed();
+
+            //Assert
+			Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email
+                && NotificationsMock.NotificationStorage[0].Message == message
+                && NotificationsMock.NotificationStorage[0].NotificationType == NotificationType.Email);
+        }
+        
     }
 }

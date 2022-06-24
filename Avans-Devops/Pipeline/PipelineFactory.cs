@@ -20,15 +20,15 @@ namespace Avans_Devops.Pipelines
 			{
 				case PipelineType.Deployment:
 					Console.Write("Deployment pipeline made");
-					pipeline = new DeploymentPipeline();
+					pipeline = new DeploymentPipeline(title);
 					break;
 				case PipelineType.Test:
 					Console.Write("Test pipeline made");
-					pipeline = new TestPipeline();
+					pipeline = new TestPipeline(title);
 					break;
 				default:
 					Console.Write("Generic pipeline made");
-					pipeline = new GenericPipeline();
+					pipeline = new GenericPipeline(title);
 					break;
 			}
 

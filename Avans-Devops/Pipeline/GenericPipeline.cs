@@ -7,11 +7,6 @@ namespace Avans_Devops.Pipelines
 {
 	public class GenericPipeline : Pipeline, IObservable
 	{
-        public GenericPipeline()
-        {
-			Observers = new();
-        }
-
 		public string Title { get; set; }
 		public int PipelineId { get; set; }
 		public List<string> Sources { get; set; }
@@ -26,6 +21,11 @@ namespace Avans_Devops.Pipelines
 		public List<Observer> Observers { get; set; }
 		public Sprint Sprint { get; set; }
 
+        public GenericPipeline(string title)
+        {
+			Observers = new();
+			Title = title;
+        }
 		public bool CanRun()
 		{
 			// A generic pipeline may always run, even if it has no steps.
