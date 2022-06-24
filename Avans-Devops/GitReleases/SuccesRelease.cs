@@ -10,6 +10,13 @@ namespace Avans_Devops.Releases
     public class SuccesRelease : IObservable, IRelease
     {
         public List<Observer> Observers { get; set; } = new List<Observer>();
+        public Sprint Sprint { get; set; }
+
+
+        public SuccesRelease(Sprint sprint)
+        {
+            Sprint = sprint;
+        }
 
         public void Proceed()
         {
@@ -30,6 +37,7 @@ namespace Avans_Devops.Releases
             AttachObserver(productOwnerObserver);
 
             NotifyObservers();
+            Sprint.IsFinished = true;
         }
         public void AttachObserver(Observer observer)
         {

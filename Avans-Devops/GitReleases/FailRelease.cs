@@ -10,6 +10,12 @@ namespace Avans_Devops.Releases
     public class FailRelease : IObservable, IRelease
     {
         public List<Observer> Observers { get; set; } = new List<Observer>();
+        public Sprint Sprint { get; set; }
+
+        public FailRelease(Sprint sprint)
+        {
+            Sprint = sprint;
+        }
 
         public void Proceed() {
             string message = "The release has been cancelled!";

@@ -10,7 +10,7 @@ namespace Avans_Devops.Pipeline
         public DeploymentPipeline()
         {
 			Observers = new();
-			Release = new SuccesRelease();
+			Release = new SuccesRelease(Sprint);
 		}
 
 		public override bool CanRun()

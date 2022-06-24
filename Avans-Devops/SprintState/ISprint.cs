@@ -14,6 +14,7 @@ namespace Avans_Devops
         public List<BacklogItem> BacklogItems { get; set; }
         public User ScrumMaster { get; set; }
         public bool IsRuningPipeline { get; set; }
+        public bool IsFinished { get; set; }
 
         public bool CheckSprintStarted()
         {
