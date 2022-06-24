@@ -1,4 +1,4 @@
-﻿using Avans_Devops.Pipeline;
+﻿using Avans_Devops.Pipelines;
 using Avans_Devops.Releases;
 using System;
 using System.Collections.Generic;

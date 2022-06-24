@@ -24,6 +24,7 @@ namespace Avans_Devops.Pipelines
 		public GitIntegration GitIntegration { get; set; }
 		public IRelease Release { get; set; }
 		public List<Observer> Observers { get; set; }
+		public Sprint Sprint { get; set; }
 
 		public bool CanRun()
 		{

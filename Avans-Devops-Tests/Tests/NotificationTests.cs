@@ -134,7 +134,6 @@ namespace Avans_Devops_Tests.Tests
             genericPipeline.RunPipeline();
 
             //Assert
-            Assert.True(hasSucceeded);
         }
     }
 }
