@@ -100,6 +100,6 @@ namespace Avans_Devops
             {
                 o.SendMessage();
             }
-        }       
+        }
     }
 }

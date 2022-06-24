@@ -20,6 +20,7 @@ namespace Avans_Devops
             ScrumMaster = scrumMaster;
             IsRuningPipeline = false;
             IsFinished = false;
+            Observers = new();
         }
 
         public override string GetTypeSprint()
