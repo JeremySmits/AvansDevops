@@ -12,7 +12,6 @@ namespace Avans_Devops.Releases
         public List<Observer> Observers { get; set; } = new List<Observer>();
         public Sprint Sprint { get; set; }
 
-
         public SuccesRelease(Sprint sprint)
         {
             Sprint = sprint;
