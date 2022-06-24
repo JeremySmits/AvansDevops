@@ -27,7 +27,7 @@ namespace Avans_Devops.Pipelines
 
         public bool CanRun();
 
-		public bool RunPipeline() {
+		public bool RunPipeline(User scrumMaster) {
             if (CanRun()){
 
                 List<List<string>> steps = new();
@@ -69,6 +69,7 @@ namespace Avans_Devops.Pipelines
                     message = "Item " + failed[0] + " in pipeline " + this.Title;
                 }
                 observer.Message = message;
+                observer.Receiver = scrumMaster;
                 NotifyObservers();
 
                 // DEZE MELDINGEN GEBEUREN IN SPRINT!!!

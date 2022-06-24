@@ -115,9 +115,9 @@ namespace Avans_Devops
             return null;
         }
 
-        public Report GenerateReport()
+        public Report GenerateReport(FileType fileType)
         {
-            return null;
+            return new Report(this, fileType);
         }
         public void NotifyObservers()
         {
