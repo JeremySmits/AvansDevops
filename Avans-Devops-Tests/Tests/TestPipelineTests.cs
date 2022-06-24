@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using Avans_Devops.Pipeline;
+using Avans_Devops.Pipelines;
 
 namespace Avans_Devops_Tests.Tests
 {
@@ -15,7 +15,7 @@ namespace Avans_Devops_Tests.Tests
         public void TryValidTestPipeline()
         {
             //Arrange
-            var testPipeline = PipelineFactory.CreatePipeline(PipelineType.Test, "testPipeline");
+            Pipeline testPipeline = PipelineFactory.CreatePipeline(PipelineType.Test, "testPipeline");
 
             testPipeline.Sources.Add("Source 1");
             testPipeline.Packages.Add("Package 1");
@@ -25,7 +25,7 @@ namespace Avans_Devops_Tests.Tests
             testPipeline.Utilities.Add("Utility 1");
 
 			//Act
-            var canRun = testPipeline.CanRun();
+            bool canRun = testPipeline.CanRun();
 
             //Assert
             Assert.True(canRun);

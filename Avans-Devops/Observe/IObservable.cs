@@ -18,6 +18,14 @@ namespace Avans_Devops.Observe
         {
             this.Observers.Remove(observer);
         }
-        public void NotifyObservers();
+        // public void NotifyObservers();
+
+        public void NotifyObservers()
+        {
+            foreach (var o in Observers)
+            {
+                o.SendMessage();
+            }
+        }
     }
 }

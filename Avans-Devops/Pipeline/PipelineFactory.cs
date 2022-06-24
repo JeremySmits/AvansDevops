@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Avans_Devops.Observe;
 
-namespace Avans_Devops.Pipeline
+namespace Avans_Devops.Pipelines
 {
 
 	public enum PipelineType

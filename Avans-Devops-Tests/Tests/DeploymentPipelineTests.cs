@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using Avans_Devops.Pipeline;
+using Avans_Devops.Pipelines;
 
 namespace Avans_Devops_Tests.Tests
 {

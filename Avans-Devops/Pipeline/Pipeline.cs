@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Avans_Devops.Observe;
 using Avans_Devops.Releases;
 
-namespace Avans_Devops.Pipeline
+namespace Avans_Devops.Pipelines
 {
-    public abstract class Pipeline: IObservable
+    public interface Pipeline: IObservable
     {
         public string Title { get; set; }
         public int PipelineId { get; set; }
@@ -20,11 +20,11 @@ namespace Avans_Devops.Pipeline
         public List<string> Deploys { get; set; }
         public List<string> Utilities { get; set; }
         public GitIntegration GitIntegration { get; set; }
-        public List<Observer> Observers { get; set;}
+        // public List<Observer> Observers { get; set;}
 
         public IRelease Release { get; set; }
 
-        public virtual bool CanRun() { return false;  }
+        public bool CanRun();
 
 		public bool RunPipeline() {
             if (CanRun()){
@@ -94,19 +94,19 @@ namespace Avans_Devops.Pipeline
             
         }
 
-        public void AttachObserver(Observer observer) {
-            this.Observers.Add(observer);
-        }
+        // public void AttachObserver(Observer observer) {
+        //     this.Observers.Add(observer);
+        // }
 
-        public void DetachObserver(Observer observer) {
-            this.Observers.Remove(observer);
-        }
+        // public void DetachObserver(Observer observer) {
+        //     this.Observers.Remove(observer);
+        // }
 
-        public void NotifyObservers() {
-            foreach (var o in Observers) {
-                o.SendMessage();
-            }
-        }
+        // public void NotifyObservers() {
+        //     foreach (var o in Observers) {
+        //         o.SendMessage();
+        //     }
+        // }
         
     }
 }

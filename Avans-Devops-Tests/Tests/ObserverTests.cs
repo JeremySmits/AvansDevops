@@ -4,7 +4,7 @@ using Xunit;
 using Avans_Devops.Observe;
 using Avans_Devops.Composite;
 using Avans_Devops.Releases;
-using Avans_Devops.Pipeline;
+using Avans_Devops.Pipelines;
 
 namespace Avans_Devops.Tests
 {

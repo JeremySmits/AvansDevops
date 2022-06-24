@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Avans_Devops.Pipelines;
 
 namespace Avans_Devops
 {
@@ -12,6 +13,7 @@ namespace Avans_Devops
         public List<Sprint> Sprints { get; set; }
         public List<BacklogItem> BackLogItems { get; set; }
         public Company Company { get; set; }
+        public Pipeline Pipeline { get; set; }
 
         public Backlog(int backlogId, string name, string description)
         {
@@ -110,6 +112,16 @@ namespace Avans_Devops
                     return false;
                 }
             }
+            return false;
+        }
+
+        public bool RunPipeline(Pipeline pipeline)
+        {
+            if (this.Pipeline != null)
+            {
+                return pipeline.RunPipeline();
+            }
+
             return false;
         }
     }
