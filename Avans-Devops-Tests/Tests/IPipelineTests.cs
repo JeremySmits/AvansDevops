@@ -45,8 +45,10 @@ namespace Avans_Devops_Tests.Tests
             genericPipeline.Deploys.Add("Deploy 2");
             genericPipeline.Utilities.Add("Utility 1");
 
+            User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
+
 			//Act
-            var hasSucceeded = genericPipeline.RunPipeline();
+            var hasSucceeded = genericPipeline.RunPipeline(user);
 
             //Assert
             Assert.True(hasSucceeded);
@@ -67,8 +69,10 @@ namespace Avans_Devops_Tests.Tests
             genericPipeline.Deploys.Add("Deploy 2");
             genericPipeline.Utilities.Add("Utility 1");
 
+            User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
+
 			//Act
-            var hasSucceeded = genericPipeline.RunPipeline();
+            var hasSucceeded = genericPipeline.RunPipeline(user);
 
             //Assert
             Assert.False(hasSucceeded);

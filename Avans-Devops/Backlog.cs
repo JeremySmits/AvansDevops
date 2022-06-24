@@ -115,11 +115,16 @@ namespace Avans_Devops
             return false;
         }
 
-        public bool RunPipeline(Pipeline pipeline)
+        public bool RunPipeline()
         {
             if (this.Pipeline != null)
             {
-                return pipeline.RunPipeline();
+                foreach (User user in ScrumTeam)
+                {
+                    if (user.Role == Roles.ScrumMaster) {
+                        return Pipeline.RunPipeline(user);
+                    }
+                }
             }
 
             return false;

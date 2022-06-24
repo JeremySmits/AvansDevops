@@ -130,10 +130,15 @@ namespace Avans_Devops_Tests.Tests
             genericPipeline.Deploys.Add("Deploy 2");
             genericPipeline.Utilities.Add("Utility 1");
 
+            Backlog backlog = new(1, "Avans Devops", "SO&A uitwerking");
+            User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
+            backlog.Pipeline = genericPipeline;
+
 			//Act
-            genericPipeline.RunPipeline();
+            backlog.RunPipeline();
 
             //Assert
+            Assert.True(true);
         }
     }
 }
