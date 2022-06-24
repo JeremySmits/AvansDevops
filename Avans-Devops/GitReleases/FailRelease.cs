@@ -7,7 +7,7 @@ using Avans_Devops.Observe;
 
 namespace Avans_Devops.Releases
 {
-    public class FailRelease : IObservable
+    public class FailRelease : IObservable, IRelease
     {
         public List<Observer> Observers { get; set; } = new List<Observer>();
 

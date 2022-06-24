@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Avans_Devops.Observe;
-
+using Avans_Devops.Releases;
 
 namespace Avans_Devops.Pipeline
 {
@@ -19,10 +19,17 @@ namespace Avans_Devops.Pipeline
         public List<string> Analyses { get; set; }
         public List<string> Deploys { get; set; }
         public List<string> Utilities { get; set; }
-
+        public GitIntegration GitIntegration { get; set; }
         public List<Observer> Observers { get; set;}
 
+        public IRelease Release { get; set; }
+
         public virtual bool CanRun() { return false;  }
+
+        public Pipeline(IRelease release)
+        {
+            Release = release;
+        }
 
 		public bool RunPipeline() {
             if (CanRun()){
@@ -73,6 +80,7 @@ namespace Avans_Devops.Pipeline
                 // Als pipeline succesvol is, zet sprint op finished
                 if (failed == null) {
                     //Placeholder voor de sprint
+                    GitIntegration.CommitAndPushToMaster();
                     return true;
                 } else {
                     return false;
