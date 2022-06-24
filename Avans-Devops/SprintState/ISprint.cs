@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Avans_Devops.Observe;
+using System;
 using System.Collections.Generic;
 
 namespace Avans_Devops
 {
-    public abstract class Sprint
+    public abstract class Sprint : IObservable
     {
         public int SprintId { get; set; }
         public Backlog Backlog { get; set; }
@@ -15,6 +16,17 @@ namespace Avans_Devops
         public User ScrumMaster { get; set; }
         public bool IsRuningPipeline { get; set; }
         public bool IsFinished { get; set; }
+        public List<Observer> Observers { get; set; }
+
+        public void SetSprintToFinished()
+        {
+            Observer observer = new();
+            observer.Receiver = ScrumMaster;
+            observer.Message = "BacklogItem: " + this.Name + " is done!";
+            this.Observers.Add(observer);
+            NotifyObservers();
+            IsFinished = true;
+        }
 
         public bool CheckSprintStarted()
         {
@@ -106,6 +118,13 @@ namespace Avans_Devops
         public Report GenerateReport()
         {
             return null;
+        }
+        public void NotifyObservers()
+        {
+            foreach (var o in Observers)
+            {
+                o.SendMessage();
+            }
         }
     }
 }
