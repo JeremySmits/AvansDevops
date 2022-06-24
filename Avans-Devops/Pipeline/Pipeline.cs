@@ -26,11 +26,6 @@ namespace Avans_Devops.Pipeline
 
         public virtual bool CanRun() { return false;  }
 
-        public Pipeline(IRelease release)
-        {
-            Release = release;
-        }
-
 		public bool RunPipeline() {
             if (CanRun()){
 
@@ -80,6 +75,7 @@ namespace Avans_Devops.Pipeline
                 // Als pipeline succesvol is, zet sprint op finished
                 if (failed == null) {
                     //Placeholder voor de sprint
+                    if(GitIntegration!=null)
                     GitIntegration.CommitAndPushToMaster();
                     return true;
                 } else {
