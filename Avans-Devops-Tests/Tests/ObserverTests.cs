@@ -215,23 +215,6 @@ namespace Avans_Devops.Tests
 		}
 
 		[Fact]
-		public void FailReleaseNotificationObserver()
-		{
-			//Arrange
-			FailRelease failRelease = new(null);
-			// Observer observer = new Observer();
-			
-			//Act
-			// failRelease.AttachObserver(observer);
-			failRelease.Proceed();
-
-			//Assert
-			foreach (var o in failRelease.Observers) {
-                Assert.True(o.NotificationMemory.Count == 1);
-            }
-		}
-
-		[Fact]
 		public void AttachPipelineObserver()
 		{
 			//Arrange

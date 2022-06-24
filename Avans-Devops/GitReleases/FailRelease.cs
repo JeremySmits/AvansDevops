@@ -21,14 +21,14 @@ namespace Avans_Devops.Releases
             string message = "The release has been cancelled!";
 
             // Scrum master notification
-            User scrumMaster = new(1, "Scrum Master Placeholder", Roles.ScrumMaster, "scrum@master.com");
             Observer scrumMasterObserver = new();
-            scrumMasterObserver.Receiver = scrumMaster;
+            scrumMasterObserver.Receiver = Sprint.ScrumMaster;
             scrumMasterObserver.Message = message;
             AttachObserver(scrumMasterObserver);
             
             // Product owner notification
             User productOwner = new(2, "Product Owner Placeholder", Roles.ProductOwner, "product@owner.com");
+            productOwner.AddNotificationPreference(NotificationType.Email, productOwner.Email);
             Observer productOwnerObserver = new();
             productOwnerObserver.Receiver = productOwner;
             productOwnerObserver.Message = message;

@@ -60,19 +60,18 @@ namespace Avans_Devops.Pipelines
                     // Else het onderdeel is leeg en gaat verder
                 }
                 Observer observer = new();
-                // observer.Receiver = this.OP;
                 String message;
                 // Als failed null is dat is de pipeline geslaagd
                 if (failed == null) {
                     message = "Pipeline " + this.Title + " has succeeded!";
                 } else {
-                    message = "Item " + failed[0] + " in pipeline " + this.Title;
+                    message = "Item " + failed + " in pipeline " + this.Title;
                 }
                 observer.Message = message;
                 observer.Receiver = scrumMaster;
+                // AttachObserver(observer);
+                this.Observers.Add(observer);
                 NotifyObservers();
-
-                // DEZE MELDINGEN GEBEUREN IN SPRINT!!!
 
                 // Als pipeline succesvol is, zet sprint op finished
                 if (failed == null) {

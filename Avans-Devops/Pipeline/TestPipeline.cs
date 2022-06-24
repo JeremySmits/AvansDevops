@@ -21,9 +21,10 @@ namespace Avans_Devops.Pipelines
 		public List<Observer> Observers { get; set; }
 		public Sprint Sprint { get; set; }
 
-		public TestPipeline()
+		public TestPipeline(string title)
         {
 			Observers = new();
+			Title = title;
 		}
 
 		public bool CanRun()
