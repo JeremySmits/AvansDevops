@@ -105,33 +105,33 @@ namespace Avans_Devops_Tests.Tests
 			string companyLogo = "Test Logo";
 			string sprintName = "Sprint Name";
 			Company company = new Company(companyName, companyLogo);
-            Backlog backlog = new(1, projectName, "Test description");            
-            InActivateSprint sprint = new(1, backlog, sprintName, DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", new User(1,"ScrumMaster", Roles.ScrumMaster,"Scrum@Master.com"));
+            Backlog backlog = new(1, projectName, "Test description");
+            User user = new User(1,"ScrumMaster", Roles.ScrumMaster,"Scrum@Master.com");
+
+            InActivateSprint sprint = new(1, null, sprintName, DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
             backlog.AddSprint(sprint);
+            sprint.Backlog = backlog;
 
             BacklogItem BacklogItem1 = new(1, backlog, 1, "Hond Uitlaten", 1, 2);
-			sprint.AddBacklogItem(BacklogItem1);
-            backlog.AddBacklogItem(BacklogItem1);
+            BacklogItem BacklogItem2 = new(1, backlog, 1, "Riem pakken", 1, 2);
 
-			BacklogItem1.SwitchState("Doing");
-			BacklogItem1.SwitchState("ReadyForTesting");
-			BacklogItem1.SwitchState("Testing");
-			BacklogItem1.SwitchState("Done");
+            BacklogItem1.Sprint = sprint;
+            BacklogItem2.Sprint = sprint;
 
-            BacklogItem BacklogItem2 = new(1, backlog, 1, "Hond Uitlaten 2", 1, 2);
-			sprint.AddBacklogItem(BacklogItem2);
-            backlog.AddBacklogItem(BacklogItem2);
+            sprint.AddBacklogItem(BacklogItem1);
+            sprint.AddBacklogItem(BacklogItem2);
 
-			BacklogItem2.SwitchState("Doing");
-			BacklogItem2.SwitchState("ReadyForTesting");
-			BacklogItem2.SwitchState("Testing");
-			BacklogItem2.SwitchState("Done");
-
-            User user = new(1, "Jeremy", Roles.Developer, "jsmits9@avans.nl");
-            Activity Activity = new("Riem pakken", user, BacklogItem1, 1);
-            Activity Activity2 = new("Hond zoeken", user, BacklogItem1, 1);
-            BacklogItem1.AddActivity(Activity);
-            BacklogItem1.AddActivity(Activity2);
+            BacklogItem1.SwitchState("Doing");
+            BacklogItem1.SwitchState("ReadyForTesting");
+            BacklogItem1.SwitchState("Testing");
+            BacklogItem1.SwitchState("Tested");
+            BacklogItem1.SwitchState("Done");
+            
+            BacklogItem2.SwitchState("Doing");
+            BacklogItem2.SwitchState("ReadyForTesting");
+            BacklogItem2.SwitchState("Testing");
+            BacklogItem2.SwitchState("Tested");
+            BacklogItem2.SwitchState("Done");
 
             //Act
 			Report report = sprint.GenerateReport(FileType.pdf);
@@ -150,28 +150,34 @@ namespace Avans_Devops_Tests.Tests
 			string companyLogo = "Test Logo";
 			string sprintName = "Sprint Name";
 			Company company = new Company(companyName, companyLogo);
-            Backlog backlog = new(1, projectName, "Test description");            
-            ActiveSprint sprint = new(1, backlog, sprintName, DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", new User(1,"ScrumMaster", Roles.ScrumMaster,"Scrum@Master.com"));
+            Backlog backlog = new(1, projectName, "Test description");
+            User user = new User(1,"ScrumMaster", Roles.ScrumMaster,"Scrum@Master.com");
+
+            InActivateSprint sprint = new(1, null, sprintName, DateTime.Today.AddDays(10), DateTime.Today.AddDays(20), "Type 1", user);
             backlog.AddSprint(sprint);
+            sprint.Backlog = backlog;
 
             BacklogItem BacklogItem1 = new(1, backlog, 1, "Hond Uitlaten", 1, 2);
-			sprint.AddBacklogItem(BacklogItem1);
+            BacklogItem BacklogItem2 = new(1, backlog, 1, "Riem pakken", 1, 2);
 
-            BacklogItem BacklogItem2 = new(1, backlog, 1, "Hond Uitlaten 2", 1, 2);
-			sprint.AddBacklogItem(BacklogItem2);
+            BacklogItem1.Sprint = sprint;
+            BacklogItem2.Sprint = sprint;
 
-            User user = new(1, "Jeremy", Roles.Developer, "jsmits9@avans.nl");
-            Activity Activity = new("Riem pakken", user, BacklogItem1, 1);
+            sprint.AddBacklogItem(BacklogItem1);
+            sprint.AddBacklogItem(BacklogItem2);
+
+            User dev1 = new(1, "Jeremy1", Roles.Developer, "jsmits9@avans.nl");
+            Activity Activity = new("Riem pakken", dev1, BacklogItem1, 1);
 			Activity.State = PhaseState.Done;
-            Activity Activity2 = new("Hond zoeken", user, BacklogItem1, 1);
+            Activity Activity2 = new("Hond zoeken", dev1, BacklogItem1, 1);
 			Activity2.State = PhaseState.Done;
             BacklogItem1.AddActivity(Activity);
             BacklogItem1.AddActivity(Activity2);
 
-			User user2 = new(1, "Jeremy", Roles.Developer, "jsmits9@avans.nl");
-			Activity Activity3 = new("Riem pakken", user2, BacklogItem2, 2);
+			User dev2 = new(1, "Jeremy2", Roles.Developer, "jsmits9@avans.nl");
+			Activity Activity3 = new("Riem pakken", dev2, BacklogItem2, 2);
 			Activity3.State = PhaseState.Done;
-            Activity Activity4 = new("Hond zoeken", user2, BacklogItem2, 2);
+            Activity Activity4 = new("Hond zoeken", dev2, BacklogItem2, 2);
 			Activity4.State = PhaseState.Done;
             BacklogItem2.AddActivity(Activity3);
             BacklogItem2.AddActivity(Activity4);
@@ -180,7 +186,6 @@ namespace Avans_Devops_Tests.Tests
 			BacklogItem1.SwitchState("ReadyForTesting");
 			BacklogItem1.SwitchState("Testing");
 			BacklogItem1.SwitchState("Done");
-
             
 			BacklogItem2.SwitchState("Doing");
 			BacklogItem2.SwitchState("ReadyForTesting");
@@ -191,8 +196,9 @@ namespace Avans_Devops_Tests.Tests
 			Report report = sprint.GenerateReport(FileType.pdf);
 
             //Assert
-            // Assert.True(report.DeveloperEffortValues.Count == 0);
-			Assert.True(report.DeveloperEffortValues.Count == 0);
+			Assert.True(report.DeveloperEffortValues.Count > 0);
+            Assert.True(report.DeveloperEffortValues[dev1] == 2);
+            Assert.True(report.DeveloperEffortValues[dev2] == 4);
         }
     }
 }

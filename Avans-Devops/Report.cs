@@ -21,22 +21,36 @@ namespace Avans_Devops
         public FileType FileType {get; set; }
         public Report(Sprint sprint, FileType fileType)
         {
-            BurnDownChart = new SortedDictionary<DateTime?, int>();
-            GenerateBurnDownChart(sprint.BacklogItems, sprint.EndDate);
-    
-            GenerateDeveloperEffortValues(sprint.BacklogItems);
+            // BurnDownChart
+            BurnDownChart = GenerateBurnDownChart(sprint.BacklogItems, sprint.EndDate);
+            
+            // Effort per developer
+            DeveloperEffortValues = GenerateDeveloperEffortValues(sprint.BacklogItems);
 
             Random rnd = new Random();
             ReportId = rnd.Next(9999);
 
             Header = new List<string>();
+            // Projectnaam
+            Header.Add(sprint.Backlog.Name);
+            // Bedrijfsnaam
+            Header.Add(sprint.Backlog.Company.Name);
+            // Bedrijfslogo
+            Header.Add(sprint.Backlog.Company.Logo);
+
+            Footer = new List<string>();
+            // Versie
+            Footer.Add(sprint.Name);
+            // Datum
+            Footer.Add(sprint.StartDate + " - " + sprint.EndDate);
 
             FileType = fileType;
 
         }
 
-        public void GenerateBurnDownChart(List<BacklogItem> BacklogItems, DateTime endTime)
+        public SortedDictionary<DateTime?, int> GenerateBurnDownChart(List<BacklogItem> BacklogItems, DateTime endTime)
         {
+            SortedDictionary<DateTime?, int> BurnDownChart = new SortedDictionary<DateTime?, int>();
             List<BacklogItem> FinishedBacklogItems = new List<BacklogItem>();
             List<BacklogItem> NonFinishedBacklogItems = new List<BacklogItem>();
             int totalEffort = 0;
@@ -69,23 +83,28 @@ namespace Avans_Devops
                 }
             }
 
-            DateTime lastDate = (DateTime)BurnDownChart.Keys.Last();
+            // DateTime lastDate = (DateTime)BurnDownChart.Keys.Last();
 
-            if (BurnDownChart.ContainsKey(lastDate))
+            if (BurnDownChart.ContainsKey(endTime))
             {
-                BurnDownChart[lastDate] = (int)BurnDownChart[lastDate] + totalEffort;
+                BurnDownChart[endTime] = (int)BurnDownChart[endTime] + totalEffort;
             }
             else
             {
-                BurnDownChart[lastDate] = totalEffort;
+                BurnDownChart[endTime] = totalEffort;
             }
+
+            return BurnDownChart;
         }
-        public void GenerateDeveloperEffortValues(List<BacklogItem> BacklogItems)
+        public Dictionary<User, int> GenerateDeveloperEffortValues(List<BacklogItem> BacklogItems)
         {
+            Dictionary<User, int> DeveloperEffortValues = new Dictionary<User, int>();
+
             foreach (BacklogItem backlogItem in BacklogItems)
             {
                 foreach (Activity activity in backlogItem.Activities)
                 {
+                    // DeveloperEffortValues.Add(activity.ResponsibleDeveloper, activity.Effort);
                     if (activity.State == PhaseState.Done) {
                         if (DeveloperEffortValues.ContainsKey(activity.ResponsibleDeveloper))
                         {
@@ -93,12 +112,13 @@ namespace Avans_Devops
                         }
                         else
                         {
-                            DeveloperEffortValues[activity.ResponsibleDeveloper] = activity.Effort;
+                            DeveloperEffortValues.Add(activity.ResponsibleDeveloper, activity.Effort);
                         }
                     }
                 }
             }
 
+            return DeveloperEffortValues;
         }
     }
 }
