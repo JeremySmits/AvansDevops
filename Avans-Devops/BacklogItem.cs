@@ -85,7 +85,7 @@ namespace Avans_Devops
                         this.Observers.Add(observer);
                         NotifyObservers();
                         State = PhaseState.Done;
-                        FinishedOn = DateTime.Now.Date;                       
+                        FinishedOn = DateTime.Now;                       
                     }
                     if (nextstate == "Testing")
                     {
