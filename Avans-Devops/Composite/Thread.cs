@@ -30,7 +30,9 @@ namespace Avans_Devops.Composite
                 Observer observer = new();
                 observer.Receiver = this.OP;
                 string message = Post.OP + "responded to your thread with: " + Post.CommentText;
+                this.Observers.Add(observer);
                 observer.Message = message;
+
                 NotifyObservers();
 
                 this.Posts.Add(Post);

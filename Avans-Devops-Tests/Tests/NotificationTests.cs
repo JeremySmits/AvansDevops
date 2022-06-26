@@ -9,6 +9,7 @@ using Avans_Devops.Adapter;
 using Avans_Devops.Pipelines;
 using Avans_Devops.Releases;
 using Xunit;
+using Avans_Devops.Composite;
 
 namespace Avans_Devops_Tests.Tests
 {
@@ -18,18 +19,18 @@ namespace Avans_Devops_Tests.Tests
         public void UseEmailAdapter()
         {
             //Arrange
-			NotificationsMock.EmptyNotifications();
+            NotificationsMock.EmptyNotifications();
 
             User user = new(1, "TestUser", Roles.Developer, "Test@User.com");
-			user.AddNotificationPreference(NotificationType.Email, user.Email);
+            user.AddNotificationPreference(NotificationType.Email, user.Email);
 
-			Observer observer = new();
-			observer.Receiver = user;
-			string message = "This is a test message!";
-			observer.Message = message;
+            Observer observer = new();
+            observer.Receiver = user;
+            string message = "This is a test message!";
+            observer.Message = message;
 
             //Act
-			observer.SendMessage();
+            observer.SendMessage();
 
             //Assert
             Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email
@@ -37,23 +38,23 @@ namespace Avans_Devops_Tests.Tests
                     && NotificationsMock.NotificationStorage[0].NotificationType == NotificationType.Email);
         }
 
-		[Fact]
+        [Fact]
         public void UseSlackAdapter()
         {
             //Arrange
-			NotificationsMock.EmptyNotifications();
+            NotificationsMock.EmptyNotifications();
 
             User user = new(1, "TestUser", Roles.Developer, "Test@User.com");
-			string slackAddress = "Slack test username";
+            string slackAddress = "Slack test username";
             user.AddNotificationPreference(NotificationType.Slack, slackAddress);
 
-			Observer observer = new();
-			observer.Receiver = user;
-			string message = "This is a test message!";
-			observer.Message = message;
+            Observer observer = new();
+            observer.Receiver = user;
+            string message = "This is a test message!";
+            observer.Message = message;
 
             //Act
-			observer.SendMessage();
+            observer.SendMessage();
 
             //Assert
             Assert.True(NotificationsMock.NotificationStorage[0].Address == slackAddress
@@ -62,27 +63,27 @@ namespace Avans_Devops_Tests.Tests
         }
 
 
-	    [Fact]
+        [Fact]
         public void UseMultipleAdapters()
         {
             //Arrange
-			NotificationsMock.EmptyNotifications();
+            NotificationsMock.EmptyNotifications();
 
             User user = new(1, "TestUser", Roles.Developer, "Test@User.com");
-			user.AddNotificationPreference(NotificationType.Email, user.Email);
-			string slackAddress = "Slack test username";
+            user.AddNotificationPreference(NotificationType.Email, user.Email);
+            string slackAddress = "Slack test username";
             user.AddNotificationPreference(NotificationType.Slack, slackAddress);
 
-			Observer observer = new();
-			observer.Receiver = user;
-			string message = "This is a test message!";
-			observer.Message = message;
+            Observer observer = new();
+            observer.Receiver = user;
+            string message = "This is a test message!";
+            observer.Message = message;
 
             //Act
-			observer.SendMessage();
+            observer.SendMessage();
 
             //Assert
-			Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email
+            Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email
                 && NotificationsMock.NotificationStorage[0].Message == message
                 && NotificationsMock.NotificationStorage[0].NotificationType == NotificationType.Email
                 && NotificationsMock.NotificationStorage[1].Address == slackAddress
@@ -90,7 +91,7 @@ namespace Avans_Devops_Tests.Tests
                 && NotificationsMock.NotificationStorage[1].NotificationType == NotificationType.Slack);
         }
 
-		[Fact]
+        [Fact]
         public void TestDoneMessageToScrumMaster()
         {
             //Arrange
@@ -156,11 +157,11 @@ namespace Avans_Devops_Tests.Tests
 
             string message = "Pipeline " + pipelineTitle + " has succeeded!";
 
-			//Act
+            //Act
             backlog.RunPipeline();
 
             //Assert
-			Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email
+            Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email
                 && NotificationsMock.NotificationStorage[0].Message == message
                 && NotificationsMock.NotificationStorage[0].NotificationType == NotificationType.Email);
         }
@@ -191,11 +192,11 @@ namespace Avans_Devops_Tests.Tests
 
             string message = "Item " + "Fail" + " in pipeline " + pipelineTitle;
 
-			//Act
+            //Act
             backlog.RunPipeline();
 
             //Assert
-			Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email
+            Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email
                 && NotificationsMock.NotificationStorage[0].Message == message
                 && NotificationsMock.NotificationStorage[0].NotificationType == NotificationType.Email);
         }
@@ -212,14 +213,37 @@ namespace Avans_Devops_Tests.Tests
             string message = "The release has been cancelled!";
             FailRelease failRelease = new FailRelease(sprint);
 
-		    //Act
+            //Act
             failRelease.Proceed();
 
             //Assert
-			Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email
+            Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email
                 && NotificationsMock.NotificationStorage[0].Message == message
                 && NotificationsMock.NotificationStorage[0].NotificationType == NotificationType.Email);
         }
-        
+
+        [Fact]
+        public void UserGetMessageWhenNewComment()
+        {
+            //Arrange
+            NotificationsMock.EmptyNotifications();
+            BacklogItem backlogItem1 = new(1, null, 1, "Backlog Item Name 1", 1, 1);
+
+            User user = new(1, "ScrumMaster", Roles.ScrumMaster, "Scrum@Master.com");
+            user.AddNotificationPreference(NotificationType.Email, user.Email);
+
+            Thread thread1 = new(1, backlogItem1, null, "Thread text 1", user);
+            Comment comment1 = new(thread1.PostID, thread1, "Comment text 1", null);
+
+            //Act
+            thread1.AddChild(comment1);
+
+            var temp = NotificationsMock.NotificationStorage;
+
+            //Assert
+            Assert.True(NotificationsMock.NotificationStorage[0].Address == user.Email
+                && NotificationsMock.NotificationStorage[0].NotificationType == NotificationType.Email);
+        }
+
     }
 }
