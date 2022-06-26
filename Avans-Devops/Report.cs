@@ -48,7 +48,7 @@ namespace Avans_Devops
 
         }
 
-        public SortedDictionary<DateTime?, int> GenerateBurnDownChart(List<BacklogItem> BacklogItems, DateTime endTime)
+        public static SortedDictionary<DateTime?, int> GenerateBurnDownChart(List<BacklogItem> BacklogItems, DateTime endTime)
         {
             SortedDictionary<DateTime?, int> BurnDownChart = new SortedDictionary<DateTime?, int>();
             List<BacklogItem> FinishedBacklogItems = new List<BacklogItem>();
@@ -83,8 +83,6 @@ namespace Avans_Devops
                 }
             }
 
-            // DateTime lastDate = (DateTime)BurnDownChart.Keys.Last();
-
             if (BurnDownChart.ContainsKey(endTime))
             {
                 BurnDownChart[endTime] = (int)BurnDownChart[endTime] + totalEffort;
@@ -96,7 +94,7 @@ namespace Avans_Devops
 
             return BurnDownChart;
         }
-        public Dictionary<User, int> GenerateDeveloperEffortValues(List<BacklogItem> BacklogItems)
+        public static Dictionary<User, int> GenerateDeveloperEffortValues(List<BacklogItem> BacklogItems)
         {
             Dictionary<User, int> DeveloperEffortValues = new Dictionary<User, int>();
 
@@ -104,7 +102,6 @@ namespace Avans_Devops
             {
                 foreach (Activity activity in backlogItem.Activities)
                 {
-                    // DeveloperEffortValues.Add(activity.ResponsibleDeveloper, activity.Effort);
                     if (activity.State == PhaseState.Done) {
                         if (DeveloperEffortValues.ContainsKey(activity.ResponsibleDeveloper))
                         {

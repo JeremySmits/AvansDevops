@@ -5,7 +5,7 @@ using Avans_Devops.Releases;
 
 namespace Avans_Devops.Pipelines
 {
-	public class DeploymentPipeline : IPipeline, IObservable
+	public class DeploymentPipeline : IPipeline
 	{
 		public string Title { get; set; }
 		public int PipelineId { get; set; }

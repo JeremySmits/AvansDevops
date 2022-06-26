@@ -12,13 +12,13 @@ namespace Avans_Devops
     {
         public IRelease Release {get;set;}
         public Sprint Sprint { get; set; }
-        public void Pull() { Console.WriteLine("Pulled latest version from git."); }
-        public void Push() { Console.WriteLine("Pushed changes to git."); }
-        public void Commit(string BranchName) { Console.WriteLine("Commited changes to " + BranchName); }
-        public void NewBranch(string BranchName) { Console.WriteLine("New branch" + BranchName + " has been added."); }
-        public void SwitchBranch(string BranchName) { Console.WriteLine("You have switched to branch :" + BranchName ); }
-        public void Stash() { Console.WriteLine("Stashed the changes."); }
-        public void Pop() { Console.WriteLine("Popped the changes."); }
+        public static void Pull() { Console.WriteLine("Pulled latest version from git."); }
+        public static void Push() { Console.WriteLine("Pushed changes to git."); }
+        public static void Commit(string BranchName) { Console.WriteLine("Commited changes to " + BranchName); }
+        public static void NewBranch(string BranchName) { Console.WriteLine("New branch" + BranchName + " has been added."); }
+        public static void SwitchBranch(string BranchName) { Console.WriteLine("You have switched to branch :" + BranchName ); }
+        public static void Stash() { Console.WriteLine("Stashed the changes."); }
+        public static void Pop() { Console.WriteLine("Popped the changes."); }
         public void CommitAndPushToMaster()
         {
             Release = new SuccesRelease(Sprint);

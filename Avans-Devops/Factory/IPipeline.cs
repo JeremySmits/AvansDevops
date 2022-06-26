@@ -21,7 +21,6 @@ namespace Avans_Devops.Pipelines
         public List<string> Utilities { get; set; }
         public GitIntegration GitIntegration { get; set; }
         public Sprint Sprint { get; set; }
-        // public List<Observer> Observers { get; set;}
 
         public IRelease Release { get; set; }
 
@@ -64,7 +63,9 @@ namespace Avans_Devops.Pipelines
                 // Als failed null is dat is de pipeline geslaagd
                 if (failed == null) {
                     message = "Pipeline " + this.Title + " has succeeded!";
-                } else {
+                } 
+                else 
+                {
                     message = "Item " + failed + " in pipeline " + this.Title;
                 }
                 observer.Message = message;
@@ -79,7 +80,9 @@ namespace Avans_Devops.Pipelines
                     if(GitIntegration!=null)
                     GitIntegration.CommitAndPushToMaster();
                     return true;
-                } else {
+                } 
+                else 
+                {
                     return false;
                 }
             }

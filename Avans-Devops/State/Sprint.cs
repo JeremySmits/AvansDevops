@@ -94,18 +94,6 @@ namespace Avans_Devops
             BacklogItems = tempBacklogItem;
         }
 
-        // public bool RunPipeline(int i) 
-        // {
-        //     IsRunningPipeline = true;
-        //     if (i == 1)
-        //     {
-        //         IsRunningPipeline = false;
-        //         return true;
-        //     }
-        //     IsRunningPipeline = false;
-        //     return false;
-        // }
-
         public void ReleaseSprint()
         {
             throw new NotImplementedException();
