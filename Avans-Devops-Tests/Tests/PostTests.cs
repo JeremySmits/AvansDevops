@@ -151,5 +151,28 @@ namespace Avans_Devops.Tests
             //Assert
             Assert.True(thread1.Posts.Count == 0);
         }
+
+        [Fact]
+        public void CantAddCommentToDoneThread()
+        {
+            //Arrange
+            BacklogItem backlogItem1 = new(1, null, 1, "Backlog Item Name 1", 1, 1);
+            User user = new User(1, "John", Roles.ScrumMaster, "John@avans.nl");
+            backlogItem1.Sprint = new ActiveSprint(1, null, "Sprint 1", DateTime.Today, DateTime.Now.AddDays(10), "", user);
+            Thread thread1 = new(1, backlogItem1, null, "Thread text 1", null);
+            Comment comment1 = new(thread1.PostID, thread1, "Comment text 1", null);
+
+            //Act
+            backlogItem1.SwitchState("Doing");
+            backlogItem1.SwitchState("ReadyForTesting");
+            backlogItem1.SwitchState("Testing");
+            backlogItem1.SwitchState("Tested");
+            backlogItem1.SwitchState("Done");
+
+            thread1.AddChild(comment1);
+
+            //Assert
+            Assert.True(thread1.Posts.Count == 0);
+        }
     }
 }
