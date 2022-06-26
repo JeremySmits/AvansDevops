@@ -14,7 +14,7 @@ namespace Avans_Devops
         public string SprintType { get; set; }
         public List<BacklogItem> BacklogItems { get; set; }
         public User ScrumMaster { get; set; }
-        public bool IsRuningPipeline { get; set; }
+        public bool IsRunningPipeline { get; set; }
         public bool IsFinished { get; set; }
         public List<Observer> Observers { get; set; }
 
@@ -25,6 +25,7 @@ namespace Avans_Devops
             observer.Message = "BacklogItem: " + this.Name + " is done!";
             this.Observers.Add(observer);
             NotifyObservers();
+            IsRunningPipeline = false;
             IsFinished = true;
         }
 
@@ -58,7 +59,7 @@ namespace Avans_Devops
 
         public void RemoveBacklogItem(int BackLogItemId)
         {
-            if(!IsRuningPipeline)
+            if(!IsRunningPipeline)
             {
                 List<BacklogItem> tempBacklogItem = new();
 
@@ -93,17 +94,17 @@ namespace Avans_Devops
             BacklogItems = tempBacklogItem;
         }
 
-        public bool RunPipeline(int i) 
-        {
-            IsRuningPipeline = true;
-            if (i == 1)
-            {
-                IsRuningPipeline = false;
-                return true;
-            }
-            IsRuningPipeline = false;
-            return false;
-        }
+        // public bool RunPipeline(int i) 
+        // {
+        //     IsRunningPipeline = true;
+        //     if (i == 1)
+        //     {
+        //         IsRunningPipeline = false;
+        //         return true;
+        //     }
+        //     IsRunningPipeline = false;
+        //     return false;
+        // }
 
         public void ReleaseSprint()
         {
