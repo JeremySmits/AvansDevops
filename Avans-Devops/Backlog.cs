@@ -13,7 +13,7 @@ namespace Avans_Devops
         public List<Sprint> Sprints { get; set; }
         public List<BacklogItem> BackLogItems { get; set; }
         public Company Company { get; set; }
-        public Pipeline Pipeline { get; set; }
+        public IPipeline Pipeline { get; set; }
 
         public Backlog(int backlogId, string name, string description)
         {

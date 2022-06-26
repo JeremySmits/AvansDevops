@@ -40,7 +40,5 @@ namespace Avans_Devops
 
             return false;
         }
-
-        public void Notify() { }
     }
 }

@@ -14,8 +14,8 @@ namespace Avans_Devops.Pipelines
 
 	public static class PipelineFactory
 	{
-		public static Pipeline CreatePipeline(PipelineType type, String title){
-			Pipeline pipeline;
+		public static IPipeline CreatePipeline(PipelineType type, String title){
+			IPipeline pipeline;
 			switch(type)
 			{
 				case PipelineType.Deployment:

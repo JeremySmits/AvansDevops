@@ -16,6 +16,7 @@ namespace Avans_Devops
         public void Push() { Console.WriteLine("Pushed changes to git."); }
         public void Commit(string BranchName) { Console.WriteLine("Commited changes to " + BranchName); }
         public void NewBranch(string BranchName) { Console.WriteLine("New branch" + BranchName + " has been added."); }
+        public void SwitchBranch(string BranchName) { Console.WriteLine("You have switched to branch :" + BranchName ); }
         public void Stash() { Console.WriteLine("Stashed the changes."); }
         public void Pop() { Console.WriteLine("Popped the changes."); }
         public void CommitAndPushToMaster()

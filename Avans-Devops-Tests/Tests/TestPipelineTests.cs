@@ -15,7 +15,7 @@ namespace Avans_Devops_Tests.Tests
         public void TryValidTestPipeline()
         {
             //Arrange
-            Pipeline testPipeline = PipelineFactory.CreatePipeline(PipelineType.Test, "testPipeline");
+            IPipeline testPipeline = PipelineFactory.CreatePipeline(PipelineType.Test, "testPipeline");
 
             testPipeline.Sources.Add("Source 1");
             testPipeline.Packages.Add("Package 1");

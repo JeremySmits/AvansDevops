@@ -8,7 +8,7 @@ using Avans_Devops.Releases;
 
 namespace Avans_Devops.Pipelines
 {
-    public interface Pipeline: IObservable
+    public interface IPipeline: IObservable
     {
         public string Title { get; set; }
         public int PipelineId { get; set; }
