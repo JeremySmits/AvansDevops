@@ -83,11 +83,11 @@ namespace Avans_Devops
 
             BackLogItems = tempBacklogItem;
         }
-        public bool RunSprintDeployment(Sprint sprint, int i)
+        public bool RunSprintDeployment(Sprint sprint)
         {
             if(sprint.GetTypeSprint() == "Active")
             {
-                if (sprint.RunPipeline(i))
+                if (this.RunPipeline())
                 {
                     foreach (Sprint s in Sprints)
                     {
@@ -117,17 +117,36 @@ namespace Avans_Devops
 
         public bool RunPipeline()
         {
+            bool succeeded = false;
             if (this.Pipeline != null)
             {
                 foreach (User user in ScrumTeam)
                 {
                     if (user.Role == Roles.ScrumMaster) {
-                        return Pipeline.RunPipeline(user);
+                        if (Sprints.Count > 0) {
+                            foreach (Sprint sprint in Sprints)
+                            {
+                                if (sprint.GetTypeSprint() == "Active")
+                                {
+                                    sprint.IsRunningPipeline = true;
+                                    succeeded = Pipeline.RunPipeline(user);
+                                    sprint.IsRunningPipeline = false;
+                                    return succeeded;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            succeeded = Pipeline.RunPipeline(user);
+                            return succeeded;
+                        }
+
+                        
                     }
                 }
             }
 
-            return false;
+            return succeeded;
         }
     }
 }

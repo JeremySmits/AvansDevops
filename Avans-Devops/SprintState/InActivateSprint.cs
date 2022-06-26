@@ -18,7 +18,7 @@ namespace Avans_Devops
             SprintType = sprintType;
             BacklogItems = new();
             ScrumMaster = scrumMaster;
-            IsRuningPipeline = false;
+            IsRunningPipeline = false;
             IsFinished = false;
             Observers = new();
         }
@@ -30,7 +30,7 @@ namespace Avans_Devops
 
         public override void AddBacklogItem(BacklogItem backlogItem)
         {
-            if (CheckSprintStarted() && !CheckSprintDone() && !IsRuningPipeline)
+            if (CheckSprintStarted() && !CheckSprintDone() && !IsRunningPipeline)
             {
                 BacklogItems.Add(backlogItem);
             }

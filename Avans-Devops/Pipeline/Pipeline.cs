@@ -94,20 +94,6 @@ namespace Avans_Devops.Pipelines
             // als alle onderdelen goed gaan, sprint wordt op finished gezet
             
         }
-
-        // public void AttachObserver(Observer observer) {
-        //     this.Observers.Add(observer);
-        // }
-
-        // public void DetachObserver(Observer observer) {
-        //     this.Observers.Remove(observer);
-        // }
-
-        // public void NotifyObservers() {
-        //     foreach (var o in Observers) {
-        //         o.SendMessage();
-        //     }
-        // }
         
     }
 }
